@@ -17,14 +17,9 @@ const App = () => {
           parentHeight={600}
           minWidth={100}
           minHeight={100}
+          x={50}
+          y={100}
         />
-        {/* <ResizableAndDraggable
-          width={200}
-          height={200}
-          parentWidth={600}
-          parentHeight={600}
-          last
-        /> */}
       </div>
     </div>
   );
