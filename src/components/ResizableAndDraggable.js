@@ -14,6 +14,8 @@ const ResizableAndDraggable = ({
   const [init, setInit] = useState({ x: 0, y: 0 });
   const [disableDrag, setDisableDrag] = useState(false);
 
+  const axis = ['s', 'w', 'e', 'n', 'sw', 'nw', 'se', 'ne'];
+
   const centerY = () => {
     const centerY = (parentHeight - h) / 2;
     setTY(centerY);
@@ -55,6 +57,8 @@ const ResizableAndDraggable = ({
   // Bagian dari resize
   useEffect(() => {
     const el = boxRef.current;
+    const transformY = el.computedStyleMap().get('transform')[0].y.value;
+    const transformX = el.computedStyleMap().get('transform')[0].x.value;
 
     el.style.width = `${w}px`;
     el.style.height = `${h}px`;
@@ -81,17 +85,56 @@ const ResizableAndDraggable = ({
     setDisableDrag(true);
   };
 
-  const resize = (e) => {
+  const resize = (e, axis) => {
     const getPosition = (e) => {
       const el = boxRef.current;
       const coordinate = el.getBoundingClientRect();
 
-      const newWidth = e.pageX - coordinate.x;
-      const newHeight = e.pageY - coordinate.y;
+      if(axis === 'se') {
+        const newWidth = e.pageX - coordinate.x;
+        const newHeight = e.pageY - coordinate.y;
 
-      if(newWidth >= minWidth || newHeight >= minHeight) {
-        setW(newWidth);
-        setH(newHeight);
+        if(newWidth >= minWidth || newHeight >= minHeight) {
+          setW(newWidth);
+          setH(newHeight);
+        }
+      }
+
+      if(axis === 's') {
+        const newHeight = e.pageY - coordinate.y;
+
+        if(newHeight >= minHeight) {
+          setH(newHeight);
+        }
+      }
+
+      if(axis === 'e') {
+        const newWidth = e.pageX - coordinate.x;
+
+        if(newWidth >= minWidth) {
+          setW(newWidth);
+        }
+      }
+      if(axis === 'sw') {
+        const newHeight = e.pageY - coordinate.y;
+
+        const deltaX = coordinate.x - e.pageX;
+
+        const newWidth = deltaX + w;
+
+        const newX = e.pageX - (window.innerWidth - parentWidth) / 2;
+
+        console.log(newX);
+
+        setInit({
+          x: newX,
+          y,
+        });
+
+        if(newWidth >= minWidth || newHeight >= minHeight) {
+          setW(newWidth);
+          setH(newHeight);
+        }
       }
     };
 
@@ -106,6 +149,8 @@ const ResizableAndDraggable = ({
     minWidth,
     minHeight,
   };
+
+  // console.log(width);
 
   return (
     <>
@@ -154,6 +199,21 @@ const ResizableAndDraggable = ({
             onMouseDown={resize}
           >
           </span>
+
+          {axis.map((item) => {
+            return (
+              <span
+                key={item}
+                role="button"
+                className={`react-resizable-handle react-resizable-handle-${item}`}
+                onMouseEnter={stopDrag}
+                onMouseLeave={() => setDisableDrag(false)}
+                onMouseDown={(e) => resize(e, item)}
+              >
+              </span>
+            );
+          })}
+
         </div>
 
       </Draggable>
