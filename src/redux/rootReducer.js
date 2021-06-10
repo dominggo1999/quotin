@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import testimonialReducer from './testimonial/testimonialReducer';
+import sidebarReducer from './sidebar/sidebarReducer';
 
 export default combineReducers({
-  testimonial: testimonialReducer,
+  sidebar: sidebarReducer,
 });
