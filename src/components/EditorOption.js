@@ -9,6 +9,10 @@ const EditorOption = () => {
   const { activeTab, showOption } = useSelector((state) => state.sidebar);
   const option = useOptionToDisplay(activeTab);
 
+  if(!showOption) {
+    return null;
+  }
+
   return (
     <div className="bg-tab-active w-[350px] h-full">
       {option()}

@@ -9,24 +9,28 @@ const EditorTab = ({ title, icon }) => {
   const dispatch = useDispatch();
   const { activeTab, showOption } = useSelector((state) => state.sidebar);
 
+  const showScrollbar = showOption ? 'custom-scrollbar' : 'no-scrollbar';
+
   const changeActiveTab = (id) => {
     dispatch(setActiveTab(id));
   };
 
   return (
-    <ul className="custom-scrollbar text-white h-full bg-menu py-10 overflow-y-scroll">
-      {sidebarData && sidebarData.map((item) => {
-        return (
-          <EditorTabItem
-            key={item.id}
-            title={item.title}
-            SVG={item.SVG}
-            changeActiveTab={changeActiveTab}
-            id={item.id}
-            activeTab={activeTab}
-          />
-        );
-      })}
+    <ul className={`${showScrollbar} text-white h-full overflow-y-scroll`}>
+      <div className="min-h-full bg-menu py-10 flex flex-col">
+        {sidebarData && sidebarData.map((item) => {
+          return (
+            <EditorTabItem
+              key={item.id}
+              title={item.title}
+              SVG={item.SVG}
+              changeActiveTab={changeActiveTab}
+              id={item.id}
+              activeTab={activeTab}
+            />
+          );
+        })}
+      </div>
     </ul>
   );
 };

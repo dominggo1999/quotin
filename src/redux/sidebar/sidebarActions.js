@@ -1,12 +1,12 @@
 import sidebarActionTypes from './sidebarActionTypes';
 
 const {
-  TOGGLE_OPTION,
+  HIDE_OPTION,
   SET_ACTIVE_TAB,
 } = sidebarActionTypes;
 
-export const toggleOption = () => ({
-  type: TOGGLE_OPTION,
+export const hideOption = () => ({
+  type: HIDE_OPTION,
 });
 
 export const setActiveTab = (id) => ({

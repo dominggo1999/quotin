@@ -11,6 +11,9 @@ const useOptionToDisplay = (activeTab) => {
   let optionToDisplay;
 
   switch (activeTab) {
+    case 'quick':
+      optionToDisplay = QuickOptions;
+      break;
     case 'background':
       optionToDisplay = BackgroundOptions;
       break;

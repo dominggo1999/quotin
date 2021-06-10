@@ -1,7 +1,8 @@
 import sidebarActionTypes from './sidebarActionTypes';
 
 const {
-  TOGGLE_OPTION,
+  HIDE_OPTION,
+  SHOW_OPTION,
   SET_ACTIVE_TAB,
 } = sidebarActionTypes;
 
@@ -12,10 +13,16 @@ const initialState = {
 
 const sidebarReducer = (state = initialState, action) => {
   switch (action.type) {
-    case TOGGLE_OPTION:
+    case HIDE_OPTION:
       return {
         ...initialState,
-        showOption: !state.showOption,
+        showOption: false,
+        activeTab: '',
+      };
+    case SHOW_OPTION:
+      return {
+        ...initialState,
+        showOption: true,
       };
     case SET_ACTIVE_TAB:
       return {

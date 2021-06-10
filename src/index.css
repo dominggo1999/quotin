@@ -3,6 +3,13 @@
 @tailwind components;
 @tailwind utilities;
 
+.no-scrollbar::-webkit-scrollbar {
+  visibility: hidden;
+}
+.no-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
 .custom-scrollbar::-webkit-scrollbar {
   visibility: hidden;
 }

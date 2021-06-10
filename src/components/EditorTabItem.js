@@ -6,7 +6,8 @@ const EditorTabItem = ({
   return (
     <li
       onClick={() => changeActiveTab(id)}
-      className={`flex flex-col items-center justify-center text-center px-1 py-3  cursor-pointer ${isActive}`}
+      className={`flex flex-col items-center justify-center text-center px-1 py-3  cursor-pointer w-full ${isActive}`}
+
     >
       <SVG
         width="25"
