@@ -6,7 +6,15 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      textColor: {
+        tab: '#AAACAD',
+      },
+      backgroundColor: {
+        'tab-active': '#293039',
+        menu: '#0E1318',
+      },
+    },
   },
   variants: {
     extend: {},

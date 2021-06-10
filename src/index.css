@@ -2,3 +2,34 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.custom-scrollbar::-webkit-scrollbar {
+  visibility: hidden;
+}
+
+.custom-scrollbar:hover::-webkit-scrollbar {
+  visibility: visible;
+}
+
+/* width */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  /* display: none; */
+}
+
+/* Track */
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #293039;
+}
+
+/* Handle */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #7f8388;
+  border-radius: 10px;
+  display: none;
+}
+
+/* Handle */
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  display: block;
+}
