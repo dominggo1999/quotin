@@ -17,7 +17,7 @@ const EditorTab = ({ title, icon }) => {
 
   return (
     <ul className={`${showScrollbar} text-white h-full overflow-y-scroll`}>
-      <div className="min-h-full bg-menu py-10 flex flex-col">
+      <div className="py-10">
         {sidebarData && sidebarData.map((item) => {
           return (
             <EditorTabItem

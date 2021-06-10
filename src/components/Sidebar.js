@@ -13,7 +13,7 @@ const Sidebar = () => {
   };
 
   return (
-    <aside className="h-screen bg-transparent flex relative">
+    <aside className="h-full  flex relative bg-menu">
       <EditorTab />
       <EditorOption />
 

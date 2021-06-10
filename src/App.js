@@ -5,7 +5,7 @@ import Editor from './pages/Editor';
 
 const App = () => {
   return (
-    <div className="relative flex w-full h-screen bg-gray-400">
+    <div className="relative flex w-full  bg-gray-400">
       <Switch>
         <Route
           exact

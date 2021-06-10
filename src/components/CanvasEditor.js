@@ -7,11 +7,11 @@ const CanvasEditor = () => {
 
   return (
     <main
-      className="overflow-hidden w-full h-screen flex justify-center items-center relative bg-gray-400"
+      className="overflow-hidden w-full h-full flex justify-center items-center relative bg-gray-400"
     >
       <div
         ref={resultRef}
-        className="relative w-[600px] h-[600px] overflow-hidden bg-gray-900"
+        className="relative w-[450px] h-[450px] overflow-hidden bg-gray-900"
       >
         <div className="relative w-full h-full">
           <RndLayer>
