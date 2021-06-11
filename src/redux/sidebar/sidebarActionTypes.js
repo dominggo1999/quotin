@@ -1,7 +1,7 @@
 const sidebarActionTypes = {
   HIDE_OPTION: 'HIDE_OPTION',
   SHOW_OPTION: 'SHOW_OPTION',
-  SET_ACTIVE_TAB: 'SET_ACTIVE_TAB',
+  HOTKEY_TOGGLE_OPTION: 'HOTKEY_TOGGLE_OPTION',
 };
 
 export default sidebarActionTypes;

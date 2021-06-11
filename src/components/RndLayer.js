@@ -17,12 +17,12 @@ const RndLayer = ({ children, className }) => {
       default={{
         x: 0,
         y: 0,
-        width: 200,
-        height: 200,
+        width: 430,
+        height: 430,
       }}
     >
-      <div className="flex justify-center items-center w-full h-full">
-        <h1 className="text-white text-8xl">Makan bang</h1>
+      <div className="flex justify-center items-center w-full h-full text-center text-white text-6xl">
+        <h1>Makan bang</h1>
       </div>
     </Rnd>
   );

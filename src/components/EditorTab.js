@@ -3,21 +3,21 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import EditorTabItem from './EditorTabItem';
 import { sidebarData } from '../data/sidebarData';
-import { setActiveTab } from '../redux/sidebar/sidebarActions';
+import { showOption } from '../redux/sidebar/sidebarActions';
 
 const EditorTab = ({ title, icon }) => {
   const dispatch = useDispatch();
-  const { activeTab, showOption } = useSelector((state) => state.sidebar);
+  const { activeTab } = useSelector((state) => state.sidebar);
 
   const showScrollbar = showOption ? 'custom-scrollbar' : 'no-scrollbar';
 
   const changeActiveTab = (id) => {
-    dispatch(setActiveTab(id));
+    dispatch(showOption(id));
   };
 
   return (
-    <ul className={`${showScrollbar} text-white h-full overflow-y-scroll`}>
-      <div className="py-10">
+    <ul className={`${showScrollbar} text-white h-full overflow-y-scroll `}>
+      <div className="py-10 bg-menu">
         {sidebarData && sidebarData.map((item) => {
           return (
             <EditorTabItem

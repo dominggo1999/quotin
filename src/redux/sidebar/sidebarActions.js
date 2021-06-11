@@ -2,14 +2,20 @@ import sidebarActionTypes from './sidebarActionTypes';
 
 const {
   HIDE_OPTION,
-  SET_ACTIVE_TAB,
+  SHOW_OPTION,
+  HOTKEY_TOGGLE_OPTION,
+
 } = sidebarActionTypes;
 
 export const hideOption = () => ({
   type: HIDE_OPTION,
 });
 
-export const setActiveTab = (id) => ({
-  type: SET_ACTIVE_TAB,
+export const showOption = (id) => ({
+  type: SHOW_OPTION,
   payload: id,
+});
+
+export const hotkeyToggleOption = () => ({
+  type: HOTKEY_TOGGLE_OPTION,
 });

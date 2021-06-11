@@ -3,32 +3,49 @@ import sidebarActionTypes from './sidebarActionTypes';
 const {
   HIDE_OPTION,
   SHOW_OPTION,
-  SET_ACTIVE_TAB,
+  HOTKEY_TOGGLE_OPTION,
 } = sidebarActionTypes;
 
 const initialState = {
   activeTab: 'quick',
-  showOption: true,
+  previousActiveTab: 'quick',
+  displayOption: true,
 };
 
 const sidebarReducer = (state = initialState, action) => {
   switch (action.type) {
+  // Cached option if closed for hotkey
     case HIDE_OPTION:
       return {
-        ...initialState,
-        showOption: false,
+        ...state,
+        displayOption: false,
         activeTab: '',
+        previousActiveTab: state.activeTab,
       };
     case SHOW_OPTION:
       return {
-        ...initialState,
-        showOption: true,
-      };
-    case SET_ACTIVE_TAB:
-      return {
-        ...initialState,
+        ...state,
+        displayOption: true,
         activeTab: action.payload,
       };
+    case HOTKEY_TOGGLE_OPTION:
+      // If active hide option but remember the previous option
+      if(state.displayOption) {
+        return {
+          ...state,
+          displayOption: false,
+          activeTab: '',
+          previousActiveTab: state.activeTab,
+        };
+      }
+
+      // If not active show previous option
+      return {
+        ...state,
+        displayOption: true,
+        activeTab: state.previousActiveTab,
+      };
+
     default:
       return initialState;
   }

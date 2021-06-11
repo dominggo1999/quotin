@@ -6,19 +6,19 @@ import { hideOption } from '../redux/sidebar/sidebarActions';
 
 const Sidebar = () => {
   const dispatch = useDispatch();
-  const { showOption } = useSelector((state) => state.sidebar);
+  const { displayOption } = useSelector((state) => state.sidebar);
 
   const hideOptionHandler = () => {
     dispatch(hideOption());
   };
 
   return (
-    <aside className="h-full  flex relative bg-menu">
+    <aside className="h-full flex relative bg-gray-400">
       <EditorTab />
       <EditorOption />
 
       {
-        showOption && <HideOptionButton hideOption={hideOptionHandler} />
+        displayOption && <HideOptionButton hideOption={hideOptionHandler} />
       }
     </aside>
   );

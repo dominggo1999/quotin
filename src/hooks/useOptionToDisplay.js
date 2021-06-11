@@ -12,31 +12,31 @@ const useOptionToDisplay = (activeTab) => {
 
   switch (activeTab) {
     case 'quick':
-      optionToDisplay = QuickOptions;
+      optionToDisplay = <QuickOptions />;
       break;
     case 'background':
-      optionToDisplay = BackgroundOptions;
+      optionToDisplay = <BackgroundOptions />;
       break;
     case 'brand':
-      optionToDisplay = BrandOptions;
+      optionToDisplay = <BrandOptions />;
       break;
     case 'frame':
-      optionToDisplay = FrameOptions;
+      optionToDisplay = <FrameOptions />;
       break;
     case 'layer':
-      optionToDisplay = LayerOptions;
+      optionToDisplay = <LayerOptions />;
       break;
     case 'quote':
-      optionToDisplay = QuoteOptions;
+      optionToDisplay = <QuoteOptions />;
       break;
     case 'sticker':
-      optionToDisplay = StickerOptions;
+      optionToDisplay = <StickerOptions />;
       break;
     case 'author':
-      optionToDisplay = AuthorOptions;
+      optionToDisplay = <AuthorOptions />;
       break;
     default:
-      optionToDisplay = QuickOptions;
+      optionToDisplay = <QuickOptions />;
   }
 
   return optionToDisplay;
