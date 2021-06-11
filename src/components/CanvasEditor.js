@@ -1,10 +1,43 @@
-import { useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useRef, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { modifyText } from '../redux/text/textActions';
 import RndLayer from './RndLayer';
+import { alignLayer } from '../redux/layer/layerActions';
 
 const CanvasEditor = () => {
   const resultRef = useRef();
-  const { quoteContent, quoteText } = useSelector((state) => state.quote);
+  const dispatch = useDispatch();
+
+  // Quote
+  const {
+    content, fontSize, textColor,
+  } = useSelector((state) => state.text.quote);
+
+  const {
+    x, y, width, height,
+  } = useSelector((state) => state.layer.quote);
+
+  // TODO: Make canvas size global
+  const [canvasSize, setCanvasSize] = useState({
+    width: 450,
+    height: 450,
+  });
+
+  const updateX = (value) => {
+    dispatch(alignLayer('quote', 'x', value));
+  };
+
+  const updateY = (value) => {
+    dispatch(alignLayer('quote', 'y', value));
+  };
+
+  const updateWidth = (value) => {
+    dispatch(alignLayer('quote', 'width', value));
+  };
+
+  const updateHeight = (value) => {
+    dispatch(alignLayer('quote', 'height', value));
+  };
 
   return (
     <main
@@ -12,15 +45,27 @@ const CanvasEditor = () => {
     >
       {/* Canvas */}
       <div
+        style={{
+          width: canvasSize.width,
+          height: canvasSize.height,
+        }}
         ref={resultRef}
-        className="relative w-[450px] h-[450px] overflow-hidden bg-gray-900"
+        className="relative overflow-hidden bg-gray-900"
       >
-        <div className="relative w-full h-full">
-          <RndLayer
-            content={quoteContent}
-          />
-
-        </div>
+        <RndLayer
+          content={content}
+          canvasSize={canvasSize}
+          x={x}
+          y={y}
+          width={width}
+          height={height}
+          updateX={updateX}
+          updateY={updateY}
+          updateWidth={updateWidth}
+          updateHeight={updateHeight}
+          fontSize={fontSize}
+          textColor={textColor}
+        />
       </div>
     </main>
   );

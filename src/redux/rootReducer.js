@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import sidebarReducer from './sidebar/sidebarReducer';
-import quoteReducer from './quote/quoteReducer';
+import textReducer from './text/textReducer';
+import layerReducer from './layer/layerReducer';
 
 export default combineReducers({
   sidebar: sidebarReducer,
-  quote: quoteReducer,
+  layer: layerReducer,
+  text: textReducer,
 });
