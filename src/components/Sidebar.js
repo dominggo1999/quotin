@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import EditorTab from './EditorTab';
-import EditorOption from './EditorOption';
+import EditorOptionContainer from './EditorOptionContainer';
 import HideOptionButton from './HideOptionButton';
 import { hideOption } from '../redux/sidebar/sidebarActions';
 
@@ -15,7 +15,7 @@ const Sidebar = () => {
   return (
     <aside className="h-full flex relative bg-gray-400">
       <EditorTab />
-      <EditorOption />
+      <EditorOptionContainer />
 
       {
         displayOption && <HideOptionButton hideOption={hideOptionHandler} />
