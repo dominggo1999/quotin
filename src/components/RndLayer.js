@@ -1,6 +1,13 @@
+import { useRef, useEffect } from 'react';
 import { Rnd } from 'react-rnd';
 
-const RndLayer = ({ children, className }) => {
+const RndLayer = ({ content, className }) => {
+  const textRef = useRef(null);
+
+  useEffect(() => {
+    textRef.current.innerHTML = content;
+  }, [content]);
+
   return (
     <Rnd
       className="border-4 border-red-400"
@@ -22,7 +29,7 @@ const RndLayer = ({ children, className }) => {
       }}
     >
       <div className="flex justify-center items-center w-full h-full text-center text-white text-6xl">
-        <h1>Makan bang</h1>
+        <span ref={textRef}></span>
       </div>
     </Rnd>
   );

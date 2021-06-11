@@ -9,6 +9,7 @@ const EditorTab = ({ title, icon }) => {
   const dispatch = useDispatch();
   const { activeTab } = useSelector((state) => state.sidebar);
 
+  // Only show scrollbar when there is active tab
   const showScrollbar = showOption ? 'custom-scrollbar' : 'no-scrollbar';
 
   const changeActiveTab = (id) => {

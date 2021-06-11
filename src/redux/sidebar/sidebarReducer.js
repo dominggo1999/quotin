@@ -14,7 +14,7 @@ const initialState = {
 
 const sidebarReducer = (state = initialState, action) => {
   switch (action.type) {
-  // Cached option if closed for hotkey
+    // Remember option if closed for toggle option hotkey functionality
     case HIDE_OPTION:
       return {
         ...state,
@@ -47,7 +47,7 @@ const sidebarReducer = (state = initialState, action) => {
       };
 
     default:
-      return initialState;
+      return state;
   }
 };
 

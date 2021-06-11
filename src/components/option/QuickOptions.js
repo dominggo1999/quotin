@@ -1,37 +1,30 @@
 import { useState, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import OptionHeader from '../OptionHeader';
+import TextContentControl from '../controls/TextContentControl';
+import { setQuoteContent, setQuoteText } from '../../redux/quote/quoteActions';
 
 const QuickOption = () => {
-  const [content, setContent] = useState('');
+  const dispatch = useDispatch();
 
-  const contentRef = useRef(null);
+  const { quoteText, quoteContent } = useSelector((state) => state.quote);
 
-  const handleChange = (e) => {
-    let str = (e.target.value);
-    str = str.replace(/(?:\r\n|\r|\n)/g, '<br>');
+  const changeQuoteContent = (content) => {
+    dispatch(setQuoteContent(content));
+  };
 
-    str = str.replace(/\*(.*?)\*/gi, '<span style="font-weight: bold">$1</span>');
-
-    str = str.replace(/\_(.*?)\_/gi, '<i>$1</i>');
-
-    contentRef.current.innerHTML = str;
+  const changeQuoteText = (text) => {
+    dispatch(setQuoteText(text));
   };
 
   return (
-    <div>
-      <textarea
-        onChange={handleChange}
-        name=""
-        id=""
-        cols="30"
-        rows="10"
-        className="p-6"
-      >
-      </textarea>
-      <div
-        ref={contentRef}
-        className="text-white"
-      >
-      </div>
+    <div className="px-5 w-full flex flex-col justify-center">
+      <OptionHeader title="Quote" />
+      <TextContentControl
+        changeContent={changeQuoteContent}
+        changeText={changeQuoteText}
+        text={quoteText}
+      />
     </div>
   );
 };

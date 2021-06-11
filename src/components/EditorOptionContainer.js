@@ -9,8 +9,44 @@ const EditorOptionContainer = () => {
   }
 
   return (
-    <div className="bg-tab-active w-[350px] h-full">
-      <EditorOption />
+    <div className="relative z-[1000] pt-[40px] pr-1 bg-tab-active min-w-[350px] max-w-[350px] h-full">
+      <div className="custom-scrollbar w-full h-full flex flex-col items-center overflow-y-scroll overflow-x-hidden">
+        <EditorOption />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+      </div>
+
     </div>
   );
 };
