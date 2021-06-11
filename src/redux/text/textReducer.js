@@ -29,6 +29,8 @@ class Text {
 // Instantiate text
 const quote = new Text({
   name: 'quote',
+  text: 'For every complex problem there is an answer that is clear, simple, and wrong.',
+  content: 'For every complex problem there is an answer that is clear, simple, and wrong.',
 });
 
 const author = new Text({

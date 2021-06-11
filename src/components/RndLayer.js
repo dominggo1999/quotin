@@ -9,11 +9,10 @@ const RndLayer = ({
   const [option, setOption] = useState({
     x, y, width, height,
   });
-
-  const layerStyle = {
+  const [layerStyle, setLayerStyle] = useState({
     fontSize,
     color: textColor,
-  };
+  });
 
   useEffect(() => {
     setOption({
@@ -25,7 +24,7 @@ const RndLayer = ({
     textRef.current.innerHTML = content;
   }, [content, x, y]);
 
-  // Di awal jadikan tinggi div sesuai dengan text
+  // Tinggi text layer selalu sama dengan text nya
   useEffect(() => {
     const text = textRef.current;
     const divHeight = pixelToNumber(getComputedStyle(text).height);
@@ -36,14 +35,23 @@ const RndLayer = ({
         height: divHeight,
       });
 
-      updateHeight(fontSize);
+      updateHeight(divHeight);
     }
   }, [content]);
+
+  // Adjust font size to layer height
+  const resizeLayer = (e, direction, ref, delta, position) => {
+    // const newTextSize = ref.offsetHeight;
+    // setLayerStyle({
+    //   ...layerStyle,
+    //   fontSize: newTextSize,
+    // });
+  };
 
   return (
     <div className="relative w-full h-full">
       <Rnd
-        className="border-4 border-red-400"
+        className="border-2 border-gray-400 border-opacity-20"
         enableResizing={{
           top: false,
           right: true,
@@ -69,6 +77,7 @@ const RndLayer = ({
             y: d.y,
           });
         }}
+        // onResize={resizeLayer}
         onResizeStop={(e, direction, ref, delta, position) => {
           updateWidth(ref.style.width);
           updateHeight(ref.style.height);
@@ -78,12 +87,15 @@ const RndLayer = ({
             ...position,
           });
         }}
+        minWidth={150}
+        minHeight={50}
       >
         <div
           style={layerStyle}
-          className="flex justify-center items-center w-full h-full text-center text-white"
+          className="relative flex justify-center items-center w-full h-full text-center text-white"
         >
           <div
+            className="w-full break-words"
             ref={textRef}
           >
           </div>

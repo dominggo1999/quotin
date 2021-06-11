@@ -41,16 +41,27 @@ const CanvasEditor = () => {
 
   return (
     <main
-      className="overflow-hidden w-full h-full flex justify-center items-center relative bg-gray-400"
+      className="w-full h-full flex justify-center items-center relative bg-gray-300 "
     >
+      {/* shadow */}
+      <div
+        style={{
+          width: canvasSize.width,
+          height: canvasSize.height,
+        }}
+        className="absolute  shadow-canvas"
+      >
+      </div>
+
       {/* Canvas */}
       <div
         style={{
           width: canvasSize.width,
           height: canvasSize.height,
         }}
+        id="canvas"
         ref={resultRef}
-        className="relative overflow-hidden bg-gray-900"
+        className="relative z-10 overflow-hidden bg-gray-900"
       >
         <RndLayer
           content={content}
