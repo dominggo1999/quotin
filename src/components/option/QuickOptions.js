@@ -32,6 +32,7 @@ const QuickOption = () => {
             shadow={item.shadow}
             highlightColor={item.highlightColor}
             textColor={item.textColor}
+            letterSpacing={item.letterSpacing}
           />
         );
       })}

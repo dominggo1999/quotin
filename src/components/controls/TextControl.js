@@ -6,7 +6,7 @@ import pixelToNumber from '../../util/pixelToNumber';
 import OptionHeader from '../OptionHeader';
 
 const TextControl = ({
-  name, lineHeight, fontSize, canvasSize, width, height, text, uppercase, shadow, highlightColor, textColor,
+  name, lineHeight, fontSize, canvasSize, width, height, text, uppercase, shadow, highlightColor, textColor, letterSpacing,
 }) => {
   const [selectedText, setSelectedText] = useState(null);
   const [showTextColorPicker, setShowTextColorPicker] = useState(false);
@@ -14,6 +14,16 @@ const TextControl = ({
   const textAreaRef = useRef(null);
   const textColorPicker = useRef(null);
   const highlightColorPicker = useRef(null);
+
+  const colorPickerStyle = {
+    position: 'absolute',
+    top: '30px',
+    padding: '10px',
+    background: '#ffffff',
+    borderRadius: '10px',
+    boxShadow: '0 0 0 1px rgb(99 114 130 / 16%), 0 8px 16px rgb(27 39 51 / 8%)',
+    zIndex: 100,
+  };
 
   useEffect(() => {
     const textArea = textAreaRef.current;
@@ -67,6 +77,11 @@ const TextControl = ({
   const changeLineHeight = (e) => {
     const int = e.target.value / 100;
     updateText('lineHeight', int);
+  };
+
+  const changeLetterSpacing = (e) => {
+    const int = e.target.value / 100;
+    updateText('letterSpacing', int);
   };
 
   const alignText = (direction) => {
@@ -157,12 +172,15 @@ const TextControl = ({
     setShowTextColorPicker((prev) => {
       return !prev;
     });
+
+    setShowHighlightColorPicker(false);
   };
 
   const toggleHighlightColor = () => {
     setShowHighlightColorPicker((prev) => {
       return !prev;
     });
+    setShowTextColorPicker(false);
   };
 
   const changeColor = (option, color) => {
@@ -202,21 +220,14 @@ const TextControl = ({
             }}
             role="button"
             onClick={toggleTextColorPicker}
-            className="w-1/2 h-[20px] relative z-50"
+            className="w-1/2 h-[20px] relative z-10"
           >
           </div>
           {showTextColorPicker
             && (
               <div>
                 <HexColorPicker
-                  style={{
-                    position: 'absolute',
-                    top: '30px',
-                    padding: '10px',
-                    background: '#ffffff',
-                    borderRadius: '10px',
-                    boxShadow: '0 0 0 1px rgb(99 114 130 / 16%), 0 8px 16px rgb(27 39 51 / 8%)',
-                  }}
+                  style={colorPickerStyle}
                   color={textColor}
                   onChange={(e) => changeColor('textColor', e)}
                 />
@@ -234,17 +245,14 @@ const TextControl = ({
             }}
             role="button"
             onClick={toggleHighlightColor}
-            className="w-1/2 h-[20px] relative z-50"
+            className="w-1/2 h-[20px] relative z-10"
           >
           </div>
           {showHighlightColorPicker
             && (
               <div>
                 <HexColorPicker
-                  style={{
-                    position: 'absolute',
-                    top: '30px',
-                  }}
+                  style={colorPickerStyle}
                   color={highlightColor}
                   onChange={(e) => changeColor('highlightColor', e)}
                 />
@@ -356,6 +364,17 @@ const TextControl = ({
         value={lineHeight * 100}
       />
       <p>Line height</p>
+
+      <p className="text-white text-center">{letterSpacing}</p>
+
+      <input
+        type="range"
+        min="0"
+        max="100"
+        onInput={changeLetterSpacing}
+        value={letterSpacing * 100}
+      />
+      <p>Letter height</p>
     </div>
   );
 };

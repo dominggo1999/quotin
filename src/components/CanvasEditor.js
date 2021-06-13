@@ -80,6 +80,7 @@ const CanvasEditor = () => {
               textAlignment={item.textAlignment}
               uppercase={item.uppercase}
               shadow={item.shadow}
+              letterSpacing={item.letterSpacing}
             />
           );
         })}

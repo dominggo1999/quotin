@@ -3,7 +3,7 @@ import { Rnd } from 'react-rnd';
 import pixelToNumber from '../util/pixelToNumber';
 
 const RndLayer = ({
-  className, name, x, y, width, height, content, updateX, updateY, updateWidth, updateHeight, fontSize, textColor, lineHeight, textAlignment, uppercase, shadow,
+  className, name, x, y, width, height, content, updateX, updateY, updateWidth, updateHeight, fontSize, textColor, lineHeight, textAlignment, uppercase, shadow, letterSpacing,
 }) => {
   const textRef = useRef(null);
   const [option, setOption] = useState({
@@ -17,6 +17,7 @@ const RndLayer = ({
     textAlign: textAlignment,
     textTransform: uppercase ? 'uppercase' : 'none',
     textShadow: shadow ? 'rgba(0, 0, 0, 0.9) 0.05em 0.05em 0.15em' : 'none',
+    letterSpacing: `${letterSpacing}em`,
   };
 
   // Kalu ukuran font berubah
@@ -30,7 +31,7 @@ const RndLayer = ({
     });
 
     updateHeight(textHeight);
-  }, [fontSize, content, lineHeight]);
+  }, [fontSize, content, lineHeight, letterSpacing]);
 
   // Init posisi dan content
   useEffect(() => {

@@ -37,6 +37,7 @@ class TextLayer extends Layer {
     this.font = options.font || 'Arial';
     this.fontSize = options.fontSize || 20;
     this.lineHeight = options.lineHeight || 1.2;
+    this.letterSpacing = options.lineHeight || 0;
   }
 }
 
