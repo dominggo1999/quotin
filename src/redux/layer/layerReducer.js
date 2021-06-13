@@ -48,6 +48,7 @@ const quote = new TextLayer({
   id: 'quote',
   x: 10,
   y: 170,
+  height: 'auto',
 });
 
 // Instantiate author
@@ -58,6 +59,9 @@ const author = new TextLayer({
   y: 250,
   width: 150,
   fontSize: 16,
+  textAlignment: 'right',
+  height: 'auto',
+
 });
 
 const initialState = {

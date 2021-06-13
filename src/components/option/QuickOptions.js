@@ -13,14 +13,6 @@ const QuickOption = () => {
   const layersState = useSelector((state) => state.layer);
   const layerInstances = useMapStateToArray(layersState);
 
-  // const changeQuoteContent = (content) => {
-  //   dispatch(modifyText('quote', 'content', content));
-  // };
-
-  // const changeQuoteText = (text) => {
-  //   dispatch(modifyText('quote', 'text', text));
-  // };
-
   // TODO: Make canvas size global
   const [canvasSize, setCanvasSize] = useState({
     width: 450,
@@ -39,6 +31,7 @@ const QuickOption = () => {
             fontSize={item.fontSize}
             width={item.width}
             height={item.height}
+            text={item.text}
           />
         );
       })}

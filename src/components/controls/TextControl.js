@@ -2,24 +2,33 @@ import { useState }from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { modifyLayerText, updateLayerLayout } from '../../redux/layer/layerActions';
 import pixelToNumber from '../../util/pixelToNumber';
+import OptionHeader from '../OptionHeader';
 
 const TextControl = ({
-  name, lineHeight, fontSize, canvasSize, width, height,
+  name, lineHeight, fontSize, canvasSize, width, height, text,
 }) => {
   const dispatch = useDispatch();
+
+  const updateText = (option, value) => {
+    dispatch(modifyLayerText(name, option, value));
+  };
+
+  const updateLayout = (option, value) => {
+    dispatch(updateLayerLayout(name, option, value));
+  };
 
   const centerX = () => {
     const formatWidth = pixelToNumber(width);
     const newX = (canvasSize.width - formatWidth) / 2;
 
-    dispatch(updateLayerLayout(name, 'x', newX));
+    updateLayout('x', newX);
   };
 
   const centerY = () => {
     const formatHeight = pixelToNumber(height);
     const newY = (canvasSize.height - formatHeight) / 2;
 
-    dispatch(updateLayerLayout(name, 'y', newY));
+    updateLayout('y', newY);
   };
 
   const centerXY = () => {
@@ -29,16 +38,68 @@ const TextControl = ({
 
   const changeFontSize = (e) => {
     const int = parseInt(e.target.value, 10);
-    dispatch(modifyLayerText(name, 'fontSize', int));
+    updateText('fontSize', int);
   };
+
   const changeLineHeight = (e) => {
     const int = e.target.value / 100;
-    dispatch(modifyLayerText(name, 'lineHeight', int));
+    updateText('lineHeight', int);
+  };
+
+  const alignText = (direction) => {
+    updateText('textAlignment', direction);
+  };
+
+  const handleChange = (e) => {
+    let str = (e.target.value);
+    dispatch(modifyLayerText(name, 'text', str));
+
+    // Get text (string not yet parsed to html)
+    str = str.replace(/(?:\r\n|\r|\n)/g, '<br>');
+
+    str = str.replace(/\*(.*?)\*/gi, '<span style="font-weight: bold">$1</span>');
+
+    str = str.replace(/\_(.*?)\_/gi, '<i>$1</i>');
+
+    // Get parsed string
+    dispatch(modifyLayerText(name, 'content', str));
   };
 
   return (
-    <>
-
+    <div className="w-full flex flex-col pb-10">
+      <OptionHeader title={name} />
+      <div className="w-full flex flex-col justify-center mb-[20px]">
+        <textarea
+          onChange={handleChange}
+          name="gew"
+          id="gewagewgaew"
+          cols="30"
+          rows="5"
+          className="w-full max-h-[200px] p-3 rounded-sm focus:outline-none"
+          value={text}
+        >
+        </textarea>
+      </div>
+      <button
+        onClick={(e) => alignText('left')}
+        className="bg-red-700 text-white mb-5"
+      >Align Text Left
+      </button>
+      <button
+        onClick={(e) => alignText('right')}
+        className="bg-red-700 text-white mb-5"
+      >Align Text Right
+      </button>
+      <button
+        onClick={(e) => alignText('center')}
+        className="bg-red-700 text-white mb-5"
+      >Align Text Center
+      </button>
+      <button
+        onClick={(e) => alignText('justify')}
+        className="bg-red-700 text-white mb-5"
+      >Align Text Justify
+      </button>
       <button
         onClick={centerX}
         className="bg-black text-white mb-5"
@@ -73,7 +134,7 @@ const TextControl = ({
         value={lineHeight * 100}
       />
       <p>Line height</p>
-    </>
+    </div>
   );
 };
 

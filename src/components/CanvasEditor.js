@@ -62,7 +62,9 @@ const CanvasEditor = () => {
           return (
             <RndLayer
               key={item.id}
+              name={item.name}
               content={item.content}
+              text={item.text}
               canvasSize={canvasSize}
               x={item.x}
               y={item.y}
@@ -75,7 +77,7 @@ const CanvasEditor = () => {
               fontSize={item.fontSize}
               textColor={item.textColor}
               lineHeight={item.lineHeight}
-
+              textAlignment={item.textAlignment}
             />
           );
         })}

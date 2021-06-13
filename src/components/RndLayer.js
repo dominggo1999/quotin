@@ -3,27 +3,36 @@ import { Rnd } from 'react-rnd';
 import pixelToNumber from '../util/pixelToNumber';
 
 const RndLayer = ({
-  x, y, width, height, content, updateX, updateY, updateWidth, updateHeight, fontSize, textColor, className, lineHeight,
+  className, x, y, width, height, content, updateX, updateY, updateWidth, updateHeight, fontSize, textColor, lineHeight, textAlignment, name,
 }) => {
+  if(name === 'quote') {
+    console.log(height);
+  }
+
   const textRef = useRef(null);
   const [option, setOption] = useState({
-    x, y, width, height: 'auto',
+    x, y, width, height,
   });
 
   const layerStyle = {
     color: textColor,
     fontSize,
     lineHeight,
+    textAlign: textAlignment,
   };
 
   // Kalu ukuran font berubah
   useEffect(() => {
     const text = textRef.current;
     const textHeight = pixelToNumber(getComputedStyle(text).height);
-    const textWidth = pixelToNumber(getComputedStyle(text).width);
+    console.log('yeah');
+
+    setOption({
+      ...option,
+      height: 'auto',
+    });
 
     updateHeight(textHeight);
-    updateWidth(textWidth);
   }, [fontSize, content, lineHeight]);
 
   // Init posisi dan content
@@ -34,7 +43,13 @@ const RndLayer = ({
       y,
     });
 
+    // Update text
     textRef.current.innerHTML = content;
+    const text = textRef.current;
+
+    // Update height
+    const textHeight = pixelToNumber(getComputedStyle(text).height);
+    updateHeight(textHeight);
   }, [content, x, y]);
 
   return (
@@ -67,12 +82,14 @@ const RndLayer = ({
           });
         }}
         onResizeStop={(e, direction, ref, delta, position) => {
-          updateHeight(ref.style.width);
+          const text = textRef.current;
+          const textHeight = pixelToNumber(getComputedStyle(ref).height);
+          updateHeight(textHeight);
           updateWidth(ref.style.width);
           setOption({
             ...option,
             width: ref.style.width,
-            height: ref.style.height,
+            height: ref.style.height, // auto
             ...position,
           });
         }}
