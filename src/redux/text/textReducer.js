@@ -16,13 +16,12 @@ class Text {
     this.textAlignment = options.textAlignment || 'center';
     this.italic = options.italic || false;
     this.bold = options.bold || false;
-    this.x = options.x || 0;
-    this.y = options.y || 0;
     this.alignment = options.alignment || 'horizontal';
     this.textColor = options.textColor || 'white';
     this.highlightColor = options.highlightColor || 'yellow';
     this.font = options.font || 'Arial';
     this.fontSize = options.font || 20;
+    this.lineHeight = options.lineHeight || 1.2;
   }
 }
 
@@ -30,7 +29,7 @@ class Text {
 const quote = new Text({
   name: 'quote',
   text: 'For every complex problem there is an answer that is clear, simple, and wrong.',
-  content: 'For every complex problem there is an answer that is clear, simple, and wrong.',
+  content: '<span>For every complex problem there is an answer that is clear, simple, and wrong.</span>',
 });
 
 const author = new Text({

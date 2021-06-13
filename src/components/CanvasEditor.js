@@ -1,21 +1,16 @@
 import { useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { modifyText } from '../redux/text/textActions';
 import RndLayer from './RndLayer';
-import { alignLayer } from '../redux/layer/layerActions';
+import { updateLayerLayout } from '../redux/layer/layerActions';
+import useMapStateToArray from '../hooks/useMapStateToArray';
 
 const CanvasEditor = () => {
   const resultRef = useRef();
   const dispatch = useDispatch();
 
-  // Quote
-  const {
-    content, fontSize, textColor,
-  } = useSelector((state) => state.text.quote);
+  const layersState = useSelector((state) => state.layer);
 
-  const {
-    x, y, width, height,
-  } = useSelector((state) => state.layer.quote);
+  const layerInstances = useMapStateToArray(layersState);
 
   // TODO: Make canvas size global
   const [canvasSize, setCanvasSize] = useState({
@@ -23,20 +18,20 @@ const CanvasEditor = () => {
     height: 450,
   });
 
-  const updateX = (value) => {
-    dispatch(alignLayer('quote', 'x', value));
+  const updateX = (name, value) => {
+    dispatch(updateLayerLayout(name, 'x', value));
   };
 
-  const updateY = (value) => {
-    dispatch(alignLayer('quote', 'y', value));
+  const updateY = (name, value) => {
+    dispatch(updateLayerLayout(name, 'y', value));
   };
 
-  const updateWidth = (value) => {
-    dispatch(alignLayer('quote', 'width', value));
+  const updateWidth = (name, value) => {
+    dispatch(updateLayerLayout(name, 'width', value));
   };
 
-  const updateHeight = (value) => {
-    dispatch(alignLayer('quote', 'height', value));
+  const updateHeight = (name, value) => {
+    dispatch(updateLayerLayout(name, 'height', value));
   };
 
   return (
@@ -49,7 +44,7 @@ const CanvasEditor = () => {
           width: canvasSize.width,
           height: canvasSize.height,
         }}
-        className="absolute  shadow-canvas"
+        className="absolute shadow-canvas"
       >
       </div>
 
@@ -63,20 +58,27 @@ const CanvasEditor = () => {
         ref={resultRef}
         className="relative z-10 overflow-hidden bg-gray-900"
       >
-        <RndLayer
-          content={content}
-          canvasSize={canvasSize}
-          x={x}
-          y={y}
-          width={width}
-          height={height}
-          updateX={updateX}
-          updateY={updateY}
-          updateWidth={updateWidth}
-          updateHeight={updateHeight}
-          fontSize={fontSize}
-          textColor={textColor}
-        />
+        {layerInstances && layerInstances.map((item) => {
+          return (
+            <RndLayer
+              key={item.id}
+              content={item.content}
+              canvasSize={canvasSize}
+              x={item.x}
+              y={item.y}
+              updateX={(value) => updateX(item.name, value)}
+              updateY={(value) => updateY(item.name, value)}
+              updateWidth={(value) => updateWidth(item.name, value)}
+              updateHeight={(value) => updateHeight(item.name, value)}
+              width={item.width}
+              height={item.height}
+              fontSize={item.fontSize}
+              textColor={item.textColor}
+              lineHeight={item.lineHeight}
+
+            />
+          );
+        })}
       </div>
     </main>
   );

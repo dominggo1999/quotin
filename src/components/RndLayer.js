@@ -3,17 +3,30 @@ import { Rnd } from 'react-rnd';
 import pixelToNumber from '../util/pixelToNumber';
 
 const RndLayer = ({
-  x, y, width, height, content, updateX, updateY, updateWidth, updateHeight, fontSize, textColor, className,
+  x, y, width, height, content, updateX, updateY, updateWidth, updateHeight, fontSize, textColor, className, lineHeight,
 }) => {
   const textRef = useRef(null);
   const [option, setOption] = useState({
-    x, y, width, height,
-  });
-  const [layerStyle, setLayerStyle] = useState({
-    fontSize,
-    color: textColor,
+    x, y, width, height: 'auto',
   });
 
+  const layerStyle = {
+    color: textColor,
+    fontSize,
+    lineHeight,
+  };
+
+  // Kalu ukuran font berubah
+  useEffect(() => {
+    const text = textRef.current;
+    const textHeight = pixelToNumber(getComputedStyle(text).height);
+    const textWidth = pixelToNumber(getComputedStyle(text).width);
+
+    updateHeight(textHeight);
+    updateWidth(textWidth);
+  }, [fontSize, content, lineHeight]);
+
+  // Init posisi dan content
   useEffect(() => {
     setOption({
       ...option,
@@ -24,43 +37,19 @@ const RndLayer = ({
     textRef.current.innerHTML = content;
   }, [content, x, y]);
 
-  // Tinggi text layer selalu sama dengan text nya
-  useEffect(() => {
-    const text = textRef.current;
-    const divHeight = pixelToNumber(getComputedStyle(text).height);
-
-    if(divHeight > 0) {
-      setOption({
-        ...option,
-        height: divHeight,
-      });
-
-      updateHeight(divHeight);
-    }
-  }, [content]);
-
-  // Adjust font size to layer height
-  const resizeLayer = (e, direction, ref, delta, position) => {
-    // const newTextSize = ref.offsetHeight;
-    // setLayerStyle({
-    //   ...layerStyle,
-    //   fontSize: newTextSize,
-    // });
-  };
-
   return (
-    <div className="relative w-full h-full">
+    <div className="relative">
       <Rnd
-        className="border-2 border-gray-400 border-opacity-20"
+        className="border-2 border-opacity-0 border-transparent hover:border-2 hover:border-gray-400 hover:border-opacity-20"
         enableResizing={{
           top: false,
           right: true,
           bottom: false,
           left: true,
-          topRight: true,
-          bottomRight: true,
-          bottomLeft: true,
-          topLeft: true,
+          topRight: false,
+          bottomRight: false,
+          bottomLeft: false,
+          topLeft: false,
         }}
         size={{ width: option.width, height: option.height }}
         position={{
@@ -77,25 +66,23 @@ const RndLayer = ({
             y: d.y,
           });
         }}
-        // onResize={resizeLayer}
         onResizeStop={(e, direction, ref, delta, position) => {
+          updateHeight(ref.style.width);
           updateWidth(ref.style.width);
-          updateHeight(ref.style.height);
           setOption({
+            ...option,
             width: ref.style.width,
             height: ref.style.height,
             ...position,
           });
         }}
-        minWidth={150}
-        minHeight={50}
       >
         <div
-          style={layerStyle}
-          className="relative flex justify-center items-center w-full h-full text-center text-white"
+          className="relative flex w-full text-center text-white"
         >
           <div
-            className="w-full break-words"
+            style={layerStyle}
+            className="w-full h-full break-words"
             ref={textRef}
           >
           </div>
