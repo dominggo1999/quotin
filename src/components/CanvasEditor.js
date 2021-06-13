@@ -78,6 +78,8 @@ const CanvasEditor = () => {
               textColor={item.textColor}
               lineHeight={item.lineHeight}
               textAlignment={item.textAlignment}
+              uppercase={item.uppercase}
+              shadow={item.shadow}
             />
           );
         })}

@@ -3,12 +3,8 @@ import { Rnd } from 'react-rnd';
 import pixelToNumber from '../util/pixelToNumber';
 
 const RndLayer = ({
-  className, x, y, width, height, content, updateX, updateY, updateWidth, updateHeight, fontSize, textColor, lineHeight, textAlignment, name,
+  className, name, x, y, width, height, content, updateX, updateY, updateWidth, updateHeight, fontSize, textColor, lineHeight, textAlignment, uppercase, shadow,
 }) => {
-  if(name === 'quote') {
-    console.log(height);
-  }
-
   const textRef = useRef(null);
   const [option, setOption] = useState({
     x, y, width, height,
@@ -19,13 +15,14 @@ const RndLayer = ({
     fontSize,
     lineHeight,
     textAlign: textAlignment,
+    textTransform: uppercase ? 'uppercase' : 'none',
+    textShadow: shadow ? 'rgba(0, 0, 0, 0.9) 0.05em 0.05em 0.15em' : 'none',
   };
 
   // Kalu ukuran font berubah
   useEffect(() => {
     const text = textRef.current;
     const textHeight = pixelToNumber(getComputedStyle(text).height);
-    console.log('yeah');
 
     setOption({
       ...option,
@@ -37,6 +34,8 @@ const RndLayer = ({
 
   // Init posisi dan content
   useEffect(() => {
+    // If layer is align (centerX, centerY, centerXY)
+    // Update X
     setOption({
       ...option,
       x,
@@ -55,7 +54,7 @@ const RndLayer = ({
   return (
     <div className="relative">
       <Rnd
-        className="border-2 border-opacity-0 border-transparent hover:border-2 hover:border-gray-400 hover:border-opacity-20"
+        className="border-2 border-opacity-0 border-transparent hover:border-2 hover:border-gray-400 hover:border-opacity-20 z-50"
         enableResizing={{
           top: false,
           right: true,
@@ -68,7 +67,6 @@ const RndLayer = ({
         }}
         size={{ width: option.width, height: option.height }}
         position={{
-          ...option,
           x: option.x,
           y: option.y,
         }}
@@ -99,7 +97,7 @@ const RndLayer = ({
         >
           <div
             style={layerStyle}
-            className="w-full h-full break-words"
+            className="w-full h-full break-words py-2"
             ref={textRef}
           >
           </div>

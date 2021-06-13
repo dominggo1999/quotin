@@ -1,9 +1,5 @@
 import { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import OptionHeader from '../OptionHeader';
-import TextContentControl from '../controls/TextContentControl';
-import { updateLayerLayout, modifyLayerText } from '../../redux/layer/layerActions';
-import pixelToNumber from '../../util/pixelToNumber';
 import TextControl from '../controls/TextControl';
 import useMapStateToArray from '../../hooks/useMapStateToArray';
 
@@ -32,6 +28,10 @@ const QuickOption = () => {
             width={item.width}
             height={item.height}
             text={item.text}
+            uppercase={item.uppercase}
+            shadow={item.shadow}
+            highlightColor={item.highlightColor}
+            textColor={item.textColor}
           />
         );
       })}

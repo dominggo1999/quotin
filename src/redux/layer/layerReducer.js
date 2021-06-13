@@ -32,8 +32,8 @@ class TextLayer extends Layer {
     this.italic = options.italic || false;
     this.bold = options.bold || false;
     this.alignment = options.alignment || 'horizontal';
-    this.textColor = options.textColor || 'white';
-    this.highlightColor = options.highlightColor || 'yellow';
+    this.textColor = options.textColor || '#FFFFFF';
+    this.highlightColor = options.highlightColor || '#e5ac00';
     this.font = options.font || 'Arial';
     this.fontSize = options.fontSize || 20;
     this.lineHeight = options.lineHeight || 1.2;
