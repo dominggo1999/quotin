@@ -1,11 +1,9 @@
-import { useState, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import TextControl from '../controls/TextControl';
 import useMapStateToArray from '../../hooks/useMapStateToArray';
 
 const QuickOption = () => {
-  const dispatch = useDispatch();
-
   const layersState = useSelector((state) => state.layer);
   const layerInstances = useMapStateToArray(layersState);
 
@@ -33,6 +31,7 @@ const QuickOption = () => {
             highlightColor={item.highlightColor}
             textColor={item.textColor}
             letterSpacing={item.letterSpacing}
+            quick
           />
         );
       })}

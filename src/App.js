@@ -6,7 +6,7 @@ import GlobalHotkey from './components/GlobalHotkey';
 
 const App = () => {
   return (
-    <div className="relative flex w-full flex-col  bg-gray-400">
+    <div className="relative flex w-full flex-col  bg-gray-300">
       <GlobalHotkey />
       <Switch>
         <Route

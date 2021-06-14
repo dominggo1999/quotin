@@ -40,3 +40,10 @@
 .custom-scrollbar:hover::-webkit-scrollbar-thumb {
   display: block;
 }
+
+/* React transform */
+.transform-component-module_wrapper__1_Fgj,
+.transform-component-module_content__2jYgh {
+  width: 100% !important;
+  height: 100% !important;
+}

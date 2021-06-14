@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import RndLayer from './RndLayer';
 import { updateLayerLayout } from '../redux/layer/layerActions';
@@ -6,7 +6,7 @@ import useMapStateToArray from '../hooks/useMapStateToArray';
 
 const CanvasEditor = () => {
   const resultRef = useRef();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(null);
 
   const layersState = useSelector((state) => state.layer);
 
@@ -36,7 +36,7 @@ const CanvasEditor = () => {
 
   return (
     <main
-      className="w-full h-full flex justify-center items-center relative bg-gray-300 "
+      className="w-full h-full flex justify-center items-center relative bg-gray-300"
     >
       {/* shadow */}
       <div
