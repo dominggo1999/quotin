@@ -10,7 +10,7 @@ const API_KEY = process.env.REACT_APP_GOOGLE_FONT_API;
 
 const Editor = () => {
   const state = useSelector((state) => state.layer);
-  const [fontReady, setFontReady] = useState(false);
+  const [addingLinkFinished, setAddingLinkFinished] = useState(false);
 
   const layersState = useSelector((state) => state.layer);
 
@@ -22,18 +22,12 @@ const Editor = () => {
 
   useEffect(() => {
     fontUsed.map((font) => {
-      const f = new FontFaceObserver(font);
-      f.load().then(() => {
-        setFontReady(true);
-      }, () => {
-        const formatFontName = font.replaceAll(' ', '+');
+      const formatFontName = font.replaceAll(' ', '+');
 
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = `https://fonts.googleapis.com/css2?family=${formatFontName}&display=swap`;
-        document.head.appendChild(link);
-        setFontReady(false);
-      });
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = `https://fonts.googleapis.com/css2?family=${formatFontName}&display=swap`;
+      document.head.appendChild(link);
 
       return null;
     });

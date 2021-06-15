@@ -48,10 +48,11 @@ const quote = new TextLayer({
   content: '<span>Berhentilah menuntut ilmu karena ilmu tidak bersalah</span>',
   id: 'quote',
   x: 10,
-  y: 170,
+  y: 80,
   height: 'auto',
-  textColor: '#35A6F0',
+  textColor: '#FFFFFF',
   fontFamily: 'Indie Flower',
+  fontSize: 30,
 });
 
 // Instantiate author
@@ -59,7 +60,7 @@ const author = new TextLayer({
   name: 'author',
   id: 'author',
   x: 250,
-  y: 250,
+  y: 280,
   width: 150,
   fontSize: 16,
   textAlignment: 'right',

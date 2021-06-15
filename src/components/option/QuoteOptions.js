@@ -24,7 +24,14 @@ const QuoteOptions = () => {
   };
 
   if(showBrowser) {
-    return <FontPicker closeBrowser={closeBrowser} />;
+    const activeFontFamily = layerInstances.filter((i) => i.name === 'quote')[0].fontFamily;
+    return (
+      <FontPicker
+        name="quote"
+        closeBrowser={closeBrowser}
+        activeFont={activeFontFamily}
+      />
+    );
   }
 
   return (

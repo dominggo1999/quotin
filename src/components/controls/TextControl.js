@@ -334,7 +334,11 @@ const TextControl = ({
         && (
           <>
             <div className="flex flex-col mt-5 text-white">
-              <p>{fontFamily}</p>
+              <p
+                className="text-center mb-2"
+                style={{ fontFamily, fontSize: 25 }}
+              >{fontFamily}
+              </p>
               <button
                 className="p-2 rounded-lg bg-purple-500"
                 onClick={openBrowser}
@@ -342,36 +346,42 @@ const TextControl = ({
               </button>
             </div>
             <div className="flex w-full flex-col mt-10">
-              <p className="text-white text-center">{fontSize}</p>
+              <p className="text-white text-center mb-2">{fontSize}</p>
               <input
+                className="mb-2"
                 type="range"
                 min="10"
                 max="100"
                 onInput={changeFontSize}
                 value={fontSize}
               />
-              <p>Font size</p>
+              <p className="text-white">Font size</p>
 
-              <p className="text-white text-center">{lineHeight}</p>
+              <p className="text-white text-center mb-2">{lineHeight}</p>
               <input
+                className="mb-2"
                 type="range"
                 min="50"
                 max="200"
                 onInput={changeLineHeight}
                 value={lineHeight * 100}
               />
-              <p>Line height</p>
+              <p className="text-white">Line height</p>
 
-              <p className="text-white text-center">{letterSpacing}</p>
+              <p className="text-white text-center mb-2">{letterSpacing}</p>
 
               <input
+                className="mb-2"
                 type="range"
                 min="0"
                 max="100"
                 onInput={changeLetterSpacing}
                 value={letterSpacing * 100}
               />
-              <p>Letter height</p>
+              <p
+                className="text-white"
+              >Letter spacing
+              </p>
             </div>
           </>
         )

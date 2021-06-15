@@ -2,16 +2,37 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import TextControl from '../controls/TextControl';
 import useMapStateToArray from '../../hooks/useMapStateToArray';
+import FontPicker from '../controls/FontPicker';
 
 const AuthorOptions = () => {
   const layersState = useSelector((state) => state.layer);
   const layerInstances = useMapStateToArray(layersState);
+  const [showBrowser, setShowBrowser] = useState(false);
 
   // TODO: Make canvas size global
   const [canvasSize, setCanvasSize] = useState({
     width: 450,
     height: 450,
   });
+
+  const openBrowser = () => {
+    setShowBrowser(true);
+  };
+
+  const closeBrowser = () => {
+    setShowBrowser(false);
+  };
+
+  if(showBrowser) {
+    const activeFontFamily = layerInstances.filter((i) => i.name === 'author')[0].fontFamily;
+    return (
+      <FontPicker
+        name="author"
+        closeBrowser={closeBrowser}
+        activeFont={activeFontFamily}
+      />
+    );
+  }
 
   return (
     <div className="px-5 w-full flex flex-col justify-center">
@@ -31,6 +52,8 @@ const AuthorOptions = () => {
             highlightColor={item.highlightColor}
             textColor={item.textColor}
             letterSpacing={item.letterSpacing}
+            openBrowser={openBrowser}
+            fontFamily={item.fontFamily}
           />
         );
       })}
