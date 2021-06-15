@@ -4,7 +4,7 @@ import RndLayer from './RndLayer';
 import { updateLayerLayout } from '../redux/layer/layerActions';
 import useMapStateToArray from '../hooks/useMapStateToArray';
 
-const CanvasEditor = () => {
+const CanvasEditor = ({ f }) => {
   const resultRef = useRef();
   const dispatch = useDispatch(null);
 
@@ -82,6 +82,7 @@ const CanvasEditor = () => {
               shadow={item.shadow}
               letterSpacing={item.letterSpacing}
               highlightColor={item.highlightColor}
+              fontFamily={item.fontFamily}
             />
           );
         })}

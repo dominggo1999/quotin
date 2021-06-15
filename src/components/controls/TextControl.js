@@ -20,7 +20,7 @@ import { ReactComponent as LeftTextIcon } from '../../assets/controls/left-align
 import { ReactComponent as RightTextIcon } from '../../assets/controls/right-align.svg';
 
 const TextControl = ({
-  name, lineHeight, fontSize, canvasSize, width, height, text, uppercase, shadow, highlightColor, textColor, letterSpacing, quick,
+  name, lineHeight, fontSize, canvasSize, width, height, text, uppercase, shadow, highlightColor, textColor, letterSpacing, quick, fontFamily, openBrowser,
 }) => {
   const [selectedText, setSelectedText] = useState(null);
   const [showTextColorPicker, setShowTextColorPicker] = useState(false);
@@ -332,38 +332,48 @@ const TextControl = ({
       {
         !quick
         && (
-          <div className="flex w-full flex-col mt-10">
-            <p className="text-white text-center">{fontSize}</p>
-            <input
-              type="range"
-              min="10"
-              max="100"
-              onInput={changeFontSize}
-              value={fontSize}
-            />
-            <p>Font size</p>
+          <>
+            <div className="flex flex-col mt-5 text-white">
+              <p>{fontFamily}</p>
+              <button
+                className="p-2 rounded-lg bg-purple-500"
+                onClick={openBrowser}
+              >Change Font
+              </button>
+            </div>
+            <div className="flex w-full flex-col mt-10">
+              <p className="text-white text-center">{fontSize}</p>
+              <input
+                type="range"
+                min="10"
+                max="100"
+                onInput={changeFontSize}
+                value={fontSize}
+              />
+              <p>Font size</p>
 
-            <p className="text-white text-center">{lineHeight}</p>
-            <input
-              type="range"
-              min="50"
-              max="200"
-              onInput={changeLineHeight}
-              value={lineHeight * 100}
-            />
-            <p>Line height</p>
+              <p className="text-white text-center">{lineHeight}</p>
+              <input
+                type="range"
+                min="50"
+                max="200"
+                onInput={changeLineHeight}
+                value={lineHeight * 100}
+              />
+              <p>Line height</p>
 
-            <p className="text-white text-center">{letterSpacing}</p>
+              <p className="text-white text-center">{letterSpacing}</p>
 
-            <input
-              type="range"
-              min="0"
-              max="100"
-              onInput={changeLetterSpacing}
-              value={letterSpacing * 100}
-            />
-            <p>Letter height</p>
-          </div>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                onInput={changeLetterSpacing}
+                value={letterSpacing * 100}
+              />
+              <p>Letter height</p>
+            </div>
+          </>
         )
       }
 

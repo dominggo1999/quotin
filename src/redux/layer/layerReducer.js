@@ -34,7 +34,7 @@ class TextLayer extends Layer {
     this.alignment = options.alignment || 'horizontal';
     this.textColor = options.textColor || '#FFFFFF';
     this.highlightColor = options.highlightColor || '#e5ac00';
-    this.font = options.font || 'Arial';
+    this.fontFamily = options.fontFamily || 'Open Sans';
     this.fontSize = options.fontSize || 20;
     this.lineHeight = options.lineHeight || 1.2;
     this.letterSpacing = options.lineHeight || 0;
@@ -51,6 +51,7 @@ const quote = new TextLayer({
   y: 170,
   height: 'auto',
   textColor: '#35A6F0',
+  fontFamily: 'Indie Flower',
 });
 
 // Instantiate author
@@ -63,7 +64,7 @@ const author = new TextLayer({
   fontSize: 16,
   textAlignment: 'right',
   height: 'auto',
-
+  fontFamily: 'Amatic SC',
 });
 
 const initialState = {
