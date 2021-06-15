@@ -81,6 +81,7 @@ const CanvasEditor = () => {
               uppercase={item.uppercase}
               shadow={item.shadow}
               letterSpacing={item.letterSpacing}
+              highlightColor={item.highlightColor}
             />
           );
         })}

@@ -50,6 +50,7 @@ const quote = new TextLayer({
   x: 10,
   y: 170,
   height: 'auto',
+  textColor: '#35A6F0',
 });
 
 // Instantiate author

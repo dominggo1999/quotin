@@ -3,7 +3,7 @@ import { Rnd } from 'react-rnd';
 import pixelToNumber from '../util/pixelToNumber';
 
 const RndLayer = ({
-  className, name, x, y, width, height, content, updateX, updateY, updateWidth, updateHeight, fontSize, textColor, lineHeight, textAlignment, uppercase, shadow, letterSpacing,
+  className, name, x, y, width, height, content, updateX, updateY, updateWidth, updateHeight, fontSize, textColor, lineHeight, textAlignment, uppercase, shadow, letterSpacing, highlightColor,
 }) => {
   const textRef = useRef(null);
   const [option, setOption] = useState({
@@ -55,7 +55,7 @@ const RndLayer = ({
   return (
     <div className="relative">
       <Rnd
-        className="border-2 border-opacity-0 border-transparent hover:border-2 hover:border-gray-400 hover:border-opacity-20 z-50"
+        className="border-2 border-opacity-0 border-layer hover:border-opacity-100 z-50"
         enableResizing={{
           top: false,
           right: true,
@@ -98,7 +98,7 @@ const RndLayer = ({
         >
           <div
             style={layerStyle}
-            className="w-full h-full break-words py-2"
+            className="w-full h-full break-words py-2 select-none"
             ref={textRef}
           >
           </div>

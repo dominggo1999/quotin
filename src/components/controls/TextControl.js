@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect }from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { HexColorPicker } from 'react-colorful';
 import { modifyLayerText, updateLayerLayout } from '../../redux/layer/layerActions';
 import pixelToNumber from '../../util/pixelToNumber';
 import OptionHeader from '../OptionHeader';
@@ -27,8 +26,6 @@ const TextControl = ({
   const [showTextColorPicker, setShowTextColorPicker] = useState(false);
   const [showHighlightColorPicker, setShowHighlightColorPicker] = useState(false);
   const textAreaRef = useRef(null);
-  const textColorPicker = useRef(null);
-  const highlightColorPicker = useRef(null);
 
   useEffect(() => {
     const textArea = textAreaRef.current;
@@ -189,6 +186,7 @@ const TextControl = ({
   };
 
   const changeColor = (option, color) => {
+    console.log('gweagew');
     updateText(option, color);
 
     if(option === 'highlightColor') {
@@ -313,6 +311,7 @@ const TextControl = ({
 
       {/* Color Picker */}
       <div className="flex w-full justify-between">
+
         <ColorPicker
           color={textColor}
           toggleColorPicker={toggleTextColorPicker}
@@ -333,7 +332,7 @@ const TextControl = ({
       {
         !quick
         && (
-          <div className="flex w-full flex-col">
+          <div className="flex w-full flex-col mt-10">
             <p className="text-white text-center">{fontSize}</p>
             <input
               type="range"
