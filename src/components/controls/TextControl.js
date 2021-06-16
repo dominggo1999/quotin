@@ -99,7 +99,7 @@ const TextControl = ({
   };
 
   const parseInput = (inputText, color = highlightColor) => {
-    // Sanitize from html tah
+    // Sanitize from html tag
     inputText = inputText.replace(/(<([^>]+)>)/ig, '');
 
     // Get text (string not yet parsed to html)
@@ -342,7 +342,7 @@ const TextControl = ({
               <button
                 className="p-2 rounded-lg bg-purple-500"
                 onClick={openBrowser}
-              >Change Font
+              >Change {name} font
               </button>
             </div>
             <div className="flex w-full flex-col mt-10">

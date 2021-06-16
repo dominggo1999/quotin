@@ -18,7 +18,7 @@ const FontInputSelect = ({
       setFonts(options);
     }else{
       const newArray = fonts.filter((item) => {
-        return item.family.toLowerCase().indexOf(input) === 0;
+        return item.family.toLowerCase().indexOf(input) === 0 || item.family.indexOf(input) === 0;
       });
 
       setFonts(newArray);

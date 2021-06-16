@@ -3,11 +3,23 @@ import { Rnd } from 'react-rnd';
 import pixelToNumber from '../util/pixelToNumber';
 
 const RndLayer = ({
-  className, name, x, y, width, height, content, updateX, updateY, updateWidth, updateHeight, fontSize, textColor, lineHeight, textAlignment, uppercase, shadow, letterSpacing, highlightColor, fontFamily,
+  className, name, x, y, width, height, content, updateX, updateY, updateWidth, updateHeight, fontSize, textColor, lineHeight, textAlignment, uppercase, shadow, letterSpacing, highlightColor, fontFamily, setActive, activeLayerId, setIgonoring,
 }) => {
   const textRef = useRef(null);
   const [option, setOption] = useState({
     x, y, width, height,
+  });
+  const [borderOpacity, setBorderOpacity] = useState(0);
+  const [noHover, setNoHover] = useState(false);
+  const [enableResizing, setEnableResizing] = useState({
+    top: false,
+    right: false,
+    left: false,
+    bottom: false,
+    topRight: false,
+    bottomRight: false,
+    bottomLeft: false,
+    topLeft: false,
   });
 
   const layerStyle = {
@@ -21,6 +33,18 @@ const RndLayer = ({
     fontFamily,
   };
 
+  // activeLayer id
+  useEffect(() => {
+    if(activeLayerId !== `${name}_layer`) {
+      setBorderOpacity(0);
+      setEnableResizing({
+        ...enableResizing,
+        left: false,
+        right: false,
+      });
+    }
+  }, [activeLayerId]);
+
   // Kalu ukuran font berubah
   useEffect(() => {
     const text = textRef.current;
@@ -32,7 +56,7 @@ const RndLayer = ({
     });
 
     updateHeight(textHeight);
-  }, [fontSize, content, lineHeight, letterSpacing]);
+  }, [fontSize, content, lineHeight, letterSpacing, uppercase, fontFamily]);
 
   // Init posisi dan content
   useEffect(() => {
@@ -53,34 +77,47 @@ const RndLayer = ({
     updateHeight(textHeight);
   }, [content, x, y]);
 
+  const handleClick = (e) => {
+    setEnableResizing({
+      ...enableResizing,
+      left: true,
+      right: true,
+    });
+    setBorderOpacity(100);
+  };
+
+  const handleDragStart = () => {
+    setBorderOpacity(100);
+  };
+
+  const handleDragStop = (e, d) => {
+    updateX(d.x);
+    updateY(d.y);
+    setOption({
+      ...option,
+      x: d.x,
+      y: d.y,
+    });
+
+    setEnableResizing({
+      ...enableResizing,
+      left: true,
+      right: true,
+    });
+  };
+
   return (
     <div className="relative">
       <Rnd
-        className="border-2 border-opacity-0 border-layer hover:border-opacity-100 z-50"
-        enableResizing={{
-          top: false,
-          right: true,
-          bottom: false,
-          left: true,
-          topRight: false,
-          bottomRight: false,
-          bottomLeft: false,
-          topLeft: false,
-        }}
+        className=" z-50"
+        enableResizing={enableResizing}
         size={{ width: option.width, height: option.height }}
         position={{
           x: option.x,
           y: option.y,
         }}
-        onDragStop={(e, d) => {
-          updateX(d.x);
-          updateY(d.y);
-          setOption({
-            ...option,
-            x: d.x,
-            y: d.y,
-          });
-        }}
+        onDragStop={handleDragStop}
+        onDragStart={handleDragStart}
         onResizeStop={(e, direction, ref, delta, position) => {
           const text = textRef.current;
           const textHeight = pixelToNumber(getComputedStyle(ref).height);
@@ -92,14 +129,19 @@ const RndLayer = ({
             height: ref.style.height, // auto
             ...position,
           });
+          setBorderOpacity(100);
         }}
       >
         <div
-          className="relative flex w-full text-center text-white"
+          role="region"
+          className={`relative flex w-full text-center text-white border-2 border-opacity-${borderOpacity} border-layer hover:border-opacity-100`}
+          onClick={handleClick}
+          onTouchStart={handleClick}
+          id={`${name}_layer`}
         >
           <div
             style={layerStyle}
-            className="w-full h-full break-words py-2 select-none"
+            className="w-full h-full break-words py-2 select-none pointer-events-none"
             ref={textRef}
           >
           </div>
