@@ -36,7 +36,7 @@ const Editor = () => {
   return (
     <div className="w-full h-screen flex flex-col font-sans">
       <EditorHeader />
-      <div className="relative flex w-full h-full bg-gray-400 overflow-y-hidden">
+      <div className="relative flex w-full h-full overflow-y-hidden">
         <Sidebar />
         <CanvasEditor />
       </div>

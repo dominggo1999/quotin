@@ -13,7 +13,7 @@ const Sidebar = ({ f }) => {
   };
 
   return (
-    <aside className="h-full flex relative bg-menu">
+    <aside className="h-full flex relative bg-none">
       <EditorTab />
       <EditorOptionContainer f={f} />
       {

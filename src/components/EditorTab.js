@@ -5,12 +5,12 @@ import EditorTabItem from './EditorTabItem';
 import { sidebarData } from '../data/sidebarData';
 import { showOption } from '../redux/sidebar/sidebarActions';
 
-const EditorTab = ({ title, icon }) => {
+const EditorTab = () => {
   const dispatch = useDispatch();
   const { activeTab } = useSelector((state) => state.sidebar);
 
   // Only show scrollbar when there is active tab
-  const showScrollbar = showOption ? 'custom-scrollbar' : 'no-scrollbar';
+  const showScrollbar = activeTab ? 'custom-scrollbar' : 'no-scrollbar';
 
   const changeActiveTab = (id) => {
     dispatch(showOption(id));

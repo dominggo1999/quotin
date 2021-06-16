@@ -9,7 +9,7 @@ const {
 const initialState = {
   activeTab: 'quick',
   previousActiveTab: 'quick',
-  displayOption: false,
+  displayOption: true,
 };
 
 const sidebarReducer = (state = initialState, action) => {
