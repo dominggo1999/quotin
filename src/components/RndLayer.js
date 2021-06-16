@@ -134,7 +134,7 @@ const RndLayer = ({
       >
         <div
           role="region"
-          className={`relative flex w-full text-center text-white border-2 border-opacity-${borderOpacity} border-layer hover:border-opacity-100`}
+          className={`relative flex w-full text-center text-white border-2 ${borderOpacity ? 'border-opacity-100' : 'border-opacity-0'} border-layer hover:border-opacity-100`}
           onClick={handleClick}
           onTouchStart={handleClick}
           id={`${name}_layer`}

@@ -38,7 +38,6 @@ const CanvasEditor = ({ f }) => {
   // Deactivate layer if clicking outside layer
   useEffect(() => {
     const deactivateLayer = (e) => {
-      console.log(e.target.id);
       if(e.target.getAttribute('role') === 'region') {
         setActiveLayerId(e.target.id);
       }else{
