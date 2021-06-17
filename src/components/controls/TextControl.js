@@ -129,6 +129,7 @@ const TextControl = ({
 
     const cursorStart = textAreaRef.current.selectionStart;
     const cursorEnd = textAreaRef.current.selectionEnd;
+    console.log(cursorStart, cursorEnd);
 
     if(cursorEnd !== cursorStart) {
       setSelectedText({
@@ -205,6 +206,7 @@ const TextControl = ({
           onChange={handleChange}
           onClick={watchSelect}
           onTouchStart={watchSelect}
+          onTouchEnd={watchSelect}
           onDoubleClick={watchSelect}
           name={`${name}input`}
           id={`${name}input`}
