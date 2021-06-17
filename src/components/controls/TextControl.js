@@ -37,8 +37,10 @@ const TextControl = ({
     };
 
     document.body.addEventListener('click', reset);
+    document.body.addEventListener('touchstart', reset);
     return () => {
       document.body.removeEventListener('click', reset);
+      document.body.removeEventListener('touchstart', reset);
     };
   }, []);
 
