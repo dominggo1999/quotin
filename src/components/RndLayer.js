@@ -4,7 +4,7 @@ import pixelToNumber from '../util/pixelToNumber';
 import ResizeHandler from './controls/ResizeHandler';
 
 const RndLayer = ({
-  className, name, x, y, width, height, content, updateX, updateY, updateWidth, updateHeight, fontSize, textColor, lineHeight, textAlignment, uppercase, shadow, letterSpacing, highlightColor, fontFamily, setActive, activeLayerId, setIgonoring,
+  className, name, x, y, width, height, content, updateX, updateY, updateWidth, updateHeight, fontSize, textColor, lineHeight, textAlignment, uppercase, shadow, letterSpacing, highlightColor, fontFamily, setActive, activeLayerId,
 }) => {
   const textRef = useRef(null);
   const [option, setOption] = useState({
@@ -88,7 +88,6 @@ const RndLayer = ({
   };
 
   const handleDragStart = (e) => {
-    e.preventDefault();
     setBorderOpacity(100);
   };
 

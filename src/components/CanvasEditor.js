@@ -5,7 +5,7 @@ import { updateLayerLayout } from '../redux/layer/layerActions';
 import useMapStateToArray from '../hooks/useMapStateToArray';
 
 const CanvasEditor = ({ f }) => {
-  const resultRef = useRef();
+  const resultRef = useRef(null);
   const dispatch = useDispatch(null);
   const [activeLayerId, setActiveLayerId] = useState();
 
@@ -46,12 +46,11 @@ const CanvasEditor = ({ f }) => {
     };
 
     window.addEventListener('mousedown', deactivateLayer);
-
-    window.addEventListener('touchstart', deactivateLayer, { passive: true });
+    window.addEventListener('touchstart', deactivateLayer, { passive: false });
 
     return () => {
       window.removeEventListener('mousedown', deactivateLayer);
-      window.removeEventListener('touchstart', deactivateLayer, { passive: true });
+      window.removeEventListener('touchstart', deactivateLayer, { passive: false });
     };
   }, []);
 
