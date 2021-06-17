@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import FontFaceObserver from 'fontfaceobserver';
 import Sidebar from '../components/Sidebar';
 import CanvasEditor from '../components/CanvasEditor';
 import EditorHeader from '../components/EditorHeader';

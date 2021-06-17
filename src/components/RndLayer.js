@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Rnd } from 'react-rnd';
 import pixelToNumber from '../util/pixelToNumber';
+import ResizeHandler from './controls/ResizeHandler';
 
 const RndLayer = ({
   className, name, x, y, width, height, content, updateX, updateY, updateWidth, updateHeight, fontSize, textColor, lineHeight, textAlignment, uppercase, shadow, letterSpacing, highlightColor, fontFamily, setActive, activeLayerId, setIgonoring,
@@ -86,7 +87,7 @@ const RndLayer = ({
     setBorderOpacity(100);
   };
 
-  const handleDragStart = () => {
+  const handleDragStart = (e) => {
     setBorderOpacity(100);
   };
 
@@ -131,6 +132,10 @@ const RndLayer = ({
           });
           setBorderOpacity(100);
         }}
+        resizeHandleComponent={{
+          left: <ResizeHandler side="left" />,
+          right: <ResizeHandler side="right" />,
+        }}
       >
         <div
           role="region"
@@ -141,7 +146,7 @@ const RndLayer = ({
         >
           <div
             style={layerStyle}
-            className="w-full h-full break-words py-2 select-none pointer-events-none"
+            className="w-full h-full break-words py-2 px-1 select-none pointer-events-none"
             ref={textRef}
           >
           </div>

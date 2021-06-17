@@ -205,6 +205,7 @@ const TextControl = ({
           ref={textAreaRef}
           onChange={handleChange}
           onClick={watchSelect}
+          onTouchStart={watchSelect}
           onDoubleClick={watchSelect}
           name={`${name}input`}
           id={`${name}input`}
