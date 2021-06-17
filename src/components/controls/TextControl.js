@@ -37,10 +37,8 @@ const TextControl = ({
     };
 
     document.body.addEventListener('click', reset);
-    document.body.addEventListener('touchstart', reset);
     return () => {
       document.body.removeEventListener('click', reset);
-      document.body.removeEventListener('touchstart', reset);
     };
   }, []);
 
@@ -141,6 +139,10 @@ const TextControl = ({
     }
   };
 
+  // const watchSelectMobile = (e) => {
+  //   console.log(e);
+  // };
+
   const addVariant = (symbol) => {
     if(selectedText) {
       const value = textAreaRef.current.value;
@@ -206,9 +208,9 @@ const TextControl = ({
         <textarea
           ref={textAreaRef}
           onChange={handleChange}
-          onClick={watchSelect}
-          onTouchEnd={watchSelect}
-          onDoubleClick={watchSelect}
+          onSelect={watchSelect}
+          // onTouchStart={watchSelectMobile}
+          // onDoubleClick={watchSelectMobile}
           name={`${name}input`}
           id={`${name}input`}
           className="w-full h-[100px] max-h-[150px] p-3 focus:outline-none"
