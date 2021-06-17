@@ -47,11 +47,11 @@ const CanvasEditor = ({ f }) => {
 
     window.addEventListener('mousedown', deactivateLayer);
 
-    window.addEventListener('touchstart', deactivateLayer);
+    window.addEventListener('touchstart', deactivateLayer, { passive: true });
 
     return () => {
       window.removeEventListener('mousedown', deactivateLayer);
-      window.removeEventListener('touchstart', deactivateLayer);
+      window.removeEventListener('touchstart', deactivateLayer, { passive: true });
     };
   }, []);
 

@@ -186,7 +186,6 @@ const TextControl = ({
   };
 
   const changeColor = (option, color) => {
-    console.log('gweagew');
     updateText(option, color);
 
     if(option === 'highlightColor') {

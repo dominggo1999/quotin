@@ -88,6 +88,7 @@ const RndLayer = ({
   };
 
   const handleDragStart = (e) => {
+    e.preventDefault();
     setBorderOpacity(100);
   };
 
