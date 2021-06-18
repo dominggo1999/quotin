@@ -41,6 +41,34 @@ class TextLayer extends Layer {
   }
 }
 
+class BaseColorBackgroundLayer extends Layer {
+  constructor(options = {}) {
+    super();
+    this.type = 'background';
+    this.id = options.id || this.id;
+    this.solidColor = options.solidColor || {
+      r: 30,
+      g: 30,
+      b: 30,
+      a: 1,
+    };
+    this.color1 = options.color1 || {
+      r: 27,
+      g: 43,
+      b: 107,
+      a: 1,
+    };
+    this.color2 = options.color2 || {
+      r: 226,
+      g: 149,
+      b: 149,
+      a: 1,
+    };
+    this.gradientRotation = options.gradientRotation || 90;
+    this.colorStyle = options.colorStyle || 'solid';
+  }
+}
+
 // Instantiate quote
 const quote = new TextLayer({
   name: 'quote',
@@ -68,16 +96,23 @@ const author = new TextLayer({
   fontFamily: 'Amatic SC',
 });
 
+// Instantiate background
+const baseColorBackground = new BaseColorBackgroundLayer({
+  id: 'baseColor',
+  colorStyle: 'gradient',
+});
+
 const initialState = {
   quote,
   author,
+  baseColorBackground,
 };
 
 const layerReducer = (state = initialState, action) => {
   const targetLayer = action.target;
   const targetSettings = state[action.target];
-  const value = action.value;
   const option = action.option;
+  const value = action.value;
 
   switch (action.type) {
     case MODIFY_LAYER_TEXT:

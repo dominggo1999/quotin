@@ -4,14 +4,17 @@ import pixelToNumber from '../util/pixelToNumber';
 import ResizeHandler from './controls/ResizeHandler';
 
 const RndLayer = ({
-  className, name, x, y, width, height, content, updateX, updateY, updateWidth, updateHeight, fontSize, textColor, lineHeight, textAlignment, uppercase, shadow, letterSpacing, highlightColor, fontFamily, setActive, activeLayerId,
+  item, updateX, updateY, updateWidth, updateHeight, activeLayerId, className,
 }) => {
+  const {
+    name, x, y, width, height, content, fontSize, textColor, lineHeight, textAlignment, uppercase, shadow, letterSpacing, fontFamily,
+  } = item;
+
   const textRef = useRef(null);
   const [option, setOption] = useState({
     x, y, width, height,
   });
   const [borderOpacity, setBorderOpacity] = useState(0);
-  const [noHover, setNoHover] = useState(false);
   const [enableResizing, setEnableResizing] = useState({
     top: false,
     right: false,
@@ -120,7 +123,6 @@ const RndLayer = ({
         onDragStop={handleDragStop}
         onDragStart={handleDragStart}
         onResizeStop={(e, direction, ref, delta, position) => {
-          const text = textRef.current;
           const textHeight = pixelToNumber(getComputedStyle(ref).height);
           updateHeight(textHeight);
           updateWidth(ref.style.width);

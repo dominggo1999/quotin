@@ -3,10 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import RndLayer from './RndLayer';
 import { updateLayerLayout } from '../redux/layer/layerActions';
 import useMapStateToArray from '../hooks/useMapStateToArray';
+import StaticLayer from './StaticLayer';
 
 const CanvasEditor = ({ f }) => {
   const resultRef = useRef(null);
-  const dispatch = useDispatch(null);
+  const dispatch = useDispatch();
   const [activeLayerId, setActiveLayerId] = useState();
 
   const layersState = useSelector((state) => state.layer);
@@ -92,32 +93,24 @@ const CanvasEditor = ({ f }) => {
         >
 
           {layerInstances && layerInstances.map((item) => {
+            if(item.type === 'text') {
+              return (
+                <RndLayer
+                  canvasSize={canvasSize}
+                  updateX={(value) => updateX(item.name, value)}
+                  updateY={(value) => updateY(item.name, value)}
+                  updateWidth={(value) => updateWidth(item.name, value)}
+                  updateHeight={(value) => updateHeight(item.name, value)}
+                  activeLayerId={activeLayerId}
+                  key={item.id}
+                  item={item}
+                />
+              );
+            }
             return (
-              <RndLayer
+              <StaticLayer
                 key={item.id}
-                name={item.name}
-                content={item.content}
-                text={item.text}
-                canvasSize={canvasSize}
-                x={item.x}
-                y={item.y}
-                updateX={(value) => updateX(item.name, value)}
-                updateY={(value) => updateY(item.name, value)}
-                updateWidth={(value) => updateWidth(item.name, value)}
-                updateHeight={(value) => updateHeight(item.name, value)}
-                width={item.width}
-                height={item.height}
-                fontSize={item.fontSize}
-                textColor={item.textColor}
-                lineHeight={item.lineHeight}
-                textAlignment={item.textAlignment}
-                uppercase={item.uppercase}
-                shadow={item.shadow}
-                letterSpacing={item.letterSpacing}
-                highlightColor={item.highlightColor}
-                fontFamily={item.fontFamily}
-                activeLayerId={activeLayerId}
-                setActive={setActive}
+                item={item}
               />
             );
           })}
