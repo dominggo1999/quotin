@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "^5.13.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "color-convert": "^2.0.1",
     "fontfaceobserver": "^2.1.0",
     "formik": "^2.2.9",
     "html2canvas": "^1.0.0-rc.7",

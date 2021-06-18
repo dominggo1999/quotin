@@ -3,7 +3,7 @@ import { useState } from 'react';
 import OptionHeader from '../OptionHeader';
 import { updateBackground } from '../../redux/layer/layerActions';
 import ColorPicker from './ColorPicker';
-import { toSolidColor, toGradientColor } from '../../util/colorConvert';
+import { toGradientColor } from '../../util/colorConverter';
 
 const Button = ({ children, bg, onClick }) => {
   return(
@@ -26,7 +26,7 @@ const BackgroundControl = ({ item }) => {
   const dispatch = useDispatch();
 
   const {
-    color1, color2, colorStyle, solidColor, gradientRotation, name,
+    color1, color2, opacityColor1, opacityColor2, colorStyle, solidColor, gradientRotation, name,
   } = item;
 
   const [showColorPicker, setShowColorPicker] = useState(initialShowPicker);
@@ -60,6 +60,11 @@ const BackgroundControl = ({ item }) => {
     dispatch(updateBackground(name, 'gradientRotation', e.target.value));
   };
 
+  const changeOpacity = (e, option) => {
+    const int = e.target.value / 100;
+    dispatch(updateBackground(name, option, int));
+  };
+
   return (
     <div className="w-full flex flex-col pb-6 text-white">
       <OptionHeader title="Background Base Color" />
@@ -81,7 +86,7 @@ const BackgroundControl = ({ item }) => {
           && (
           <ColorPicker
             color={solidColor}
-            pickerColor={toSolidColor(solidColor)}
+            pickerColor={solidColor}
             toggleColorPicker={() => toggleColorPicker('solidColor')}
             showColorPicker={showColorPicker.solidColor}
             changeColor={(e) => changeColor('solidColor', e)}
@@ -97,7 +102,7 @@ const BackgroundControl = ({ item }) => {
             <>
               <ColorPicker
                 color={color1}
-                pickerColor={toSolidColor(color1)}
+                pickerColor={color1}
                 toggleColorPicker={() => toggleColorPicker('color1')}
                 showColorPicker={showColorPicker.color1}
                 changeColor={(e) => changeColor('color1', e)}
@@ -107,7 +112,7 @@ const BackgroundControl = ({ item }) => {
               />
               <ColorPicker
                 color={color2}
-                pickerColor={toSolidColor(color2)}
+                pickerColor={color2}
                 toggleColorPicker={() => toggleColorPicker('color2')}
                 showColorPicker={showColorPicker.color2}
                 changeColor={(e) => changeColor('color2', e)}
@@ -115,29 +120,60 @@ const BackgroundControl = ({ item }) => {
                 adjustPosition
                 type="rgba"
                 pickerWidth="60%"
-                adjustPosition
+                adjustPosition="-50px"
               />
             </>
           )
         }
       </div>
 
-      {/* Rotation */}
-
       {
         colorStyle === 'gradient' && (
-        <div className="flex w-full flex-col mt-5">
-          <p className="text-white text-center mb-2">{gradientRotation}</p>
-          <input
-            className="mb-2"
-            type="range"
-            min="0"
-            max="360"
-            onInput={changeRotation}
-            value={gradientRotation}
-          />
-          <p className="text-white">Rotation</p>
-        </div>
+          <>
+            {/* Opacity control */}
+            <div className="flex flex-col mt-5 text-white">
+              <p className="text-white text-center mb-2">{opacityColor1}</p>
+              <input
+                className="mb-2"
+                type="range"
+                min="0"
+                max="100"
+                onInput={(e) => changeOpacity(e, 'opacityColor1')}
+                value={opacityColor1 * 100}
+              />
+              <p
+                className="text-white"
+              >Opacity Color 1
+              </p>
+              <p className="text-white text-center mb-2">{opacityColor2}</p>
+              <input
+                className="mb-2"
+                type="range"
+                min="0"
+                max="100"
+                onInput={(e) => changeOpacity(e, 'opacityColor2')}
+                value={opacityColor2 * 100}
+              />
+              <p
+                className="text-white"
+              >Opacity Color 2
+              </p>
+            </div>
+
+            {/* Rotation */}
+            <div className="flex w-full flex-col mt-5">
+              <p className="text-white text-center mb-2">{gradientRotation}</p>
+              <input
+                className="mb-2"
+                type="range"
+                min="0"
+                max="360"
+                onInput={changeRotation}
+                value={gradientRotation}
+              />
+              <p className="text-white">Rotation</p>
+            </div>
+          </>
         )
       }
     </div>

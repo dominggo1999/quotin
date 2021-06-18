@@ -50,24 +50,11 @@ class BaseColorBackgroundLayer extends Layer {
     this.name = options.name; // must have name
     this.type = 'background';
     this.id = options.id || this.id;
-    this.solidColor = options.solidColor || {
-      r: 30,
-      g: 30,
-      b: 30,
-      a: 1,
-    };
-    this.color1 = options.color1 || {
-      r: 27,
-      g: 43,
-      b: 107,
-      a: 1,
-    };
-    this.color2 = options.color2 || {
-      r: 226,
-      g: 149,
-      b: 149,
-      a: 1,
-    };
+    this.solidColor = options.solidColor || '#1E1E1E';
+    this.color1 = options.color1 || '#1B2B6B  ';
+    this.color2 = options.color2 || '#E29595';
+    this.opacityColor1 = options.opacityColor1 || 1;
+    this.opacityColor2 = options.opacityColor2 || 1;
     this.gradientRotation = options.gradientRotation || 90;
     this.colorStyle = options.colorStyle || 'solid';
   }
@@ -105,6 +92,7 @@ const baseColor = new BaseColorBackgroundLayer({
   id: 'baseColor',
   colorStyle: 'gradient',
   name: 'baseColor',
+  gradientRotation: '0',
 });
 
 const initialState = {

@@ -332,6 +332,7 @@ const TextControl = ({
           title="Highlight Color"
           type="hex"
           pickerWidth="60%"
+          adjustPosition="-70px"
         />
       </div>
 
