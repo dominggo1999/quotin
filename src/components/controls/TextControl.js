@@ -22,6 +22,7 @@ import { ReactComponent as RightTextIcon } from '../../assets/controls/right-ali
 const TextControl = ({
   name, lineHeight, fontSize, canvasSize, width, height, text, uppercase, shadow, highlightColor, textColor, letterSpacing, quick, fontFamily, openBrowser,
 }) => {
+  const dispatch = useDispatch();
   const [selectedText, setSelectedText] = useState(null);
   const [showTextColorPicker, setShowTextColorPicker] = useState(false);
   const [showHighlightColorPicker, setShowHighlightColorPicker] = useState(false);
@@ -41,8 +42,6 @@ const TextControl = ({
       document.body.removeEventListener('click', reset);
     };
   }, []);
-
-  const dispatch = useDispatch();
 
   const updateText = (option, value) => {
     dispatch(modifyLayerText(name, option, value));
@@ -120,22 +119,24 @@ const TextControl = ({
 
     str = parseInput(str);
 
+    // Set selected text to null
+    setSelectedText(null);
+
     // Get parsed string
     dispatch(modifyLayerText(name, 'content', str));
   };
 
   const watchSelect = (e) => {
-    const textareaVal = textAreaRef.current.value;
-
     const cursorStart = textAreaRef.current.selectionStart;
     const cursorEnd = textAreaRef.current.selectionEnd;
-    console.log(cursorStart, cursorEnd);
 
     if(cursorEnd !== cursorStart) {
       setSelectedText({
         start: cursorStart,
         end: cursorEnd,
       });
+    } else{
+      setSelectedText(null);
     }
   };
 
