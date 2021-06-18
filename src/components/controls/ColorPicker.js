@@ -1,13 +1,12 @@
-import { HexColorPicker } from 'react-colorful';
+import { HexColorPicker, RgbaColorPicker } from 'react-colorful';
 
 const ColorPicker = ({
-  color, toggleColorPicker, showColorPicker, changeColor, title, adjustPosition,
+  color, pickerColor, toggleColorPicker, showColorPicker, changeColor, title, adjustPosition, type, pickerWidth,
 }) => {
   const colorPickerStyle = {
     position: 'absolute',
     top: '30px',
-    right: adjustPosition ? 'auto' : 0,
-    left: adjustPosition ? 0 : 'auto',
+    left: adjustPosition ? '-40px' : 0,
     padding: '10px',
     background: '#ffffff',
     borderRadius: '10px',
@@ -21,21 +20,39 @@ const ColorPicker = ({
       <div className="relative w-full flex justify-center">
         <div
           style={{
-            backgroundColor: color,
+            background: pickerColor,
+            width: pickerWidth,
+            height: '20px',
+            zIndex: 10,
           }}
           role="button"
           onClick={toggleColorPicker}
-          className="w-[60%] h-[20px] relative z-10"
         >
         </div>
         {showColorPicker
           && (
             <div>
-              <HexColorPicker
-                style={colorPickerStyle}
-                color={color}
-                onChange={changeColor}
-              />
+              {
+                type === 'hex'
+                && (
+                <HexColorPicker
+                  style={colorPickerStyle}
+                  color={color}
+                  onChange={changeColor}
+                />
+                )
+              }
+              {
+                type === 'rgba'
+                && (
+                <RgbaColorPicker
+                  style={colorPickerStyle}
+                  color={color}
+                  onChange={changeColor}
+                />
+                )
+              }
+
             </div>
           )}
       </div>

@@ -314,18 +314,24 @@ const TextControl = ({
 
         <ColorPicker
           color={textColor}
+          pickerColor={textColor}
           toggleColorPicker={toggleTextColorPicker}
           showColorPicker={showTextColorPicker}
           changeColor={(e) => changeColor('textColor', e)}
           title="Text Color"
-          adjustPosition
+          type="hex"
+          pickerWidth="60%"
         />
         <ColorPicker
+          adjustPosition
           color={highlightColor}
+          pickerColor={highlightColor}
           toggleColorPicker={toggleHighlightColor}
           showColorPicker={showHighlightColorPicker}
           changeColor={(e) => changeColor('highlightColor', e)}
           title="Highlight Color"
+          type="hex"
+          pickerWidth="60%"
         />
       </div>
 

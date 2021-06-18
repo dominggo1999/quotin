@@ -1,18 +1,8 @@
-const toSolidColor = (obj) => {
-  const {
-    r, g, b, a,
-  } = obj;
-
-  return (`rgba(${r},${g},${b},${a})`);
-};
-
-const toGradientColor = (obj1, obj2, rotation) => {
-  return `linear-gradient(${rotation}deg, ${toSolidColor(obj1)} 0%, ${toSolidColor(obj2)} 100%)`;
-};
+import { toSolidColor, toGradientColor } from '../util/colorConvert';
 
 const StaticLayer = ({ item }) => {
   const {
-    solidColor, color1, color2, colorStyle, gradientRotation,
+    solidColor, color1, color2, colorStyle, gradientRotation, width, height,
   } = item;
 
   const background = colorStyle === 'solid' ? toSolidColor(solidColor) : toGradientColor(color1, color2, gradientRotation);
@@ -22,8 +12,9 @@ const StaticLayer = ({ item }) => {
       <div
         style={{
           background,
+          width,
+          height,
         }}
-        className="w-full h-full"
       />
     </div>
   );

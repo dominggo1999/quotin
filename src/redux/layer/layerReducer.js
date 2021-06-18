@@ -5,6 +5,7 @@ const {
   UPDATE_LAYER_LAYOUT,
   MODIFY_LAYER_TEXT,
   TOGGLE_LAYER,
+  UPDATE_BACKGROUND,
 } = layerActionTypes;
 
 class Layer {
@@ -44,6 +45,9 @@ class TextLayer extends Layer {
 class BaseColorBackgroundLayer extends Layer {
   constructor(options = {}) {
     super();
+    this.width = options.width || '100%';
+    this.height = options.height || '100%';
+    this.name = options.name; // must have name
     this.type = 'background';
     this.id = options.id || this.id;
     this.solidColor = options.solidColor || {
@@ -97,15 +101,16 @@ const author = new TextLayer({
 });
 
 // Instantiate background
-const baseColorBackground = new BaseColorBackgroundLayer({
+const baseColor = new BaseColorBackgroundLayer({
   id: 'baseColor',
   colorStyle: 'gradient',
+  name: 'baseColor',
 });
 
 const initialState = {
   quote,
   author,
-  baseColorBackground,
+  baseColor,
 };
 
 const layerReducer = (state = initialState, action) => {
@@ -124,6 +129,14 @@ const layerReducer = (state = initialState, action) => {
         },
       };
     case UPDATE_LAYER_LAYOUT:
+      return {
+        ...state,
+        [targetLayer]: {
+          ...targetSettings,
+          [option]: value,
+        },
+      };
+    case UPDATE_BACKGROUND:
       return {
         ...state,
         [targetLayer]: {
