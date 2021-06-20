@@ -3,11 +3,11 @@ import html2canvas from 'html2canvas';
 const EditorHeader = () => {
   const downloadImage = () => {
     const c = document.getElementById('canvas');
-    console.log(c.height);
 
     html2canvas(c, {
       scale: 3,
       backgroundColor: null,
+      useCORS: true,
     }).then((canvas) => {
       const imageURL = canvas.toDataURL('image/png');
       const a = document.createElement('a');

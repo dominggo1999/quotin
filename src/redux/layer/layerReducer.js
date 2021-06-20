@@ -47,7 +47,7 @@ class BaseColorBackgroundLayer extends Layer {
     super();
     this.name = options.name; // must have name
     this.type = 'background';
-    this.id = options.id || this.id;
+    this.id = options.id || 'baseColor';
     this.solidColor = options.solidColor || '#1E1E1E';
     this.color1 = options.color1 || '#1B2B6B  ';
     this.color2 = options.color2 || '#E29595';
@@ -55,6 +55,16 @@ class BaseColorBackgroundLayer extends Layer {
     this.opacityColor2 = options.opacityColor2 || 1;
     this.gradientRotation = options.gradientRotation || 90;
     this.colorStyle = options.colorStyle || 'solid';
+  }
+}
+
+class Photo extends Layer {
+  constructor(options = {}) {
+    super();
+    this.id = 'photo';
+    this.imageID = options.imageID || '8197559'; // pexels api
+    this.name = 'photo';
+    this.type = 'photo';
   }
 }
 
@@ -93,10 +103,13 @@ const baseColor = new BaseColorBackgroundLayer({
   gradientRotation: '0',
 });
 
+const photo = new Photo();
+
 const initialState = {
   quote,
   author,
   baseColor,
+  photo,
 };
 
 const layerReducer = (state = initialState, action) => {

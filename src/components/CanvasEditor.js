@@ -5,6 +5,7 @@ import { updateLayerLayout } from '../redux/layer/layerActions';
 import useMapStateToArray from '../hooks/useMapStateToArray';
 import useCanvasSize from '../hooks/useCanvasSize';
 import StaticLayer from './StaticLayer';
+import PhotoLayer from './PhotoLayer';
 
 const CanvasEditor = () => {
   const resultRef = useRef(null);
@@ -84,6 +85,16 @@ const CanvasEditor = () => {
                   activeLayerId={activeLayerId}
                   key={item.id}
                   item={item}
+                />
+              );
+            }
+
+            if(item.type === 'photo') {
+              return (
+                <PhotoLayer
+                  key={item.id}
+                  item={item}
+                  canvasSize={canvasSize}
                 />
               );
             }
