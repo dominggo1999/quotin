@@ -13,7 +13,6 @@ const EditorOptionContainer = () => {
       <div className="custom-scrollbar w-full h-full flex flex-col items-center overflow-y-scroll overflow-x-hidden">
         <EditorOption />
       </div>
-
     </div>
   );
 };

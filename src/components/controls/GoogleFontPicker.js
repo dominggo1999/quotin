@@ -10,6 +10,7 @@ import {
   SortOption,
   Variant,
 } from '@samuelmeuli/font-manager';
+import FontFaceObserver from 'fontfaceobserver';
 import FontInputSelect from './FontInputSelect';
 
 /**
@@ -107,7 +108,6 @@ const GoogleFontPicker = (props) => {
       <FontInputSelect
         options={fonts}
         onSelection={onSelection}
-        activeFontFamily={activeFontFamily}
         getFontId={getFontId}
         realFontFamily={realFontFamily}
         changeCategory={changeCategory}

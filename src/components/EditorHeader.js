@@ -12,7 +12,7 @@ const EditorHeader = () => {
       const imageURL = canvas.toDataURL('image/png');
       const a = document.createElement('a');
       a.href = imageURL;
-      a.download = imageURL;
+      a.download = 'your beautiful quote';
       a.click();
     });
   };

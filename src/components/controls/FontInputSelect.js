@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 const categories = ['sans-serif', 'serif', 'display', 'handwriting', 'monospace', ''];
 
 const FontInputSelect = ({
-  options, fontManager, onSelection, activeFontFamily, getFontId, realFontFamily, changeCategory, fontCategory,
+  options, fontManager, onSelection, getFontId, realFontFamily, changeCategory, fontCategory,
 }) => {
   const [fonts, setFonts] = useState([]);
 
