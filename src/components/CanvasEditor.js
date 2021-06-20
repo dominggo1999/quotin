@@ -64,7 +64,7 @@ const CanvasEditor = () => {
     >
       {/* Canvas */}
       <div
-        className="relative w-full min-h-full flex justify-center p-5"
+        className="relative w-full min-h-full flex justify-center p-1"
       >
         <div
           style={canvasSize}

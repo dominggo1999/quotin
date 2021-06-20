@@ -4,6 +4,7 @@ import Sidebar from '../components/Sidebar';
 import CanvasEditor from '../components/CanvasEditor';
 import EditorHeader from '../components/EditorHeader';
 import useMapStateToArray from '../hooks/useMapStateToArray';
+import Result from '../components/Result';
 
 const API_KEY = process.env.REACT_APP_GOOGLE_FONT_API;
 
@@ -39,6 +40,7 @@ const Editor = () => {
         <Sidebar />
         <CanvasEditor />
       </div>
+      <Result />
     </div>
   );
 };

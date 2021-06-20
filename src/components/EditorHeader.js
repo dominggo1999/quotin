@@ -5,7 +5,7 @@ const EditorHeader = () => {
     const c = document.getElementById('canvas');
 
     html2canvas(c, {
-      scale: 3,
+      scale: 4,
       backgroundColor: null,
       useCORS: true,
     }).then((canvas) => {

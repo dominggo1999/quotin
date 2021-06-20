@@ -62,9 +62,16 @@ class Photo extends Layer {
   constructor(options = {}) {
     super();
     this.id = 'photo';
-    this.imageID = options.imageID || '8197559'; // pexels api
+    this.imageID = options.imageID || '3347244'; // pexels api
     this.name = 'photo';
     this.type = 'photo';
+    this.boundaryWidth = options.boundaryWidth || 0;
+    this.boundaryHeight = options.boundaryHeight || 0;
+    this.imageWidth = options.imageWidth || 0;
+    this.imageHeight = options.imageHeight || 0;
+    this.imageURL = options.imageURL || 0;
+    this.x = options.imageURL || 0;
+    this.y = options.imageURL || 0;
   }
 }
 

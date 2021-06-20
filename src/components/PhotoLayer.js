@@ -1,20 +1,35 @@
 import { useEffect, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { useDispatch, useSelector } from 'react-redux';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { createClient } from 'pexels';
 import { Rnd } from 'react-rnd';
+import { updateLayerLayout } from '../redux/layer/layerActions';
 
 const apiKey = process.env.REACT_APP_PEXELS_API;
 const client = createClient(apiKey);
 
 const PhotoLayer = ({ item, canvasSize }) => {
-  const [imageURL, setImageURL] = useState('');
-  const [photoAspectRatio, setphotoAspectRatio] = useState(1);
-  const [boundaryWidth, setBoundaryWidth] = useState();
-  const [boundaryHeight, setBoundaryHeight] = useState();
-  const [imageWidth, setImageWidth] = useState();
-  const [imageHeight, setImageHeight] = useState();
-  const { imageID } = item;
+  const dispatch = useDispatch();
+
+  const {
+    imageID,
+    boundaryWidth,
+    boundaryHeight,
+    imageWidth,
+    imageHeight,
+    imageURL,
+    name,
+  } = item;
+  // const [imageURL, setImageURL] = useState();
+  // const [boundaryWidth, setBoundaryWidth] = useState();
+  // const [boundaryHeight, setBoundaryHeight] = useState();
+  // const [imageWidth, setImageWidth] = useState();
+  // const [imageHeight, setImageHeight] = useState();
+
+  const updatePhoto = (option, value) => {
+    dispatch(updateLayerLayout(name, option, value));
+  };
 
   useEffect(() => {
     const getImage = async () => {
@@ -30,31 +45,33 @@ const PhotoLayer = ({ item, canvasSize }) => {
         // draggable axis = y
         const hImage = canvasSize.width / imageAspectRatio;
         const hBoundary = hImage + hImage - canvasSize.height;
-        setBoundaryHeight(hBoundary);
-        setBoundaryWidth('100%');
-        setImageHeight(hImage);
-        setImageWidth(canvasSize.width);
+        updatePhoto('boundaryHeight', hBoundary);
+        updatePhoto('boundaryWidth', '100%');
+        updatePhoto('imageHeight', hImage);
+        updatePhoto('imageWidth', canvasSize.width);
       }else{
         // h nya image < h nya canvas
         // draggable axis = y
         const hImage = canvasSize.height;
         const wImage = imageAspectRatio * hImage;
         const wBoundary = wImage + wImage - canvasSize.width;
-        setBoundaryHeight('100%');
-        setBoundaryWidth(wBoundary);
-        setImageHeight(hImage);
-        setImageWidth(wImage);
+        updatePhoto('boundaryHeight', '100%');
+        updatePhoto('boundaryWidth', wBoundary);
+        updatePhoto('imageHeight', hImage);
+        updatePhoto('imageWidth', wImage);
       }
 
-      console.log(imageAspectRatio, canvasAspectRatio);
-
-      setImageURL(response.src.large2x);
+      updatePhoto('imageURL', response.src.large2x);
     };
 
     getImage();
   }, []);
 
-  console.log(imageWidth);
+  const onDragStop = (e, d) => {
+    // this.setState({ x: d.x, y: d.y });
+    updatePhoto('x', d.x);
+    updatePhoto('y', d.y);
+  };
 
   return (
     <div
@@ -84,6 +101,7 @@ const PhotoLayer = ({ item, canvasSize }) => {
             x: 0,
             y: 0,
           }}
+          onDragStop={onDragStop}
         >
           <img
             src={imageURL}
