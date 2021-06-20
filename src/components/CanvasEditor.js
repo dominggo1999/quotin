@@ -69,7 +69,7 @@ const CanvasEditor = () => {
           style={canvasSize}
           id="canvas"
           ref={resultRef}
-          className="relative z-10 overflow-hidden bg-transparent m-auto"
+          className="relative z-10 overflow-hidden bg-red-600 m-auto"
         >
 
           {layerInstances && layerInstances.map((item) => {

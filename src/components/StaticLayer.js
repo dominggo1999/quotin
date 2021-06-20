@@ -10,15 +10,17 @@ const StaticLayer = ({ item, canvasSize }) => {
   toGradientColor(color1, color2, opacityColor1, opacityColor2, gradientRotation);
 
   return (
-    <div className="w-full h-full flex justify-center items-center">
-      <div
-        style={{
-          background,
-          width: canvasSize.width,
-          height: canvasSize.height,
-        }}
-      />
-    </div>
+    <div
+      style={{
+        background,
+        width: canvasSize.width + 5, // to compensate html2canvas scaling
+        height: canvasSize.height + 5, // to compensate html2canvas scaling
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%,-50%)',
+      }}
+    />
   );
 };
 

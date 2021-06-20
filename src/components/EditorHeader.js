@@ -7,6 +7,7 @@ const EditorHeader = () => {
 
     html2canvas(c, {
       scale: 3,
+      backgroundColor: null,
     }).then((canvas) => {
       const imageURL = canvas.toDataURL('image/png');
       const a = document.createElement('a');
