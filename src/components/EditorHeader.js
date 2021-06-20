@@ -3,6 +3,7 @@ import html2canvas from 'html2canvas';
 const EditorHeader = () => {
   const downloadImage = () => {
     const c = document.getElementById('canvas');
+    console.log(c.height);
 
     html2canvas(c, {
       scale: 3,

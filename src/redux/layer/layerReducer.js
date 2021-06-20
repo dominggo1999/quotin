@@ -45,8 +45,6 @@ class TextLayer extends Layer {
 class BaseColorBackgroundLayer extends Layer {
   constructor(options = {}) {
     super();
-    this.width = options.width || '100%';
-    this.height = options.height || '100%';
     this.name = options.name; // must have name
     this.type = 'background';
     this.id = options.id || this.id;
@@ -66,12 +64,12 @@ const quote = new TextLayer({
   text: 'Berhentilah menuntut ilmu karena ilmu tidak bersalah',
   content: '<span>Berhentilah menuntut ilmu karena ilmu tidak bersalah</span>',
   id: 'quote',
-  x: 10,
-  y: 80,
+  x: 5,
+  y: 220,
   height: 'auto',
   textColor: '#FFFFFF',
   fontFamily: 'Indie Flower',
-  fontSize: 30,
+  fontSize: 25,
 });
 
 // Instantiate author
@@ -79,7 +77,7 @@ const author = new TextLayer({
   name: 'author',
   id: 'author',
   x: 250,
-  y: 280,
+  y: 350,
   width: 150,
   fontSize: 16,
   textAlignment: 'right',

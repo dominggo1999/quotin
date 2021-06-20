@@ -7,37 +7,40 @@ import LayerOptions from './option/LayerOptions';
 import QuoteOptions from './option/QuoteOptions';
 import StickerOptions from './option/StickerOptions';
 import AuthorOptions from './option/AuthorOptions';
+import useCanvasSize from '../hooks/useCanvasSize';
 
 const EditorOption = () => {
   const { activeTab, displayOption } = useSelector((state) => state.sidebar);
+  const canvas = useSelector((state) => state.canvas);
+  const canvasSize = useCanvasSize(canvas);
 
   switch (activeTab) {
     case 'quick':
-      return <QuickOptions />;
+      return <QuickOptions canvasSize={canvasSize} />;
 
     case 'background':
-      return <BackgroundOptions />;
+      return <BackgroundOptions canvasSize={canvasSize} />;
 
     case 'brand':
-      return <BrandOptions />;
+      return <BrandOptions canvasSize={canvasSize} />;
 
     case 'frame':
-      return <FrameOptions />;
+      return <FrameOptions canvasSize={canvasSize} />;
 
     case 'layer':
-      return <LayerOptions />;
+      return <LayerOptions canvasSize={canvasSize} />;
 
     case 'quote':
-      return <QuoteOptions />;
+      return <QuoteOptions canvasSize={canvasSize} />;
 
     case 'sticker':
-      return <StickerOptions />;
+      return <StickerOptions canvasSize={canvasSize} />;
 
     case 'author':
-      return <AuthorOptions />;
+      return <AuthorOptions canvasSize={canvasSize} />;
 
     default:
-      return <QuickOptions />;
+      return <QuickOptions canvasSize={canvasSize} />;
   }
 };
 

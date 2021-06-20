@@ -64,8 +64,6 @@ const RndLayer = ({
 
   // Init posisi dan content
   useEffect(() => {
-    // If layer is align (centerX, centerY, centerXY)
-    // Update X
     setOption({
       ...option,
       x,

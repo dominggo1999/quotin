@@ -376,7 +376,6 @@ const TextControl = ({
               <p className="text-white">Line height</p>
 
               <p className="text-white text-center mb-2">{letterSpacing}</p>
-
               <input
                 className="mb-2"
                 type="range"

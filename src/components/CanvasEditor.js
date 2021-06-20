@@ -3,22 +3,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import RndLayer from './RndLayer';
 import { updateLayerLayout } from '../redux/layer/layerActions';
 import useMapStateToArray from '../hooks/useMapStateToArray';
+import useCanvasSize from '../hooks/useCanvasSize';
 import StaticLayer from './StaticLayer';
 
-const CanvasEditor = ({ f }) => {
+const CanvasEditor = () => {
   const resultRef = useRef(null);
   const dispatch = useDispatch();
   const [activeLayerId, setActiveLayerId] = useState();
 
   const layersState = useSelector((state) => state.layer);
-
+  const canvas = useSelector((state) => state.canvas);
   const layerInstances = useMapStateToArray(layersState);
 
-  // TODO: Make canvas size global
-  const [canvasSize, setCanvasSize] = useState({
-    width: 450,
-    height: 450,
-  });
+  const canvasSize = useCanvasSize(canvas);
 
   const updateX = (name, value) => {
     dispatch(updateLayerLayout(name, 'x', value));
@@ -62,34 +59,17 @@ const CanvasEditor = ({ f }) => {
 
   return (
     <main
-      className="w-full h-full flex justify-center items-center relative bg-gray-300 min-w-[600px]"
+      className="relative bg-gray-300 min-w-[600px] w-full overflow-auto"
     >
-
       {/* Canvas */}
       <div
-        style={{
-          width: canvasSize.width,
-          height: canvasSize.height,
-        }}
-        className="relative"
+        className="relative w-full min-h-full flex justify-center p-5"
       >
-        {/* shadow */}
         <div
-          style={{
-            width: canvasSize.width,
-            height: canvasSize.height,
-          }}
-          className="absolute shadow-canvas"
-        >
-        </div>
-        <div
-          style={{
-            width: canvasSize.width,
-            height: canvasSize.height,
-          }}
+          style={canvasSize}
           id="canvas"
           ref={resultRef}
-          className="relative z-10 overflow-hidden bg-gray-900"
+          className="relative z-10 overflow-hidden bg-transparent m-auto"
         >
 
           {layerInstances && layerInstances.map((item) => {
@@ -111,6 +91,7 @@ const CanvasEditor = ({ f }) => {
               <StaticLayer
                 key={item.id}
                 item={item}
+                canvasSize={canvasSize}
               />
             );
           })}

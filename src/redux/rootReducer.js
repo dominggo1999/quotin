@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import sidebarReducer from './sidebar/sidebarReducer';
 import layerReducer from './layer/layerReducer';
+import canvasReducer from './canvas/canvasReducer';
 
 export default combineReducers({
   sidebar: sidebarReducer,
   layer: layerReducer,
+  canvas: canvasReducer,
 });

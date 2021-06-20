@@ -1,21 +1,14 @@
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import TextControl from '../controls/TextControl';
 import useMapStateToArray from '../../hooks/useMapStateToArray';
 
-const QuickOption = () => {
+const QuickOption = ({ canvasSize }) => {
   const layersState = useSelector((state) => state.layer);
   const layerInstances = useMapStateToArray(layersState);
 
-  // TODO: Make canvas size global
-  const [canvasSize, setCanvasSize] = useState({
-    width: 450,
-    height: 450,
-  });
-
   return (
     <div className="px-5 w-full flex flex-col justify-center">
-      {layerInstances && layerInstances.map((item) => {
+      {layerInstances && layerInstances.filter((i) => i.type === 'text').map((item) => {
         return (
           <TextControl
             canvasSize={canvasSize}

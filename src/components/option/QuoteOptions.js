@@ -4,16 +4,10 @@ import TextControl from '../controls/TextControl';
 import useMapStateToArray from '../../hooks/useMapStateToArray';
 import FontPicker from '../controls/FontPicker';
 
-const QuoteOptions = () => {
+const QuoteOptions = ({ canvasSize }) => {
   const layersState = useSelector((state) => state.layer);
   const layerInstances = useMapStateToArray(layersState);
   const [showBrowser, setShowBrowser] = useState(false);
-
-  // TODO: Make canvas size global
-  const [canvasSize, setCanvasSize] = useState({
-    width: 450,
-    height: 450,
-  });
 
   const openBrowser = () => {
     setShowBrowser(true);

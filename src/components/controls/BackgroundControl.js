@@ -3,7 +3,6 @@ import { useState } from 'react';
 import OptionHeader from '../OptionHeader';
 import { updateBackground } from '../../redux/layer/layerActions';
 import ColorPicker from './ColorPicker';
-import { toGradientColor } from '../../util/colorConverter';
 
 const Button = ({ children, bg, onClick }) => {
   return(
