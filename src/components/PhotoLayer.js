@@ -46,15 +46,11 @@ const PhotoLayer = ({ item, canvasSize }) => {
         setImageWidth(wImage);
       }
 
-      console.log(imageAspectRatio, canvasAspectRatio);
-
       setImageURL(response.src.large2x);
     };
 
     getImage();
   }, []);
-
-  console.log(imageWidth);
 
   return (
     <div

@@ -21,7 +21,7 @@ class TextLayer extends Layer {
     this.id = options.id || this.id;
     this.x = options.x || 0;
     this.y = options.y || 0;
-    this.width = options.width || 430;
+    this.width = options.width || 200;
     this.height = options.height || 200;
     this.type = 'text';
     this.name = options.name; // must have name
@@ -62,7 +62,7 @@ class Photo extends Layer {
   constructor(options = {}) {
     super();
     this.id = 'photo';
-    this.imageID = options.imageID || '8197559'; // pexels api
+    this.imageID = options.imageID || '775199'; // pexels api
     this.name = 'photo';
     this.type = 'photo';
   }
@@ -74,22 +74,22 @@ const quote = new TextLayer({
   text: 'Berhentilah menuntut ilmu karena ilmu tidak bersalah',
   content: '<span>Berhentilah menuntut ilmu karena ilmu tidak bersalah</span>',
   id: 'quote',
-  x: 5,
+  x: 35,
   y: 220,
   height: 'auto',
   textColor: '#FFFFFF',
   fontFamily: 'Indie Flower',
-  fontSize: 25,
+  fontSize: 20,
 });
 
 // Instantiate author
 const author = new TextLayer({
   name: 'author',
   id: 'author',
-  x: 250,
-  y: 350,
+  x: 100,
+  y: 400,
   width: 150,
-  fontSize: 16,
+  fontSize: 18,
   textAlignment: 'right',
   height: 'auto',
   fontFamily: 'Amatic SC',

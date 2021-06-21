@@ -10,8 +10,9 @@ import {
   SortOption,
   Variant,
 } from '@samuelmeuli/font-manager';
-import FontFaceObserver from 'fontfaceobserver';
+import { useDispatch } from 'react-redux';
 import FontInputSelect from './FontInputSelect';
+import { addVisitedFonts } from '../../redux/font/fontActions';
 
 /**
  * Return the fontId based on the provided font family
@@ -21,6 +22,8 @@ const getFontId = (fontFamily) => {
 };
 
 const GoogleFontPicker = (props) => {
+  const dispatch = useDispatch();
+
   const defaultProps = {
     activeFontFamily: FONT_FAMILY_DEFAULT,
     onChange: () => {},
@@ -46,20 +49,21 @@ const GoogleFontPicker = (props) => {
     limit,
     sort,
     onChange,
-    realFontFamily,
     changeFont,
-    changeCategory,
+    getFonts,
+    fonts,
+    visitedCategory,
+    cachedFonts,
     fontCategory,
   } = props;
 
   const [status, setStatus] = useState('loading');
-  const [fonts, setFonts] = useState([]);
 
-  useEffect(() => {
+  const fetchFonts = () => {
     const fontManager = new FontManager(apiKey, activeFontFamily, {
       pickerId: pickerId || defaultProps.pickerId,
       families: families || defaultProps.families,
-      categories: categories || defaultProps.categories,
+      categories: fontCategory || defaultProps.categories,
       scripts: scripts || defaultProps.scripts,
       variants: variants || defaultProps.variants,
       filter: filter || defaultProps.filter,
@@ -75,12 +79,8 @@ const GoogleFontPicker = (props) => {
         // Extract and sort font list
         const fonts = Array.from(fontManager.getFonts().values());
 
-        setFonts((prevFonts) => {
-          if (sort === 'alphabet') {
-            return fonts.sort((font1, font2) => font1.family.localeCompare(font2.family));
-          }
-          return fonts;
-        });
+        getFonts(fonts);
+        dispatch(addVisitedFonts(fontCategory));
       })
       .catch((err) => {
       // On error: Log error message
@@ -88,7 +88,16 @@ const GoogleFontPicker = (props) => {
         console.error('Error trying to fetch the list of available fonts');
         console.error(err);
       });
-  }, [categories]);
+  };
+
+  useEffect(() => {
+    if(visitedCategory.indexOf(fontCategory) === -1) {
+      fetchFonts();
+    }else if (cachedFonts[fontCategory]) {
+      getFonts(cachedFonts[fontCategory]);
+      setStatus('finished');
+    }
+  }, [fontCategory]);
 
   const onSelection = (e) => {
     const target = e.target;
@@ -99,7 +108,6 @@ const GoogleFontPicker = (props) => {
     }
 
     changeFont(activeFontFamily);
-    // setActiveFontFamily(activeFontFamily);
   };
 
   return (
@@ -109,9 +117,6 @@ const GoogleFontPicker = (props) => {
         options={fonts}
         onSelection={onSelection}
         getFontId={getFontId}
-        realFontFamily={realFontFamily}
-        changeCategory={changeCategory}
-        fontCategory={fontCategory}
       />
       )}
     </div>

@@ -8,15 +8,17 @@ const BackgroundOptions = () => {
   const layerInstances = useMapStateToArray(layersState);
 
   return (
-    <div className="px-5 w-full flex items-center justify-center">
-      {layerInstances && layerInstances.filter((i) => i.name === 'baseColor').map((item) => {
-        return (
-          <BackgroundControl
-            key={item.id}
-            item={item}
-          />
-        );
-      })}
+    <div className="custom-scrollbar w-full h-full flex flex-col items-center overflow-y-scroll overflow-x-hidden">
+      <div className="px-5 w-full flex items-center justify-center">
+        {layerInstances && layerInstances.filter((i) => i.name === 'baseColor').map((item) => {
+          return (
+            <BackgroundControl
+              key={item.id}
+              item={item}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

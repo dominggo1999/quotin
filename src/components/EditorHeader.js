@@ -1,20 +1,47 @@
 import html2canvas from 'html2canvas';
+import { useSelector, useDispatch } from 'react-redux';
+import useCanvasSize from '../hooks/useCanvasSize';
 
 const EditorHeader = () => {
+  const canvas = useSelector((state) => state.canvas);
+
   const downloadImage = () => {
     const c = document.getElementById('canvas');
 
     html2canvas(c, {
-      scale: 3,
+      scale: 5,
       backgroundColor: null,
       useCORS: true,
     }).then((canvas) => {
-      const imageURL = canvas.toDataURL('image/png');
+      const imageURL = canvas.toDataURL('image/png', 1);
       const a = document.createElement('a');
       a.href = imageURL;
       a.download = 'your beautiful quote';
       a.click();
     });
+
+    // const scale = 5;
+
+    // const w = canvasSize.width;
+    // const h = canvasSize.height;
+    // const canvas = document.createElement('canvas');
+    // canvas.width = w * scale;
+    // canvas.height = h * scale;
+    // canvas.style.width = `${w}px`;
+    // canvas.style.height = `${h}px`;
+    // const context = canvas.getContext('2d');
+    // context.scale(scale, scale);
+    // html2canvas(c, {
+    //   canvas,
+    //   backgroundColor: null,
+    //   useCORS: true,
+    // }).then((canvas) => {
+    //   const imageURL = canvas.toDataURL('image/png');
+    //   const a = document.createElement('a');
+    //   a.href = imageURL;
+    //   a.download = 'your beautiful quote';
+    //   a.click();
+    // });
   };
 
   return (
