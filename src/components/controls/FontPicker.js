@@ -51,7 +51,7 @@ const FontPicker = ({ closeBrowser, name, activeFont }) => {
   };
 
   return (
-    <>
+    <div className="no-scrollbar w-full h-full flex flex-col items-center">
       <div className="w-full px-5">
         <button
           className=" py-1 px-5 mb-2 font-bold text-white text-sm bg-purple-500 rounded-lg"
@@ -81,29 +81,23 @@ const FontPicker = ({ closeBrowser, name, activeFont }) => {
           />
         </div>
       </div>
-      <div className="w-full h-full">
-        <div className="custom-scrollbar w-full h-full flex flex-col items-center overflow-y-scroll overflow-x-hidden">
-          <div className="text-white w-full relative px-5">
-            <GoogleFontPicker
-              name={name}
-              apiKey={API_KEY}
-              activeFontFamily={activeFontFamily}
-              onChange={(nextFont) => setActiveFontFamily(nextFont.family)}
-              limit={200}
-              sort="alphabet"
-              changeFont={(f) => setTest(f)}
-              changeCategory={changeCategory}
-              pickerId={`${name}fontPicker`}
-              fontCategory={fontCategory}
-              fonts={fonts}
-              getFonts={getFonts}
-              visitedCategory={visitedCategory}
-              cachedFonts={cachedFonts}
-            />
-          </div>
-        </div>
-      </div>
-    </>
+      <GoogleFontPicker
+        name={name}
+        apiKey={API_KEY}
+        activeFontFamily={activeFontFamily}
+        onChange={(nextFont) => setActiveFontFamily(nextFont.family)}
+        limit={200}
+        sort="alphabet"
+        changeFont={(f) => setTest(f)}
+        changeCategory={changeCategory}
+        pickerId={`${name}fontPicker`}
+        fontCategory={fontCategory}
+        fonts={fonts}
+        getFonts={getFonts}
+        visitedCategory={visitedCategory}
+        cachedFonts={cachedFonts}
+      />
+    </div>
   );
 };
 

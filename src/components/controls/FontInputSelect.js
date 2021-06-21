@@ -4,9 +4,8 @@ const FontInputSelect = ({
   options, onSelection, getFontId,
 }) => {
   return (
-    <div className="w-full relative">
-      <ul className="font-list-item w-full h-full">
-        {
+    <ul className="custom-scrollbar overflow-y-auto w-full text-white px-5">
+      {
         options.map((font) => {
           const fontId = getFontId(font.family);
           return (
@@ -28,8 +27,7 @@ const FontInputSelect = ({
           );
         })
       }
-      </ul>
-    </div>
+    </ul>
   );
 };
 

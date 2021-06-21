@@ -111,7 +111,7 @@ const GoogleFontPicker = (props) => {
   };
 
   return (
-    <div className="w-full mt-5">
+    <>
       {status === 'finished' && fonts && (
       <FontInputSelect
         options={fonts}
@@ -119,7 +119,7 @@ const GoogleFontPicker = (props) => {
         getFontId={getFontId}
       />
       )}
-    </div>
+    </>
   );
 };
 
