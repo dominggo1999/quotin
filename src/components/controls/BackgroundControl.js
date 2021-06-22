@@ -65,7 +65,7 @@ const BackgroundControl = ({ item }) => {
   };
 
   return (
-    <div className="w-full flex flex-col pb-6 text-white">
+    <div className="order-3 w-full flex flex-col mb-10 text-white">
       <OptionHeader title="Background Base Color" />
       <div className="flex justify-center">
         <Button

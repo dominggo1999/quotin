@@ -9,7 +9,6 @@ const client = createClient(apiKey);
 
 const PhotoLayer = ({ item, canvasSize }) => {
   const [imageURL, setImageURL] = useState('');
-  const [photoAspectRatio, setphotoAspectRatio] = useState(1);
   const [boundaryWidth, setBoundaryWidth] = useState();
   const [boundaryHeight, setBoundaryHeight] = useState();
   const [imageWidth, setImageWidth] = useState();
@@ -19,6 +18,7 @@ const PhotoLayer = ({ item, canvasSize }) => {
   useEffect(() => {
     const getImage = async () => {
       const response = await client.photos.show({ id: imageID });
+      setImageURL(response.src.large2x);
 
       const { height, width } = response;
 
@@ -45,12 +45,10 @@ const PhotoLayer = ({ item, canvasSize }) => {
         setImageHeight(hImage);
         setImageWidth(wImage);
       }
-
-      setImageURL(response.src.large2x);
     };
 
     getImage();
-  }, []);
+  }, [imageID]);
 
   return (
     <div

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import GoogleFontPicker from './GoogleFontPicker';
 import { modifyLayerText } from '../../redux/layer/layerActions';
-import { addVisitedFonts, cacheFonts } from '../../redux/font/fontActions';
+import { cacheFonts } from '../../redux/font/fontActions';
 
 const API_KEY = process.env.REACT_APP_GOOGLE_FONT_API;
 
@@ -51,10 +51,10 @@ const FontPicker = ({ closeBrowser, name, activeFont }) => {
   };
 
   return (
-    <div className="no-scrollbar w-full h-full flex flex-col items-center">
+    <div className="w-full h-full flex flex-col items-center">
       <div className="w-full px-5">
         <button
-          className=" py-1 px-5 mb-2 font-bold text-white text-sm bg-purple-500 rounded-lg"
+          className="py-1 px-5 mb-2 font-bold text-white text-sm bg-purple-500 rounded-lg"
           onClick={closeBrowser}
         >Back
         </button>
