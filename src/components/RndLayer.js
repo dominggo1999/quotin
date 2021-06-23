@@ -7,7 +7,7 @@ const RndLayer = ({
   item, updateX, updateY, updateWidth, updateHeight, activeLayerId, className,
 }) => {
   const {
-    name, x, y, width, height, content, fontSize, textColor, lineHeight, textAlignment, uppercase, shadow, letterSpacing, fontFamily,
+    name, x, y, width, height, content, fontSize, textColor, lineHeight, textAlignment, uppercase, shadow, letterSpacing, fontFamily, display,
   } = item;
 
   const textRef = useRef(null);
@@ -35,6 +35,7 @@ const RndLayer = ({
     textShadow: shadow ? 'rgba(0, 0, 0, 0.9) 0.05em 0.05em 0.15em' : 'none',
     letterSpacing: `${letterSpacing}em`,
     fontFamily,
+    display: !display ? 'none' : 'block',
   };
 
   // activeLayer id
@@ -111,7 +112,7 @@ const RndLayer = ({
   return (
     <div className="relative">
       <Rnd
-        className=" z-50"
+        className=" z-[9999]"
         enableResizing={enableResizing}
         size={{ width: option.width, height: option.height }}
         position={{

@@ -5,7 +5,7 @@ const {
 } = canvasActionTypes;
 
 const initialState = {
-  aspectRatio: [1, 2], // w : h
+  aspectRatio: [1, 1.2], // w : h
   baseHeight: 530, // pixel
   baseWidth: 600,
   orientation: 'potrait',

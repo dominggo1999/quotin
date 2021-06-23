@@ -13,7 +13,7 @@ const PhotoLayer = ({ item, canvasSize }) => {
   const [boundaryHeight, setBoundaryHeight] = useState();
   const [imageWidth, setImageWidth] = useState();
   const [imageHeight, setImageHeight] = useState();
-  const { imageID } = item;
+  const { imageID, display } = item;
 
   useEffect(() => {
     const getImage = async () => {
@@ -36,7 +36,7 @@ const PhotoLayer = ({ item, canvasSize }) => {
         setImageWidth(canvasSize.width);
       }else{
         // h nya image < h nya canvas
-        // draggable axis = y
+        // draggable axis = x
         const hImage = canvasSize.height;
         const wImage = imageAspectRatio * hImage;
         const wBoundary = wImage + wImage - canvasSize.width;
@@ -56,6 +56,7 @@ const PhotoLayer = ({ item, canvasSize }) => {
         ...canvasSize,
         position: 'relative',
         zIndex: 40,
+        display: !display ? 'none' : 'block',
       }}
     >
       <div

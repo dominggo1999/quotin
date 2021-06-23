@@ -8,16 +8,8 @@ const {
   UPDATE_BACKGROUND,
 } = layerActionTypes;
 
-class Layer {
+class TextLayer {
   constructor(options = {}) {
-    this.display = options.display || true;
-    this.opacity = options.opacity || 1;
-  }
-}
-
-class TextLayer extends Layer {
-  constructor(options = {}) {
-    super();
     this.id = options.id || this.id;
     this.x = options.x || 0;
     this.y = options.y || 0;
@@ -39,12 +31,13 @@ class TextLayer extends Layer {
     this.fontSize = options.fontSize || 20;
     this.lineHeight = options.lineHeight || 1.2;
     this.letterSpacing = options.lineHeight || 0;
+    this.display = options.display;
+    this.opacity = options.opacity || 1;
   }
 }
 
-class BaseColorBackgroundLayer extends Layer {
+class BaseColorBackgroundLayer {
   constructor(options = {}) {
-    super();
     this.name = options.name; // must have name
     this.type = 'background';
     this.id = options.id || 'baseColor';
@@ -55,16 +48,32 @@ class BaseColorBackgroundLayer extends Layer {
     this.opacityColor2 = options.opacityColor2 || 1;
     this.gradientRotation = options.gradientRotation || 90;
     this.colorStyle = options.colorStyle || 'solid';
+    this.display = options.display;
+    this.opacity = options.opacity || 1;
   }
 }
 
-class Photo extends Layer {
+class Photo {
   constructor(options = {}) {
-    super();
     this.id = 'photo';
     this.imageID = options.imageID || '775199'; // pexels api
     this.name = 'photo';
     this.type = 'photo';
+    this.display = options.display;
+    this.opacity = options.opacity || 1;
+  }
+}
+
+class Frame {
+  constructor(options = {}) {
+    this.id = 'frame';
+    this.name = 'frame';
+    this.type = 'frame';
+    this.offset = options.offset || 5; // padding
+    this.width = options.width || 10; // thickness
+    this.opacity = options.opacity || 1;
+    this.display = options.display || true;
+    this.color = options.color || '#FFFFFF';
   }
 }
 
@@ -80,6 +89,7 @@ const quote = new TextLayer({
   textColor: '#FFFFFF',
   fontFamily: 'Indie Flower',
   fontSize: 20,
+  display: true,
 });
 
 // Instantiate author
@@ -93,6 +103,7 @@ const author = new TextLayer({
   textAlignment: 'right',
   height: 'auto',
   fontFamily: 'Amatic SC',
+  display: true,
 });
 
 // Instantiate background
@@ -101,15 +112,20 @@ const baseColor = new BaseColorBackgroundLayer({
   colorStyle: 'gradient',
   name: 'baseColor',
   gradientRotation: '0',
+  display: true,
 });
 
-const photo = new Photo();
+const photo = new Photo({
+  display: true,
+});
+const frame = new Frame();
 
 const initialState = {
   quote,
   author,
   baseColor,
   photo,
+  frame,
 };
 
 const layerReducer = (state = initialState, action) => {

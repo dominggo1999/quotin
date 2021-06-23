@@ -6,6 +6,7 @@ import useMapStateToArray from '../hooks/useMapStateToArray';
 import useCanvasSize from '../hooks/useCanvasSize';
 import StaticLayer from './StaticLayer';
 import PhotoLayer from './PhotoLayer';
+import FrameLayer from './FrameLayer';
 
 const CanvasEditor = () => {
   const resultRef = useRef(null);
@@ -70,7 +71,7 @@ const CanvasEditor = () => {
           style={canvasSize}
           id="canvas"
           ref={resultRef}
-          className="relative z-10 overflow-hidden bg-red-600 m-auto"
+          className="relative z-10 overflow-hidden bg-green-700 m-auto"
         >
 
           {layerInstances && layerInstances.map((item) => {
@@ -89,6 +90,15 @@ const CanvasEditor = () => {
               );
             }
 
+            if(item.type === 'frame') {
+              return (
+                <FrameLayer
+                  key={item.id}
+                  item={item}
+                />
+              );
+            }
+
             if(item.type === 'photo') {
               return (
                 <PhotoLayer
@@ -98,6 +108,7 @@ const CanvasEditor = () => {
                 />
               );
             }
+
             return (
               <StaticLayer
                 key={item.id}

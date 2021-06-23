@@ -2,7 +2,7 @@ import { toGradientColor } from '../util/colorConverter';
 
 const StaticLayer = ({ item, canvasSize }) => {
   const {
-    solidColor, color1, color2, opacityColor1, opacityColor2, colorStyle, gradientRotation,
+    solidColor, color1, color2, opacityColor1, opacityColor2, colorStyle, gradientRotation, display, name,
   } = item;
 
   const background = colorStyle === 'solid' ? solidColor : toGradientColor(color1, color2, opacityColor1, opacityColor2, gradientRotation);
@@ -19,6 +19,7 @@ const StaticLayer = ({ item, canvasSize }) => {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%,-50%)',
+        display: !display ? 'none' : 'block',
       }}
     />
   );
