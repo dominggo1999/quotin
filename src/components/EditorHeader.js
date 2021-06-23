@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import useCanvasSize from '../hooks/useCanvasSize';
 
 const EditorHeader = () => {
-  const canvas = useSelector((state) => state.canvas);
+  const { canvas, layer } = useSelector((state) => state);
 
   const downloadImage = () => {
     const c = document.getElementById('canvas');
@@ -44,14 +44,28 @@ const EditorHeader = () => {
     // });
   };
 
+  const logTemplate = () => {
+    console.log({
+      canvas,
+      layer,
+    });
+  };
+
   return (
     <nav className="w-full px-10 flex justify-between items-center bg-blue-700 py-3">
       <h1 className="text-xl text-white font-black">Quotin</h1>
-      <button
-        onClick={downloadImage}
-        className="bg-gray font-semibold p-2 rounded-lg bg-white"
-      >Download
-      </button>
+      <div className="flex">
+        <button
+          onClick={downloadImage}
+          className="bg-gray font-semibold p-2 rounded-lg bg-white ml-2"
+        >Download
+        </button>
+        <button
+          onClick={logTemplate}
+          className="bg-gray font-semibold p-2 rounded-lg bg-white ml-2"
+        >Log State
+        </button>
+      </div>
     </nav>
   );
 };

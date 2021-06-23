@@ -7,8 +7,8 @@ const {
 } = sidebarActionTypes;
 
 const initialState = {
-  activeTab: 'frame',
-  previousActiveTab: 'frame',
+  activeTab: 'quick',
+  previousActiveTab: 'quick',
   displayOption: true,
 };
 

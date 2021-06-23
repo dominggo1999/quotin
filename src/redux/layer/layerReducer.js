@@ -56,7 +56,7 @@ class BaseColorBackgroundLayer {
 class Photo {
   constructor(options = {}) {
     this.id = 'photo';
-    this.imageID = options.imageID || '775199'; // pexels api
+    this.imageID = options.imageID || '572897'; // pexels api
     this.name = 'photo';
     this.type = 'photo';
     this.display = options.display;
@@ -83,20 +83,21 @@ const quote = new TextLayer({
   text: 'Berhentilah menuntut ilmu karena ilmu tidak bersalah',
   content: '<span>Berhentilah menuntut ilmu karena ilmu tidak bersalah</span>',
   id: 'quote',
-  x: 35,
-  y: 220,
+  x: 52.833343505859375,
+  y: 43,
   height: 'auto',
   textColor: '#FFFFFF',
   fontFamily: 'Indie Flower',
-  fontSize: 20,
+  fontSize: 55,
   display: true,
+  width: 343,
 });
 
 // Instantiate author
 const author = new TextLayer({
   name: 'author',
   id: 'author',
-  x: 100,
+  x: 240,
   y: 400,
   width: 150,
   fontSize: 18,
