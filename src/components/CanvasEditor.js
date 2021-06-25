@@ -7,6 +7,7 @@ import useCanvasSize from '../hooks/useCanvasSize';
 import StaticLayer from './StaticLayer';
 import PhotoLayer from './PhotoLayer';
 import FrameLayer from './FrameLayer';
+import BrandLayer from './BrandLayer';
 
 const CanvasEditor = () => {
   const resultRef = useRef(null);
@@ -84,6 +85,15 @@ const CanvasEditor = () => {
                   updateWidth={(value) => updateWidth(item.name, value)}
                   updateHeight={(value) => updateHeight(item.name, value)}
                   activeLayerId={activeLayerId}
+                  key={item.id}
+                  item={item}
+                />
+              );
+            }
+
+            if(item.type === 'brand') {
+              return (
+                <BrandLayer
                   key={item.id}
                   item={item}
                 />

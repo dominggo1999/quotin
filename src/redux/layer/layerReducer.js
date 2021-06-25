@@ -56,7 +56,7 @@ class BaseColorBackgroundLayer {
 class Photo {
   constructor(options = {}) {
     this.id = 'photo';
-    this.imageID = options.imageID || '572897'; // pexels api
+    this.imageID = options.imageID || '1395958'; // pexels api
     this.name = 'photo';
     this.type = 'photo';
     this.display = options.display;
@@ -72,8 +72,23 @@ class Frame {
     this.offset = options.offset || 5; // padding
     this.width = options.width || 10; // thickness
     this.opacity = options.opacity || 1;
-    this.display = options.display || true;
+    this.display = options.display;
     this.color = options.color || '#FFFFFF';
+  }
+}
+
+class Brand {
+  constructor(options = {}) {
+    this.id = 'brand';
+    this.name = 'brand';
+    this.type = 'brand';
+    this.opacity = options.opacity || 1;
+    this.display = options.display;
+    this.text = options.text || 'minggo1999';
+    this.icon = options.icon || 'pinterest';
+    this.position = options.position || 'center-end';
+    this.color = options.color || '#FFFFFF';
+    this.size = options.size || '15';
   }
 }
 
@@ -83,7 +98,7 @@ const quote = new TextLayer({
   text: 'Berhentilah menuntut ilmu karena ilmu tidak bersalah',
   content: '<span>Berhentilah menuntut ilmu karena ilmu tidak bersalah</span>',
   id: 'quote',
-  x: 52.833343505859375,
+  x: 52.833,
   y: 43,
   height: 'auto',
   textColor: '#FFFFFF',
@@ -120,6 +135,9 @@ const photo = new Photo({
   display: true,
 });
 const frame = new Frame();
+const brand = new Brand({
+  display: true,
+});
 
 const initialState = {
   quote,
@@ -127,6 +145,7 @@ const initialState = {
   baseColor,
   photo,
   frame,
+  brand,
 };
 
 const layerReducer = (state = initialState, action) => {
