@@ -3,6 +3,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { createClient } from 'pexels';
 import { Rnd } from 'react-rnd';
+import useLayerOrder from '../hooks/useLayerOrder';
 
 const apiKey = process.env.REACT_APP_PEXELS_API;
 const client = createClient(apiKey);
@@ -13,7 +14,11 @@ const PhotoLayer = ({ item, canvasSize }) => {
   const [boundaryHeight, setBoundaryHeight] = useState();
   const [imageWidth, setImageWidth] = useState();
   const [imageHeight, setImageHeight] = useState();
-  const { imageID, display } = item;
+  const {
+    imageID, display, name,
+  } = item;
+
+  const zIndex = useLayerOrder(name);
 
   useEffect(() => {
     const getImage = async () => {
@@ -50,13 +55,16 @@ const PhotoLayer = ({ item, canvasSize }) => {
     getImage();
   }, [imageID]);
 
+  if(!display) {
+    return null;
+  }
+
   return (
     <div
       style={{
         ...canvasSize,
         position: 'relative',
-        zIndex: 40,
-        display: !display ? 'none' : 'block',
+        zIndex,
       }}
     >
       <div

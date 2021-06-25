@@ -21,7 +21,7 @@ const initialShowPicker = {
   color2: false,
 };
 
-const BackgroundControl = ({ item }) => {
+const BackgroundControl = ({ item, title, order }) => {
   const dispatch = useDispatch();
 
   const {
@@ -64,9 +64,12 @@ const BackgroundControl = ({ item }) => {
     dispatch(updateBackground(name, option, int));
   };
 
+  const o = `order-${order}`;
+  console.log(o, name);
+
   return (
-    <div className="order-3 w-full flex flex-col mb-10 text-white">
-      <OptionHeader title="Background Base Color" />
+    <div className={`${o} w-full flex flex-col mb-10 text-white`}>
+      <OptionHeader title={`Background ${title}`} />
       <div className="flex justify-center">
         <Button
           bg={colorStyle === 'solid' ? 'bg-purple-500' : null}

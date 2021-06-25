@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import { Rnd } from 'react-rnd';
+import { useSelector } from 'react-redux';
 import pixelToNumber from '../util/pixelToNumber';
 import ResizeHandler from './controls/ResizeHandler';
+import useLayerOrder from '../hooks/useLayerOrder';
 
 const RndLayer = ({
   item, updateX, updateY, updateWidth, updateHeight, activeLayerId, className,
@@ -26,6 +28,8 @@ const RndLayer = ({
     topLeft: false,
   });
 
+  const zIndex = useLayerOrder(name);
+
   const layerStyle = {
     color: textColor,
     fontSize,
@@ -35,7 +39,6 @@ const RndLayer = ({
     textShadow: shadow ? 'rgba(0, 0, 0, 0.9) 0.05em 0.05em 0.15em' : 'none',
     letterSpacing: `${letterSpacing}em`,
     fontFamily,
-    display: !display ? 'none' : 'block',
   };
 
   // activeLayer id
@@ -109,10 +112,14 @@ const RndLayer = ({
     });
   };
 
+  if(!display) {
+    return null;
+  }
+
   return (
     <div className="relative">
       <Rnd
-        className=" z-[9999]"
+        style={{ zIndex }}
         enableResizing={enableResizing}
         size={{ width: option.width, height: option.height }}
         position={{

@@ -33,10 +33,11 @@ class TextLayer {
     this.letterSpacing = options.lineHeight || 0;
     this.display = options.display;
     this.opacity = options.opacity || 1;
+    this.zIndex = options.zIndex || 200;
   }
 }
 
-class BaseColorBackgroundLayer {
+class BackgroundLayer {
   constructor(options = {}) {
     this.name = options.name; // must have name
     this.type = 'background';
@@ -50,6 +51,7 @@ class BaseColorBackgroundLayer {
     this.colorStyle = options.colorStyle || 'solid';
     this.display = options.display;
     this.opacity = options.opacity || 1;
+    this.zIndex = options.zIndex || 60;
   }
 }
 
@@ -61,6 +63,7 @@ class Photo {
     this.type = 'photo';
     this.display = options.display;
     this.opacity = options.opacity || 1;
+    this.zIndex = options.zIndex || 70;
   }
 }
 
@@ -69,11 +72,12 @@ class Frame {
     this.id = 'frame';
     this.name = 'frame';
     this.type = 'frame';
-    this.offset = options.offset || 5; // padding
-    this.width = options.width || 10; // thickness
+    this.offset = options.offset || 10; // padding
+    this.width = options.width || 3; // thickness
     this.opacity = options.opacity || 1;
     this.display = options.display;
     this.color = options.color || '#FFFFFF';
+    this.zIndex = options.zIndex || 110;
   }
 }
 
@@ -89,6 +93,7 @@ class Brand {
     this.position = options.position || 'center-end';
     this.color = options.color || '#FFFFFF';
     this.size = options.size || '15';
+    this.zIndex = options.zIndex || 100;
   }
 }
 
@@ -120,32 +125,49 @@ const author = new TextLayer({
   height: 'auto',
   fontFamily: 'Amatic SC',
   display: true,
+  zIndex: 210,
 });
 
-// Instantiate background
-const baseColor = new BaseColorBackgroundLayer({
+// Instantiate base background
+const baseColor = new BackgroundLayer({
   id: 'baseColor',
   colorStyle: 'gradient',
   name: 'baseColor',
   gradientRotation: '0',
   display: true,
 });
+// Instantiate overlay background
+const overlayColor = new BackgroundLayer({
+  id: 'overlayColor',
+  colorStyle: 'gradient',
+  name: 'overlayColor',
+  gradientRotation: '0',
+  display: true,
+  zIndex: 80,
+  opacityColor1: 0.5,
+  opacityColor2: 0.5,
+  color1: '#20B979',
+  color2: '#E07F39',
+});
 
 const photo = new Photo({
   display: true,
 });
-const frame = new Frame();
+const frame = new Frame({
+  display: true,
+});
 const brand = new Brand({
   display: true,
 });
 
 const initialState = {
-  quote,
   author,
-  baseColor,
-  photo,
-  frame,
+  quote,
   brand,
+  frame,
+  overlayColor,
+  photo,
+  baseColor,
 };
 
 const layerReducer = (state = initialState, action) => {

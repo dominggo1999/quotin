@@ -36,11 +36,13 @@ const BackgroundOptions = () => {
             );
           }
 
-          if(item.name === 'baseColor') {
+          if(item.type === 'background') {
             return (
               <BackgroundControl
-                key={item.id}
+                key={`${item.id}control`}
                 item={item}
+                title={item.name}
+                order={item.name === 'baseColor' ? 3 : 2}
               />
             );
           }

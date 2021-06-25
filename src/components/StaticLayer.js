@@ -1,4 +1,5 @@
 import { toGradientColor } from '../util/colorConverter';
+import useLayerOrder from '../hooks/useLayerOrder';
 
 const StaticLayer = ({ item, canvasSize }) => {
   const {
@@ -9,17 +10,23 @@ const StaticLayer = ({ item, canvasSize }) => {
 
   toGradientColor(color1, color2, opacityColor1, opacityColor2, gradientRotation);
 
+  const zIndex = useLayerOrder(name);
+
+  if(!display) {
+    return null;
+  }
+
   return (
     <div
       style={{
         background,
-        width: canvasSize.width + 5, // to compensate html2canvas scaling
-        height: canvasSize.height + 5, // to compensate html2canvas scaling
+        width: canvasSize.width + 10, // to compensate html2canvas scaling
+        height: canvasSize.height + 10, // to compensate html2canvas scaling
         position: 'absolute',
         top: '50%',
         left: '50%',
         transform: 'translate(-50%,-50%)',
-        display: !display ? 'none' : 'block',
+        zIndex,
       }}
     />
   );

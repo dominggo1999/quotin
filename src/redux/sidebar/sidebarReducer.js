@@ -7,8 +7,8 @@ const {
 } = sidebarActionTypes;
 
 const initialState = {
-  activeTab: 'brand',
-  previousActiveTab: 'brand',
+  activeTab: 'layer',
+  previousActiveTab: 'layer',
   displayOption: true,
 };
 

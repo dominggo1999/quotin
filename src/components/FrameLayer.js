@@ -1,3 +1,5 @@
+import useLayerOrder from '../hooks/useLayerOrder';
+
 const FrameLayer = ({ item }) => {
   const {
     offset,
@@ -5,7 +7,10 @@ const FrameLayer = ({ item }) => {
     opacity,
     display,
     color,
+    name,
   } = item;
+
+  const zIndex = useLayerOrder(name);
 
   const frameStyle = {
     borderWidth: `${width}px`,
@@ -15,12 +20,17 @@ const FrameLayer = ({ item }) => {
     width: '100%',
   };
 
+  if(!display) {
+    return null;
+  }
+
   return (
     <div
-      className="w-full h-full flex items center justify-center absolute top-0 left-0 z-[1000]"
+      className="w-full h-full flex items center justify-center absolute top-0 left-0 "
       style={{
         padding: `${offset}%`,
         pointerEvents: 'none',
+        zIndex,
       }}
     >
       <div
