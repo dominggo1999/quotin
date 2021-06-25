@@ -24,7 +24,7 @@ const ColorPicker = ({
   useClickOutside(ref, toggleColorPicker);
 
   return (
-    <div className="w-full flex flex-col items-center justify-center">
+    <div className="w-full flex flex-col items-center justify-center mb-2">
       <p className="text-white">{title}</p>
       <div className="relative w-full flex justify-center">
         <div

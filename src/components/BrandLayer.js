@@ -21,9 +21,15 @@ const BrandLayer = ({ item }) => {
   return (
     <div
       style={style}
-      className="w-full h-full absolute top-0 left-0 z-[9999] p-3"
+      className="w-full h-full absolute top-0 left-0 z-[9999] p-3 pointer-events-none"
     >
-      <div className={`flex w-full h-full justify-${horizontal} items-${vertical}`}>
+      <div
+        style={{
+          justifyContent: horizontal,
+          alignItems: vertical,
+        }}
+        className="flex h-full w-full"
+      >
         <span
           className="flex items-center"
         >
