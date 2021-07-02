@@ -111,7 +111,7 @@ const BrandControl = ({ item }) => {
             options={brandData}
             renderOption={renderBrand}
             renderValue={renderBrandValue}
-            className="select-search w-full"
+            className="select-search w-full z-50"
             onChange={handleBrandChange}
             value={icon}
           />

@@ -12,6 +12,10 @@ const RndLayer = ({
     name, x, y, width, height, content, fontSize, textColor, lineHeight, textAlignment, uppercase, shadow, letterSpacing, fontFamily, display,
   } = item;
 
+  if(!display) {
+    return null;
+  }
+
   const textRef = useRef(null);
   const [option, setOption] = useState({
     x, y, width, height,
@@ -81,7 +85,7 @@ const RndLayer = ({
     // Update height
     const textHeight = pixelToNumber(getComputedStyle(text).height);
     updateHeight(textHeight);
-  }, [content, x, y]);
+  }, [content, x, y, display]);
 
   const handleClick = (e) => {
     setEnableResizing({
@@ -111,10 +115,6 @@ const RndLayer = ({
       right: true,
     });
   };
-
-  if(!display) {
-    return null;
-  }
 
   return (
     <div className="relative">

@@ -4,6 +4,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import useMapStateToArray from '../../hooks/useMapStateToArray';
 import OptionHeader from '../OptionHeader';
 import { reorderCanvas } from '../../redux/canvas/canvasActions';
+import ToggleDisplay from '../controls/ToggleDisplay';
 
 const defaultOrder = ['author', 'quote', 'brand', 'frame', 'overlayColor', 'photo', 'baseColor'];
 
@@ -19,11 +20,15 @@ const Layer = ({ layer, index }) => {
             ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
-            className="bg-menu text-white w-full p-2 uppercase my-1"
+            className="bg-menu text-white w-full p-2 uppercase my-1 flex justify-between"
           >
             <span className="select-none">
               {layer.name}
             </span>
+            <ToggleDisplay
+              name={layer.name}
+              display={layer.display}
+            />
           </div>
         );
       }}
@@ -48,7 +53,6 @@ const LayerOptions = () => {
   const layerOrder = useSelector((state) => state.canvas.order); // order berdasarkan ini
   const [list, setList] = useState([]);
   const dispatch = useDispatch();
-  const [order, setOrder] = useState(layerOrder);
 
   const sort = (order) => {
     const arr = [];
@@ -62,7 +66,7 @@ const LayerOptions = () => {
     sort(layerOrder);
   }, []);
 
-  const handleDragEnd = (result, dar) => {
+  const handleDragEnd = (result) => {
     const { destination, source, draggableId } = result;
 
     if(!destination)return null;
@@ -79,8 +83,8 @@ const LayerOptions = () => {
     newLayerOrder.splice(source.index, 1);
     newLayerOrder.splice(destination.index, 0, draggableId);
 
-    dispatch(reorderCanvas(newLayerOrder));
-    sort(newLayerOrder);
+    dispatch(reorderCanvas(newLayerOrder)); // global state
+    sort(newLayerOrder); // local state
   };
 
   const resetOrder = () => {
@@ -96,7 +100,7 @@ const LayerOptions = () => {
           onClick={resetOrder}
           className="mb-2 p-2 rounded-lg bg-purple-500 text-white w-full"
         >
-          Reset
+          Reset Order
         </button>
         <DragDropContext
           onDragEnd={handleDragEnd}

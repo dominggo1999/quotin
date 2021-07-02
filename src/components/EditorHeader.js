@@ -1,5 +1,6 @@
 import html2canvas from 'html2canvas';
 import { useSelector, useDispatch } from 'react-redux';
+import DomToImage from 'dom-to-image';
 import useCanvasSize from '../hooks/useCanvasSize';
 
 const EditorHeader = () => {
@@ -13,7 +14,7 @@ const EditorHeader = () => {
       backgroundColor: null,
       useCORS: true,
     }).then((canvas) => {
-      const imageURL = canvas.toDataURL('image/png', 1);
+      const imageURL = canvas.toDataURL('image/png');
       const a = document.createElement('a');
       a.href = imageURL;
       a.download = 'your beautiful quote';
@@ -44,6 +45,31 @@ const EditorHeader = () => {
     // });
   };
 
+  const toImage = async () => {
+    const scale = 5;
+    const node = document.getElementById('canvas');
+
+    console.log(node.offsetWidth * scale, node.offsetHeight * scale);
+
+    await DomToImage.toPng(node, {
+      height: node.offsetHeight * scale,
+      width: node.offsetWidth * scale,
+      style: {
+        transform: `scale(${scale})`,
+        transformOrigin: 'top left',
+        width: `${node.offsetWidth}px`,
+        height: `${node.offsetHeight}px`,
+      },
+    }).then((dataUrl) => {
+      // const imageURL = canvas.toDataURL('image/png');
+      // const a = document.createElement('a');
+      const link = document.createElement('a');
+      link.download = 'my-beautiful-quote.png';
+      link.href = dataUrl;
+      link.click();
+    });
+  };
+
   const logTemplate = () => {
     console.log({
       canvas,
@@ -56,7 +82,7 @@ const EditorHeader = () => {
       <h1 className="text-xl text-white font-black">Quotin</h1>
       <div className="flex">
         <button
-          onClick={downloadImage}
+          onClick={toImage}
           className="bg-gray font-semibold p-2 rounded-lg bg-white ml-2"
         >Download
         </button>

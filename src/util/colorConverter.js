@@ -5,7 +5,11 @@ const toSolidColor = (obj) => {
     r, g, b, a,
   } = obj;
 
-  return (`rgba(${r},${g},${b},${a})`);
+  if(a === 1) {
+    return `rgb(${r},${g},${b})`;
+  }
+
+  return `rgba(${r},${g},${b},${a})`;
 };
 
 export const toGradientColor = (col1, col2, opacityColor1, opacityColor2, rotation) => {
@@ -26,5 +30,5 @@ export const toGradientColor = (col1, col2, opacityColor1, opacityColor2, rotati
     a: opacityColor2,
   };
 
-  return `linear-gradient(${rotation}deg, ${toSolidColor(rgba1)} 0%, ${toSolidColor(rgba2)} 100%)`;
+  return `linear-gradient(${rotation}deg, ${toSolidColor(rgba1)}, ${toSolidColor(rgba2)})`;
 };

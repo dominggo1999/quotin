@@ -26,7 +26,7 @@ const FrameLayer = ({ item }) => {
 
   return (
     <div
-      className="w-full h-full flex items center justify-center absolute top-0 left-0 "
+      className="w-full h-full flex items center justify-center absolute top-0 left-0"
       style={{
         padding: `${offset}%`,
         pointerEvents: 'none',

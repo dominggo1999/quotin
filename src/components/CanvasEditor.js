@@ -55,11 +55,6 @@ const CanvasEditor = () => {
     };
   }, []);
 
-  // Choose active layer id
-  const setActive = (id) => {
-    setActiveLayerId(id);
-  };
-
   return (
     <main
       className="relative bg-gray-300 min-w-[600px] w-full overflow-auto"
@@ -72,7 +67,7 @@ const CanvasEditor = () => {
           style={canvasSize}
           id="canvas"
           ref={resultRef}
-          className="relative z-10 overflow-hidden bg-green-700 m-auto"
+          className="relative z-10 overflow-hidden bg-green-700"
         >
 
           {layerInstances && layerInstances.map((item) => {

@@ -65,7 +65,6 @@ const BackgroundControl = ({ item, title, order }) => {
   };
 
   const o = `order-${order}`;
-  console.log(o, name);
 
   return (
     <div className={`${o} w-full flex flex-col mb-10 text-white`}>

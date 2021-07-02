@@ -26,6 +26,7 @@ const Editor = () => {
       const link = document.createElement('link');
       link.rel = 'stylesheet';
       link.href = `https://fonts.googleapis.com/css2?family=${formatFontName}&display=swap`;
+      link.crossOrigin = 'anonymous';
       document.head.appendChild(link);
 
       return null;

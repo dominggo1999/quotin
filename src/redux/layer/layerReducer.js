@@ -58,7 +58,7 @@ class BackgroundLayer {
 class Photo {
   constructor(options = {}) {
     this.id = 'photo';
-    this.imageID = options.imageID || '1395958'; // pexels api
+    this.imageID = options.imageID || '3779822'; // pexels api
     this.name = 'photo';
     this.type = 'photo';
     this.display = options.display;
@@ -144,20 +144,20 @@ const overlayColor = new BackgroundLayer({
   gradientRotation: '0',
   display: true,
   zIndex: 80,
-  opacityColor1: 0.5,
-  opacityColor2: 0.5,
-  color1: '#20B979',
-  color2: '#E07F39',
+  opacityColor1: 1,
+  opacityColor2: 0.01,
+  color1: '#000000',
+  color2: '#ffffff',
 });
 
 const photo = new Photo({
   display: true,
 });
 const frame = new Frame({
-  display: true,
+  display: false,
 });
 const brand = new Brand({
-  display: true,
+  display: false,
 });
 
 const initialState = {

@@ -20,7 +20,7 @@ import { ReactComponent as LeftTextIcon } from '../../assets/controls/left-align
 import { ReactComponent as RightTextIcon } from '../../assets/controls/right-align.svg';
 
 const TextControl = ({
-  name, lineHeight, fontSize, canvasSize, width, height, text, uppercase, shadow, highlightColor, textColor, letterSpacing, quick, fontFamily, openBrowser,
+  name, lineHeight, fontSize, canvasSize, width, height, text, uppercase, shadow, highlightColor, textColor, letterSpacing, quick, fontFamily, openBrowser, order,
 }) => {
   const dispatch = useDispatch();
   const [selectedText, setSelectedText] = useState(null);
@@ -196,8 +196,10 @@ const TextControl = ({
     }
   };
 
+  const o = `order-${order}`;
+
   return (
-    <div className="w-full flex flex-col pb-6">
+    <div className={`${o} w-full flex flex-col pb-6`}>
       <OptionHeader title={name} />
 
       {/* Text Input */}

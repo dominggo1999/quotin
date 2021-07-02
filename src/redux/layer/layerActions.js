@@ -28,7 +28,9 @@ export const updateBackground = (target, option, value) => ({
   value,
 });
 
-export const toggleLayer = (target) => ({
+export const toggleLayer = (target, option, value) => ({
   type: UPDATE_LAYER_LAYOUT,
   target,
+  option,
+  value,
 });

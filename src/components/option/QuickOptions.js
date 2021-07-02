@@ -26,6 +26,7 @@ const QuickOption = ({ canvasSize }) => {
               textColor={item.textColor}
               letterSpacing={item.letterSpacing}
               quick
+              order={item.name === 'quote' ? 'first' : 'last'}
             />
           );
         })}
