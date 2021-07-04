@@ -5,6 +5,7 @@ import pixelToNumber from '../../util/pixelToNumber';
 import OptionHeader from '../OptionHeader';
 import ColorPicker from './ColorPicker';
 import TextControlButton from './TextControlButton';
+import ToggleDisplay from './ToggleDisplay';
 import { ReactComponent as CenterLayerIcon } from '../../assets/controls/center-center.svg';
 import { ReactComponent as VerticalLayerIcon } from '../../assets/controls/vertical-align-center.svg';
 import { ReactComponent as HorizontaLayerIcon } from '../../assets/controls/horizontal-align.svg';
@@ -200,8 +201,10 @@ const TextControl = ({
 
   return (
     <div className={`${o} w-full flex flex-col pb-6`}>
-      <OptionHeader title={name} />
-
+      <div className="w-full flex justify-between">
+        <OptionHeader title={name} />
+        <ToggleDisplay name={name} />
+      </div>
       {/* Text Input */}
       <div className="w-full flex flex-col justify-center mb-[20px]">
         <textarea

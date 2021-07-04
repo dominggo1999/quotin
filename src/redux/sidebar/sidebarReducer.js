@@ -7,8 +7,8 @@ const {
 } = sidebarActionTypes;
 
 const initialState = {
-  activeTab: 'layer',
-  previousActiveTab: 'layer',
+  activeTab: 'quick',
+  previousActiveTab: 'quick',
   displayOption: true,
 };
 

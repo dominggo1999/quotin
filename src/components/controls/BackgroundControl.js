@@ -3,12 +3,13 @@ import { useState } from 'react';
 import OptionHeader from '../OptionHeader';
 import { updateBackground } from '../../redux/layer/layerActions';
 import ColorPicker from './ColorPicker';
+import ToggleDisplay from './ToggleDisplay';
 
 const Button = ({ children, bg, onClick }) => {
   return(
     <button
       onClick={onClick}
-      className={`${bg} py-2 px-3 rounded-lg border-2 border-purple-500 mx-2 focus:outline-none `}
+      className={`${bg} py-2 px-3 rounded-lg border-2 border-purple-500 mx-2 focus:outline-none select-none`}
     >
       {children}
     </button>
@@ -68,7 +69,10 @@ const BackgroundControl = ({ item, title, order }) => {
 
   return (
     <div className={`${o} w-full flex flex-col mb-10 text-white`}>
-      <OptionHeader title={`Background ${title}`} />
+      <div className="w-full flex justify-between">
+        <OptionHeader title={`Background ${title}`} />
+        <ToggleDisplay name={name} />
+      </div>
       <div className="flex justify-center">
         <Button
           bg={colorStyle === 'solid' ? 'bg-purple-500' : null}

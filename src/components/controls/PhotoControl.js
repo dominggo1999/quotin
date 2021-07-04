@@ -1,9 +1,13 @@
 import OptionHeader from '../OptionHeader';
+import ToggleDisplay from './ToggleDisplay';
 
 const PhotoControl = ({ item, openBrowser }) => {
   return (
     <div className="order-first w-full flex flex-col mb-10 text-white">
-      <OptionHeader title="Background Photo" />
+      <div className="w-full flex justify-between">
+        <OptionHeader title="Background Photo" />
+        <ToggleDisplay name={item.name} />
+      </div>
       <button
         className="p-2 rounded-lg bg-purple-500"
         onClick={openBrowser}

@@ -25,7 +25,7 @@ const ColorPicker = ({
 
   return (
     <div className="w-full flex flex-col items-center justify-center mb-2">
-      <p className="text-white">{title}</p>
+      <p className="text-white select-none">{title}</p>
       <div className="relative w-full flex justify-center">
         <div
           style={{

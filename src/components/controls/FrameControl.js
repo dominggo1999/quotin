@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import OptionHeader from '../OptionHeader';
 import ColorPicker from './ColorPicker';
 import { updateLayerLayout } from '../../redux/layer/layerActions';
+import ToggleDisplay from './ToggleDisplay';
 
 const FrameControl = ({ item }) => {
   const dispatch = useDispatch();
@@ -47,7 +48,10 @@ const FrameControl = ({ item }) => {
 
   return (
     <div className="order-1 w-full flex flex-col mb-10 text-white">
-      <OptionHeader title="Frame" />
+      <div className="w-full flex justify-between">
+        <OptionHeader title="Frame" />
+        <ToggleDisplay name={name} />
+      </div>
       <div className="flex flex-col items-center">
         <ColorPicker
           color={color}

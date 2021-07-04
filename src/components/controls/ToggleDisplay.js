@@ -18,11 +18,11 @@ const ToggleDisplay = ({ name }) => {
     <div
       role="button"
       onClick={toggle}
-      className="flex justify-center items-center"
+      className="flex justify-center items-center text-white"
     >
       {
-        display ? <AiOutlineEyeInvisible />
-          : <AiOutlineEye />
+        display ? <AiOutlineEyeInvisible className="text-lg" />
+          : <AiOutlineEye className="text-lg" />
       }
 
     </div>

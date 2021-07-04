@@ -7,6 +7,7 @@ import ColorPicker from './ColorPicker';
 import { brandData } from '../../data/brandData';
 import 'react-select-search/style.css';
 import useBrandIcon from '../../hooks/useBrandIcon';
+import ToggleDisplay from './ToggleDisplay';
 
 const pos = ['start-start', 'center-start', 'end-start', 'start-center', 'center-center', 'end-center', 'start-end', 'center-end', 'end-end'];
 
@@ -54,7 +55,7 @@ const BrandControl = ({ item }) => {
       return (
         <span
           {...valueProps}
-          className={`${className} flex items-center px-2`}
+          className={`${className} select-none flex items-center px-2`}
           type="button"
         >
           <Icon />
@@ -100,10 +101,13 @@ const BrandControl = ({ item }) => {
 
   return (
     <div className="order-1 w-full flex flex-col mb-10 text-white">
-      <OptionHeader title="Brand" />
+      <div className="w-full flex justify-between select-none">
+        <OptionHeader title="Brand" />
+        <ToggleDisplay name={name} />
+      </div>
       <div className="flex flex-col">
         <div className="text-black">
-          <p className="text-white mb-2">Choose icon:</p>
+          <p className="text-white mb-2 select-none">Choose icon:</p>
           {
           brandData
           && (
@@ -118,7 +122,7 @@ const BrandControl = ({ item }) => {
           )
         }
         </div>
-        <p className="text-white my-2">Username or URL :</p>
+        <p className="text-white my-2 select-none">Username or URL :</p>
         <input
           className="text-black p-3 focus:outline-none w-full"
           type="text"
