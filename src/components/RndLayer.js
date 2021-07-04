@@ -68,12 +68,13 @@ const RndLayer = ({
     });
 
     updateHeight(textHeight);
-  }, [fontSize, content, lineHeight, letterSpacing, uppercase, fontFamily]);
+  }, [fontSize, content, lineHeight, letterSpacing, uppercase, fontFamily, display]);
 
   // Init posisi dan content
   useEffect(() => {
     setOption({
       ...option,
+      height: 'auto',
       x,
       y,
     });
