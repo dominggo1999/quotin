@@ -9,7 +9,7 @@ const EditorOptionContainer = () => {
   }
 
   return (
-    <div className="relative z-[1000] pt-[40px] pr-1 bg-tab-active min-w-[350px] max-w-[350px] h-full">
+    <div className="relative z-[1000] pt-[40px] pr-1 bg-tab-active min-w-[350px] max-w-[350px] h-full custom-scrollbar">
       <EditorOption />
     </div>
   );

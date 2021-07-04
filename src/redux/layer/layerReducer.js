@@ -63,7 +63,10 @@ class Photo {
     this.type = 'photo';
     this.display = options.display;
     this.opacity = options.opacity || 1;
-    this.zIndex = options.zIndex || 70;
+    this.imageX = options.imageX;
+    this.imageY = options.imageY;
+    this.imageWidth = options.imageWidth;
+    this.imageHeight = options.imageHeight;
   }
 }
 
@@ -100,14 +103,14 @@ class Brand {
 // Instantiate quote
 const quote = new TextLayer({
   name: 'quote',
-  text: 'Berhentilah menuntut ilmu karena ilmu tidak bersalah',
-  content: '<span>Berhentilah menuntut ilmu karena ilmu tidak bersalah</span>',
+  text: 'The quick brown fox jumps over the lazy dog',
+  content: '<span>The quick brown fox jumps over the lazy dog</span>',
   id: 'quote',
   x: 52.833,
   y: 43,
   height: 'auto',
   textColor: '#FFFFFF',
-  fontFamily: 'Indie Flower',
+  fontFamily: 'B612 Mono',
   fontSize: 55,
   display: true,
   width: 343,
@@ -152,6 +155,8 @@ const overlayColor = new BackgroundLayer({
 
 const photo = new Photo({
   display: true,
+  imageX: 0,
+  imageY: 0,
 });
 const frame = new Frame({
   display: false,

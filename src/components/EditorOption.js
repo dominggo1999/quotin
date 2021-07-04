@@ -7,6 +7,7 @@ import LayerOptions from './option/LayerOptions';
 import QuoteOptions from './option/QuoteOptions';
 import StickerOptions from './option/StickerOptions';
 import AuthorOptions from './option/AuthorOptions';
+import CanvasOptions from './option/CanvasOptions';
 import useCanvasSize from '../hooks/useCanvasSize';
 
 const EditorOption = () => {
@@ -17,6 +18,9 @@ const EditorOption = () => {
   switch (activeTab) {
     case 'quick':
       return <QuickOptions canvasSize={canvasSize} />;
+
+    case 'canvas':
+      return <CanvasOptions canvasSize={canvasSize} />;
 
     case 'background':
       return <BackgroundOptions canvasSize={canvasSize} />;

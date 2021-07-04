@@ -6,12 +6,18 @@ import { ReactComponent as Sticker } from '../assets/badge.svg';
 import { ReactComponent as Frame } from '../assets/display-frame.svg';
 import { ReactComponent as Brand } from '../assets/id-card.svg';
 import { ReactComponent as Layer } from '../assets/layer.svg';
+import { ReactComponent as Canvas } from '../assets/canvas.svg';
 
 export const sidebarData = [
   {
     id: 'quick',
     title: 'Quick',
     SVG: Quick,
+  },
+  {
+    id: 'canvas',
+    title: 'Canvas',
+    SVG: Canvas,
   },
   {
     id: 'quote',

@@ -126,7 +126,7 @@ const PhotoPicker = ({ closeBrowser }) => {
   };
 
   return (
-    <div className="no-scrollbar w-full h-full flex flex-col items-center">
+    <div className="w-full h-full flex flex-col items-center">
       <div className="w-full px-5">
         <button
           className=" py-1 px-5 mb-3 font-bold text-white text-sm bg-purple-500 rounded-lg"

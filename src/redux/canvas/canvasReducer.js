@@ -4,6 +4,7 @@ const {
   SET_CANVAS_ASPECT_RATIO,
   REORDER_CANVAS,
   SET_CANVAS_ORIENTATION,
+  SET_IMAGE_ASPECT_RATIO,
 } = canvasActionTypes;
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
   baseHeight: 530, // pixel
   baseWidth: 600,
   orientation: 'potrait',
+  imageAspectRatio: 1, // pindahkan ke layer reducer
   order: ['author', 'quote', 'brand', 'frame', 'overlayColor', 'photo', 'baseColor'],
 };
 
@@ -25,6 +27,11 @@ const canvasReducer = (state = initialState, action) => {
       return {
         ...state,
         orientation: action.payload,
+      };
+    case SET_IMAGE_ASPECT_RATIO:
+      return {
+        ...state,
+        imageAspectRatio: action.payload,
       };
     case REORDER_CANVAS:
       return {

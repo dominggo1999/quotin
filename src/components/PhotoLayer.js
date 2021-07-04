@@ -3,15 +3,19 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { createClient } from 'pexels';
 import { Rnd } from 'react-rnd';
+import { useDispatch } from 'react-redux';
 import useLayerOrder from '../hooks/useLayerOrder';
+import { setImageAspectRatio } from '../redux/canvas/canvasActions';
+import { updateLayerLayout } from '../redux/layer/layerActions';
 
 const apiKey = process.env.REACT_APP_PEXELS_API;
 const client = createClient(apiKey);
 
 const PhotoLayer = ({ item, canvasSize }) => {
   const {
-    imageID, display, name,
+    imageID, display, name, imageX, imageY,
   } = item;
+  const dispatch = useDispatch();
 
   const [imageURL, setImageURL] = useState('');
   const [boundaryWidth, setBoundaryWidth] = useState();
@@ -20,6 +24,8 @@ const PhotoLayer = ({ item, canvasSize }) => {
   const [imageHeight, setImageHeight] = useState();
   const [loading, setLoading] = useState(false);
   const [imageRatio, setImageRatio] = useState();
+  const [x, setX] = useState(imageX);
+  const [y, setY] = useState(imageY);
 
   const zIndex = useLayerOrder(name);
 
@@ -44,6 +50,12 @@ const PhotoLayer = ({ item, canvasSize }) => {
       setImageHeight(hImage);
       setImageWidth(wImage);
     }
+
+    // Reset position to 0,0
+    setX(0);
+    setY(0);
+    dispatch(updateLayerLayout('photo', 'imageX', 0));
+    dispatch(updateLayerLayout('photo', 'imageY', 0));
   };
 
   useEffect(() => {
@@ -57,6 +69,9 @@ const PhotoLayer = ({ item, canvasSize }) => {
 
       const imageAspectRatio = width / height;
       const canvasAspectRatio = canvasSize.width / canvasSize.height;
+
+      // Remember imageaspectratio
+      dispatch(setImageAspectRatio(imageAspectRatio));
 
       // Image aspect ratio will always be the same if canvas size is changed
       setImageRatio(imageAspectRatio);
@@ -74,9 +89,27 @@ const PhotoLayer = ({ item, canvasSize }) => {
     }
   }, [canvasSize.width, canvasSize.height]);
 
+  const enableResizing = {
+    top: false,
+    right: false,
+    left: false,
+    bottom: false,
+    topRight: false,
+    bottomRight: false,
+    bottomLeft: false,
+    topLeft: false,
+  };
+
   if(!display) {
     return null;
   }
+
+  const onDragStop = (e, d) => {
+    setX(d.x);
+    setY(d.y);
+    dispatch(updateLayerLayout('photo', 'imageX', d.x));
+    dispatch(updateLayerLayout('photo', 'imageY', d.y));
+  };
 
   return (
     <div
@@ -102,10 +135,16 @@ const PhotoLayer = ({ item, canvasSize }) => {
         imageURL && !loading && (
         <Rnd
           bounds="#photoBoundary"
-          default={{
-            x: 0,
-            y: 0,
+          enableResizing={enableResizing}
+          position={{
+            x,
+            y,
           }}
+          onDragStop={onDragStop}
+          // default={{
+          //   x: 0,
+          //   y: 0,
+          // }}
         >
           <LazyLoadImage
             src={imageURL}
