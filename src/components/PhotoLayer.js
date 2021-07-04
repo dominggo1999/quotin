@@ -9,17 +9,42 @@ const apiKey = process.env.REACT_APP_PEXELS_API;
 const client = createClient(apiKey);
 
 const PhotoLayer = ({ item, canvasSize }) => {
+  const {
+    imageID, display, name,
+  } = item;
+
   const [imageURL, setImageURL] = useState('');
   const [boundaryWidth, setBoundaryWidth] = useState();
   const [boundaryHeight, setBoundaryHeight] = useState();
   const [imageWidth, setImageWidth] = useState();
   const [imageHeight, setImageHeight] = useState();
   const [loading, setLoading] = useState(false);
-  const {
-    imageID, display, name,
-  } = item;
+  const [imageRatio, setImageRatio] = useState();
 
   const zIndex = useLayerOrder(name);
+
+  const adjustDimension = (imageAspectRatio, canvasAspectRatio) => {
+    if(imageAspectRatio < canvasAspectRatio) {
+      // h nya image > h nya canvas
+      // draggable axis = y
+      const hImage = canvasSize.width / imageAspectRatio;
+      const hBoundary = hImage + hImage - canvasSize.height;
+      setBoundaryHeight(hBoundary);
+      setBoundaryWidth('100%');
+      setImageHeight(hImage);
+      setImageWidth(canvasSize.width);
+    }else{
+      // h nya image < h nya canvas
+      // draggable axis = x
+      const hImage = canvasSize.height;
+      const wImage = imageAspectRatio * hImage;
+      const wBoundary = wImage + wImage - canvasSize.width;
+      setBoundaryHeight('100%');
+      setBoundaryWidth(wBoundary);
+      setImageHeight(hImage);
+      setImageWidth(wImage);
+    }
+  };
 
   useEffect(() => {
     const getImage = async () => {
@@ -33,30 +58,21 @@ const PhotoLayer = ({ item, canvasSize }) => {
       const imageAspectRatio = width / height;
       const canvasAspectRatio = canvasSize.width / canvasSize.height;
 
-      if(imageAspectRatio < canvasAspectRatio) {
-        // h nya image > h nya canvas
-        // draggable axis = y
-        const hImage = canvasSize.width / imageAspectRatio;
-        const hBoundary = hImage + hImage - canvasSize.height;
-        setBoundaryHeight(hBoundary);
-        setBoundaryWidth('100%');
-        setImageHeight(hImage);
-        setImageWidth(canvasSize.width);
-      }else{
-        // h nya image < h nya canvas
-        // draggable axis = x
-        const hImage = canvasSize.height;
-        const wImage = imageAspectRatio * hImage;
-        const wBoundary = wImage + wImage - canvasSize.width;
-        setBoundaryHeight('100%');
-        setBoundaryWidth(wBoundary);
-        setImageHeight(hImage);
-        setImageWidth(wImage);
-      }
+      // Image aspect ratio will always be the same if canvas size is changed
+      setImageRatio(imageAspectRatio);
+
+      adjustDimension(imageAspectRatio, canvasAspectRatio);
     };
 
     getImage();
   }, [imageID]);
+
+  useEffect(() => {
+    if(imageRatio) {
+      const canvasRatio = canvasSize.width / canvasSize.height;
+      adjustDimension(imageRatio, canvasRatio);
+    }
+  }, [canvasSize.width, canvasSize.height]);
 
   if(!display) {
     return null;

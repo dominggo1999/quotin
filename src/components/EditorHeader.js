@@ -2,9 +2,11 @@ import html2canvas from 'html2canvas';
 import { useSelector, useDispatch } from 'react-redux';
 import DomToImage from 'dom-to-image';
 import useCanvasSize from '../hooks/useCanvasSize';
+import { setCanvasAspectRatio, setCanvasOrientation } from '../redux/canvas/canvasActions';
 
 const EditorHeader = () => {
   const { canvas, layer } = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   const downloadImage = () => {
     const c = document.getElementById('canvas');
@@ -75,6 +77,11 @@ const EditorHeader = () => {
     });
   };
 
+  const resizeCanvas = () => {
+    dispatch(setCanvasAspectRatio([2, 1]));
+    dispatch(setCanvasOrientation('landscape'));
+  };
+
   return (
     <nav className="w-full px-10 flex justify-between items-center bg-blue-700 py-3">
       <h1 className="text-xl text-white font-black">Quotin</h1>
@@ -89,6 +96,11 @@ const EditorHeader = () => {
           className="bg-gray font-semibold p-2 rounded-lg bg-white ml-2"
         >Log State
         </button>
+        {/* <button
+          onClick={resizeCanvas}
+          className="bg-gray font-semibold p-2 rounded-lg bg-white ml-2"
+        >Resize Canvas
+        </button> */}
       </div>
     </nav>
   );

@@ -1,6 +1,7 @@
 const canvasActionTypes = {
   SET_CANVAS_ASPECT_RATIO: 'SET_CANVAS_ASPECT_RATIO',
   REORDER_CANVAS: 'REORDER_CANVAS',
+  SET_CANVAS_ORIENTATION: 'SET_CANVAS_ORIENTATION',
 };
 
 export default canvasActionTypes;

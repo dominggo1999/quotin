@@ -3,6 +3,7 @@ import canvasActionTypes from './canvasActionTypes';
 const {
   SET_CANVAS_ASPECT_RATIO,
   REORDER_CANVAS,
+  SET_CANVAS_ORIENTATION,
 } = canvasActionTypes;
 
 const initialState = {
@@ -19,6 +20,11 @@ const canvasReducer = (state = initialState, action) => {
       return {
         ...state,
         aspectRatio: action.payload,
+      };
+    case SET_CANVAS_ORIENTATION:
+      return {
+        ...state,
+        orientation: action.payload,
       };
     case REORDER_CANVAS:
       return {

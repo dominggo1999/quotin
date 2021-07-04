@@ -20,6 +20,7 @@ const PhotoPicker = ({ closeBrowser }) => {
   const [error, setError] = useState(null);
 
   const imagesRef = useRef(null);
+  const inputRef = useRef(null);
 
   const dispatch = useDispatch(null);
 
@@ -31,6 +32,10 @@ const PhotoPicker = ({ closeBrowser }) => {
     setQuery('');
     setError(null);
   }, [mode]);
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
 
   const extractId = (url) => {
     // Check if url is pexels url
@@ -148,6 +153,7 @@ const PhotoPicker = ({ closeBrowser }) => {
         </div>
         <form onSubmit={handleSubmit}>
           <input
+            ref={inputRef}
             className="w-full mb-3 px-3 py-2 text-lg text-black focus:outline-none"
             type="text"
             onChange={handleChange}

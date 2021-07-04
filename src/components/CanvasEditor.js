@@ -57,11 +57,15 @@ const CanvasEditor = () => {
 
   return (
     <main
-      className="relative bg-gray-300 min-w-[600px] w-full overflow-auto"
+      className="relative bg-gray-300 min-w-[600px] w-full overflow-y-auto"
     >
       {/* Canvas */}
       <div
-        className="relative w-full min-h-full flex justify-center p-5"
+        className="relative flex justify-center p-5 h-full items-center"
+        style={{
+          minWidth: canvasSize.width,
+          minHeight: canvasSize.height,
+        }}
       >
         <div
           style={canvasSize}
