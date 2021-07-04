@@ -14,6 +14,7 @@ const PhotoLayer = ({ item, canvasSize }) => {
   const [boundaryHeight, setBoundaryHeight] = useState();
   const [imageWidth, setImageWidth] = useState();
   const [imageHeight, setImageHeight] = useState();
+  const [loading, setLoading] = useState(false);
   const {
     imageID, display, name,
   } = item;
@@ -22,8 +23,10 @@ const PhotoLayer = ({ item, canvasSize }) => {
 
   useEffect(() => {
     const getImage = async () => {
+      setLoading(true);
       const response = await client.photos.show({ id: imageID });
       setImageURL(response.src.large2x);
+      setLoading(false);
 
       const { height, width } = response;
 
@@ -80,7 +83,7 @@ const PhotoLayer = ({ item, canvasSize }) => {
         }}
       />
       {
-        imageURL && (
+        imageURL && !loading && (
         <Rnd
           bounds="#photoBoundary"
           default={{
@@ -88,10 +91,11 @@ const PhotoLayer = ({ item, canvasSize }) => {
             y: 0,
           }}
         >
-          <img
+          <LazyLoadImage
             src={imageURL}
             alt="Background"
-            draggable={false}
+            effect="blur"
+            draggable={false} // prevent ghost image
             style={{
               height: imageHeight,
               width: imageWidth,

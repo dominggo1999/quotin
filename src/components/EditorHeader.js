@@ -49,8 +49,6 @@ const EditorHeader = () => {
     const scale = 5;
     const node = document.getElementById('canvas');
 
-    console.log(node.offsetWidth * scale, node.offsetHeight * scale);
-
     await DomToImage.toPng(node, {
       height: node.offsetHeight * scale,
       width: node.offsetWidth * scale,

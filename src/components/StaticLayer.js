@@ -17,7 +17,7 @@ const StaticLayer = ({ item, canvasSize }) => {
   return (
     <div
       style={{
-        backgroundImage: background,
+        background,
         width: canvasSize.width + 40, // to compensate html2canvas scaling
         height: canvasSize.height + 40, // to compensate html2canvas scaling
         position: 'absolute',
