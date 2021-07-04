@@ -101,7 +101,7 @@ const BrandControl = ({ item }) => {
 
   return (
     <div className="order-1 w-full flex flex-col mb-10 text-white">
-      <div className="w-full flex justify-between select-none">
+      <div className="w-full flex justify-between select-none items-center mb-3">
         <OptionHeader title="Brand" />
         <ToggleDisplay name={name} />
       </div>

@@ -48,7 +48,7 @@ const FrameControl = ({ item }) => {
 
   return (
     <div className="order-1 w-full flex flex-col mb-10 text-white">
-      <div className="w-full flex justify-between">
+      <div className="w-full flex justify-between items-center mb-3">
         <OptionHeader title="Frame" />
         <ToggleDisplay name={name} />
       </div>

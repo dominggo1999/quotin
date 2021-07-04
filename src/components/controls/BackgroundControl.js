@@ -69,7 +69,7 @@ const BackgroundControl = ({ item, title, order }) => {
 
   return (
     <div className={`${o} w-full flex flex-col mb-10 text-white`}>
-      <div className="w-full flex justify-between">
+      <div className="w-full flex justify-between items-center mb-3">
         <OptionHeader title={`Background ${title}`} />
         <ToggleDisplay name={name} />
       </div>

@@ -48,6 +48,10 @@ const PhotoPicker = ({ closeBrowser }) => {
   };
 
   const getImage = async (query, page) => {
+    if(!query) {
+      return;
+    }
+
     // If url mode
     const id = extractId(query);
 

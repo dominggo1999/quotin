@@ -25,6 +25,7 @@ const QuickOption = ({ canvasSize }) => {
               highlightColor={item.highlightColor}
               textColor={item.textColor}
               letterSpacing={item.letterSpacing}
+              textAlignment={item.textAlignment}
               quick
               order={item.name === 'quote' ? 'first' : 'last'}
             />

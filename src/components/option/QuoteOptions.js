@@ -47,6 +47,7 @@ const QuoteOptions = ({ canvasSize }) => {
               highlightColor={item.highlightColor}
               textColor={item.textColor}
               letterSpacing={item.letterSpacing}
+              textAlignment={item.textAlignment}
               openBrowser={openBrowser}
               fontFamily={item.fontFamily}
             />

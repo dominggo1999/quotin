@@ -1,6 +1,6 @@
 const OptionHeader = ({ title }) => {
   return (
-    <h6 className="mb-3 uppercase text-white font-black select-none">
+    <h6 className="uppercase text-white font-black select-none">
       {title}
     </h6>
   );

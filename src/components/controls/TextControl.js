@@ -21,7 +21,7 @@ import { ReactComponent as LeftTextIcon } from '../../assets/controls/left-align
 import { ReactComponent as RightTextIcon } from '../../assets/controls/right-align.svg';
 
 const TextControl = ({
-  name, lineHeight, fontSize, canvasSize, width, height, text, uppercase, shadow, highlightColor, textColor, letterSpacing, quick, fontFamily, openBrowser, order,
+  name, lineHeight, fontSize, canvasSize, width, height, text, uppercase, shadow, highlightColor, textColor, letterSpacing, quick, fontFamily, openBrowser, order, textAlignment,
 }) => {
   const dispatch = useDispatch();
   const [selectedText, setSelectedText] = useState(null);
@@ -201,7 +201,7 @@ const TextControl = ({
 
   return (
     <div className={`${o} w-full flex flex-col pb-6`}>
-      <div className="w-full flex justify-between">
+      <div className="w-full flex justify-between items-center mb-3">
         <OptionHeader title={name} />
         <ToggleDisplay name={name} />
       </div>
@@ -238,12 +238,14 @@ const TextControl = ({
             <TextControlButton
               readjustSize={5}
               onClick={(e) => toggleShadow(false)}
+              shadow={shadow}
             >
               <TextShadow />
             </TextControlButton>
           ) : (
             <TextControlButton
               readjustSize={5}
+              shadow={shadow}
               onClick={(e) => toggleShadow(true)}
             >
               <TextShadow />
@@ -257,6 +259,7 @@ const TextControl = ({
             <TextControlButton
               readjustSize={5}
               onClick={(e) => toggleUppercase(false)}
+              uppercase={uppercase}
             >
               <LowercaseTextIcon />
             </TextControlButton>
@@ -264,6 +267,7 @@ const TextControl = ({
             <TextControlButton
               readjustSize={5}
               onClick={(e) => toggleUppercase(true)}
+              uppercase={uppercase}
             >
               <UppercaseTextIcon />
             </TextControlButton>
@@ -275,21 +279,29 @@ const TextControl = ({
       <div className="flex justify-center mb-1 w-full">
         <TextControlButton
           onClick={(e) => alignText('left')}
+          textAlignment={textAlignment}
+          value="left"
         >
           <LeftTextIcon />
         </TextControlButton>
         <TextControlButton
           onClick={(e) => alignText('right')}
+          textAlignment={textAlignment}
+          value="right"
         >
           <RightTextIcon />
         </TextControlButton>
         <TextControlButton
           onClick={(e) => alignText('center')}
+          textAlignment={textAlignment}
+          value="center"
         >
           <CenterTextIcon />
         </TextControlButton>
         <TextControlButton
           onClick={(e) => alignText('justify')}
+          textAlignment={textAlignment}
+          value="justify"
         >
           <JustifyTextIcon />
         </TextControlButton>

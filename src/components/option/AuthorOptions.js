@@ -48,6 +48,7 @@ const AuthorOptions = ({ canvasSize }) => {
               textColor={item.textColor}
               letterSpacing={item.letterSpacing}
               openBrowser={openBrowser}
+              textAlignment={item.textAlignment}
               fontFamily={item.fontFamily}
             />
           );

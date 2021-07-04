@@ -65,7 +65,7 @@ const FontPicker = ({ closeBrowser, name, activeFont }) => {
             return (
               <button
                 onClick={() => changeCategory(item)}
-                key={`font-category${item}`}
+                key={`font-category-${item}`}
                 className={`${bg} text-sm text-white mr-2 mb-2 py-1 px-2 rounded-lg focus:outline-none`}
               >{item || 'all'}
               </button>
