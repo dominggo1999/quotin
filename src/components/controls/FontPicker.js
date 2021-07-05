@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import GoogleFontPicker from './GoogleFontPicker';
+import GoogleFont from './GoogleFont';
 import { modifyLayerText } from '../../redux/layer/layerActions';
 import { cacheFonts } from '../../redux/font/fontActions';
 
@@ -10,7 +10,6 @@ const categories = ['sans-serif', 'serif', 'display', 'handwriting', 'monospace'
 
 const FontPicker = ({ closeBrowser, name, activeFont }) => {
   const [activeFontFamily, setActiveFontFamily] = useState(activeFont);
-  const [test, setTest] = useState(activeFont);
   const [fontCategory, setFontCategory] = useState('');
   const [fonts, setFonts] = useState([]);
   const [displayedFonts, setDisplayedFonts] = useState([]);
@@ -23,8 +22,8 @@ const FontPicker = ({ closeBrowser, name, activeFont }) => {
   };
 
   useEffect(() => {
-    dispatch(modifyLayerText(name, 'fontFamily', test));
-  }, [test]);
+    dispatch(modifyLayerText(name, 'fontFamily', activeFontFamily));
+  }, [activeFontFamily]);
 
   const getFonts = (list) => {
     const sort = list.sort((font1, font2) => font1.family.localeCompare(font2.family));
@@ -81,21 +80,14 @@ const FontPicker = ({ closeBrowser, name, activeFont }) => {
           />
         </div>
       </div>
-      <GoogleFontPicker
-        name={name}
+      <GoogleFont
         apiKey={API_KEY}
-        activeFontFamily={activeFontFamily}
-        onChange={(nextFont) => setActiveFontFamily(nextFont.family)}
-        limit={200}
-        sort="alphabet"
-        changeFont={(f) => setTest(f)}
-        changeCategory={changeCategory}
-        pickerId={`${name}fontPicker`}
-        fontCategory={fontCategory}
-        fonts={fonts}
-        getFonts={getFonts}
-        visitedCategory={visitedCategory}
+        changeFont={(f) => setActiveFontFamily(f)}
         cachedFonts={cachedFonts}
+        visitedCategory={visitedCategory}
+        fontCategory={fontCategory}
+        getFonts={getFonts}
+        fonts={fonts}
       />
     </div>
   );

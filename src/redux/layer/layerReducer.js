@@ -110,7 +110,7 @@ const quote = new TextLayer({
   y: 43,
   height: 'auto',
   textColor: '#FFFFFF',
-  fontFamily: 'B612 Mono',
+  fontFamily: 'Architects Daughter',
   fontSize: 55,
   display: true,
   width: 343,

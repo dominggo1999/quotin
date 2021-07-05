@@ -28,7 +28,8 @@
     "react-select-search": "^3.0.7",
     "redux": "^4.1.0",
     "redux-logger": "^3.0.6",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "webfontloader": "^1.6.28"
   },
   "scripts": {
     "start": "craco start",
