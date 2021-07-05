@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import WebFont from 'webfontloader';
+import WebFont from '../../lib/WebFontLoader';
 import FontInputSelect from './FontInputSelect';
 import { addVisitedFonts } from '../../redux/font/fontActions';
 
 const getFontId = (fontFamily) => {
   return fontFamily.replace(/\s+/g, '-').toLowerCase();
 };
-
 const LIST_BASE_URL = 'https://www.googleapis.com/webfonts/v1/webfonts';
+const ignoreFonts = ['Open Sans Condensed', 'Molle', 'UnifrakturCook', 'Coda Caption'];
 
 const GoogleFont = ({
   apiKey, changeFont, cachedFonts, visitedCategory, fontCategory, getFonts, fonts,
@@ -26,22 +26,27 @@ const GoogleFont = ({
           return true;
         }
         return item.category === fontCategory;
-      }).slice(0, 200);
+      }).slice(0, 200).filter((i) => {
+        return ignoreFonts.indexOf(i.family) === -1;
+      });
 
       const families = filter.map((i) => {
         return i.family;
       });
 
-      WebFont.load({
-        google: {
-          families,
-        },
-        loading: () => {
-          setStatus('finished');
-          getFonts(filter);
-          dispatch(addVisitedFonts(fontCategory));
-        },
+      families.map((font) => {
+        const formatFontName = font.replaceAll(' ', '+');
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = `https://fonts.googleapis.com/css2?family=${formatFontName}&display=swap`;
+        link.crossOrigin = 'anonymous';
+        document.head.appendChild(link);
+        return null;
       });
+
+      setStatus('finished');
+      getFonts(filter);
+      dispatch(addVisitedFonts(fontCategory));
     } catch (err) {
       // On error: Log error message
       setStatus('error');
@@ -85,6 +90,7 @@ const GoogleFont = ({
         options={fonts}
         onSelection={onSelection}
         getFontId={getFontId}
+        fontCategory={fontCategory}
       />
       )}
     </>

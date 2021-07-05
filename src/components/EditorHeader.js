@@ -1,12 +1,14 @@
 import html2canvas from 'html2canvas';
 import { useSelector, useDispatch } from 'react-redux';
-import DomToImage from 'dom-to-image';
+import DomToImage from '@yzfe/dom-to-image';
 import useCanvasSize from '../hooks/useCanvasSize';
 import { setCanvasAspectRatio, setCanvasOrientation } from '../redux/canvas/canvasActions';
 
 const EditorHeader = () => {
   const { canvas, layer } = useSelector((state) => state);
   const dispatch = useDispatch();
+
+  const { author, quote } = layer;
 
   const downloadImage = () => {
     const c = document.getElementById('canvas');
@@ -60,6 +62,7 @@ const EditorHeader = () => {
         width: `${node.offsetWidth}px`,
         height: `${node.offsetHeight}px`,
       },
+      fontFamily: [author.fontFamily, quote.fontFamily],
     }).then((dataUrl) => {
       // const imageURL = canvas.toDataURL('image/png');
       // const a = document.createElement('a');

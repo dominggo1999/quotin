@@ -1,10 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 
 const FontInputSelect = ({
-  options, onSelection, getFontId,
+  options, onSelection, getFontId, fontCategory,
 }) => {
+  const fontsRef = useRef(null);
+
+  useEffect(() => {
+    fontsRef.current.scrollTo(0, 0);
+  }, [fontCategory]);
+
   return (
-    <ul className="custom-scrollbar overflow-y-auto w-full text-white px-5">
+    <ul
+      ref={fontsRef}
+      className="custom-scrollbar overflow-y-auto w-full text-white px-5"
+    >
       {
         options.map((font) => {
           const fontId = getFontId(font.family);
