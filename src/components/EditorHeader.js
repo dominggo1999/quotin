@@ -7,6 +7,7 @@ import { setCanvasAspectRatio, setCanvasOrientation } from '../redux/canvas/canv
 const EditorHeader = () => {
   const { canvas, layer } = useSelector((state) => state);
   const dispatch = useDispatch();
+  const canvasSize = useCanvasSize(canvas);
 
   const { author, quote } = layer;
 
@@ -50,20 +51,35 @@ const EditorHeader = () => {
   };
 
   const toImage = async () => {
-    const scale = 5;
+    let height;
+    let width;
+
+    if(canvas.aspectRatio[1] === 1) {
+      height = canvas.aspectRatio[1] * 2000;
+      width = canvas.aspectRatio[0] * 2000;
+    }else{
+      height = canvas.aspectRatio[1];
+      width = canvas.aspectRatio[0];
+    }
+
+    const scale = height / canvasSize.height;
+
+    // Scale image to the desire size
     const node = document.getElementById('canvas');
 
-    await DomToImage.toPng(node, {
-      height: node.offsetHeight * scale,
-      width: node.offsetWidth * scale,
+    const config = {
+      height,
+      width,
       style: {
         transform: `scale(${scale})`,
         transformOrigin: 'top left',
-        width: `${node.offsetWidth}px`,
-        height: `${node.offsetHeight}px`,
+        width: `${canvasSize.width}px`,
+        height: `${canvasSize.height}px`,
       },
       fontFamily: [author.fontFamily, quote.fontFamily],
-    }).then((dataUrl) => {
+    };
+
+    await DomToImage.toPng(node, config).then((dataUrl) => {
       // const imageURL = canvas.toDataURL('image/png');
       // const a = document.createElement('a');
       const link = document.createElement('a');
@@ -80,13 +96,8 @@ const EditorHeader = () => {
     });
   };
 
-  const resizeCanvas = () => {
-    dispatch(setCanvasAspectRatio([2, 1]));
-    dispatch(setCanvasOrientation('landscape'));
-  };
-
   return (
-    <nav className="w-full px-10 flex justify-between items-center bg-blue-700 py-3">
+    <nav className="w-full px-10 flex justify-between items-center bg-purple-500 py-3">
       <h1 className="text-xl text-white font-black">Quotin</h1>
       <div className="flex">
         <button
@@ -99,11 +110,6 @@ const EditorHeader = () => {
           className="bg-gray font-semibold p-2 rounded-lg bg-white ml-2"
         >Log State
         </button>
-        {/* <button
-          onClick={resizeCanvas}
-          className="bg-gray font-semibold p-2 rounded-lg bg-white ml-2"
-        >Resize Canvas
-        </button> */}
       </div>
     </nav>
   );

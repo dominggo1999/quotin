@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCanvasAspectRatio, setCanvasOrientation } from '../../redux/canvas/canvasActions';
+import { canvasSizeData } from '../../data/canvasSizeData';
+import CanvasSizeControl from '../controls/CanvasSizeControl';
 
 // Move this to util
 const getOrientation = (aspectRatio) => {
@@ -44,12 +46,29 @@ const CanvasOptions = () => {
 
       {/* Options */}
       <div className="w-full text-white px-5 flex flex-col">
-        <button onClick={rotateCanvas}>Rotate Canvas</button>
-        <button onClick={fitCanvasToImage}>Fit Canvas To Image</button>
+        <button
+          className="p-2 rounded-lg bg-purple-500 mb-3"
+          onClick={rotateCanvas}
+        >Rotate Canvas
+        </button>
+        <button
+          className="p-2 rounded-lg bg-purple-500 mb-3"
+          onClick={fitCanvasToImage}
+        >Fit Canvas To Image
+        </button>
       </div>
       {/* Size */}
       <div className="custom-scrollbar overflow-y-auto w-full px-5">
-        test
+        {
+          canvasSizeData.map((item) => {
+            return (
+              <CanvasSizeControl
+                key={`panel ${item.panel}`}
+                sizeOptions={item}
+              />
+            );
+          })
+        }
       </div>
     </div>
   );

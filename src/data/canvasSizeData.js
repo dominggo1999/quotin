@@ -1,4 +1,4 @@
-const sizes = [
+export const canvasSizeData = [
   {
     panel: 'Social Medias',
     sub: [
@@ -160,7 +160,7 @@ const sizes = [
     sub: [
       {
         header: 'Desktop Widescreen',
-        size: [
+        sizes: [
           {
             name: '1280x720',
             size: [1280, 720],
@@ -181,15 +181,11 @@ const sizes = [
             name: '1920x1080',
             size: [1920, 1080],
           },
-          {
-            name: '1920x1080',
-            size: [1920, 1200],
-          },
         ],
       },
       {
         header: 'Desktop Fullscreen',
-        size: [
+        sizes: [
           {
             name: '800x600',
             size: [800, 600],
@@ -210,14 +206,14 @@ const sizes = [
       },
       {
         header: 'Mobile Wallpaper',
-        size: [
+        sizes: [
           {
             name: 'Standard QHD+',
             size: [800, 600],
           },
           {
             name: 'Iphone X',
-            size: [1024, 768],
+            size: [1125, 2436],
           },
           {
             name: 'Iphone 6, 6s',
