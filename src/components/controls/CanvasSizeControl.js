@@ -9,7 +9,7 @@ const Sub = ({ sub, resizeCanvas }) => {
     <div className="text-white py-2">
       <h3 className="mb-1 font-bold">{header}</h3>
       {
-        sizes.map((size) => {
+        sizes.map((size, i) => {
           return (
             <p
               key={`size_${size.name}`}
@@ -24,18 +24,18 @@ const Sub = ({ sub, resizeCanvas }) => {
   );
 };
 
-const CanvasSizeControl = ({ sizeOptions }) => {
-  const dispatch = useDispatch();
+const CanvasSizeControl = ({ sizeOptions, resizeCanvas }) => {
+  // const dispatch = useDispatch();
   const { panel, sub } = sizeOptions;
 
-  const resizeCanvas = (aspectRatio) => {
-    // 0 -> w
-    // 1 -> h
-    const newOrientation = aspectRatio[0] > aspectRatio[1] ? 'landscape' : 'potrait';
+  // const resizeCanvas = (aspectRatio) => {
+  //   // 0 -> w
+  //   // 1 -> h
+  //   const newOrientation = aspectRatio[0] > aspectRatio[1] ? 'landscape' : 'potrait';
 
-    dispatch(setCanvasAspectRatio(aspectRatio));
-    dispatch(setCanvasOrientation(newOrientation));
-  };
+  //   dispatch(setCanvasAspectRatio(aspectRatio));
+  //   dispatch(setCanvasOrientation(newOrientation));
+  // };
 
   return (
     <div className="w-full py-5 select-none">

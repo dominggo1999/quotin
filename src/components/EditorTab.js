@@ -17,7 +17,7 @@ const EditorTab = () => {
   };
 
   return (
-    <ul className={`${showScrollbar} text-white h-full overflow-y-scroll `}>
+    <ul className={`${showScrollbar} text-white h-full overflow-y-scroll select-none`}>
       <div className="py-10 bg-menu">
         {sidebarData && sidebarData.map((item) => {
           return (

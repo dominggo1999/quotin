@@ -65,6 +65,7 @@ const CanvasOptions = () => {
               <CanvasSizeControl
                 key={`panel ${item.panel}`}
                 sizeOptions={item}
+                resizeCanvas={resizeCanvas}
               />
             );
           })
