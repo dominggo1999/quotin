@@ -131,6 +131,7 @@ const author = new TextLayer({
   display: true,
   zIndex: 210,
   textColor: '#FF005C',
+  lineHeight: 1,
 });
 
 // Instantiate base background

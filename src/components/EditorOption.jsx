@@ -6,7 +6,6 @@ import BrandOptions from './option/BrandOptions';
 import FrameOptions from './option/FrameOptions';
 import LayerOptions from './option/LayerOptions';
 import QuoteOptions from './option/QuoteOptions';
-import StickerOptions from './option/StickerOptions';
 import AuthorOptions from './option/AuthorOptions';
 import CanvasOptions from './option/CanvasOptions';
 import useCanvasSize from '../hooks/useCanvasSize';
@@ -37,9 +36,6 @@ const EditorOption = () => {
 
     case 'quote':
       return <QuoteOptions canvasSize={canvasSize} />;
-
-    case 'sticker':
-      return <StickerOptions canvasSize={canvasSize} />;
 
     case 'author':
       return <AuthorOptions canvasSize={canvasSize} />;
