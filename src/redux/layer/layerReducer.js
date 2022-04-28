@@ -104,7 +104,7 @@ class Brand {
 const quote = new TextLayer({
   name: 'quote',
   text: 'We are often more *frightened* than *hurt*, and we suffer more from *imagination* than from *reality*',
-  content: '"We are often more <span style="color:#FF005C;" class="highlight">frightened</span> than <span style="color:#FF005C;" class="highlight">hurt</span>, and we suffer more from <span style="color:#FF005C;" class="highlight">imagination</span> than from <span style="color:#FF005C;" class="highlight">reality</span>"',
+  content: 'We are often more <span style="color:#FF005C;" class="highlight">frightened</span> than <span style="color:#FF005C;" class="highlight">hurt</span>, and we suffer more from <span style="color:#FF005C;" class="highlight">imagination</span> than from <span style="color:#FF005C;" class="highlight">reality</span>',
   id: 'quote',
   x: 52.833,
   y: 43,

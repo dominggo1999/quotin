@@ -1,7 +1,7 @@
 import React, { cloneElement } from 'react';
 
 const TextControlButton = ({
-  children, onClick, readjustSize, className, shadow, uppercase, textAlignment, value,
+  children, onClick, readjustSize, className, shadow, uppercase, textAlignment, value, title,
 }) => {
   let bg;
 
@@ -15,6 +15,7 @@ const TextControlButton = ({
 
   return (
     <button
+      title={title}
       onClick={onClick}
       className={`text-white w-[35px] h-[35px] flex items-center justify-center ${bg} focus:outline-none mr-2 hover:bg-menu rounded-full`}
     >

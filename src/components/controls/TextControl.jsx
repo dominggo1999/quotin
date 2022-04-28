@@ -221,14 +221,23 @@ const TextControl = ({
 
       <div className="flex justify-center mb-1 w-full">
         {/* Add Variant */}
-        <TextControlButton onClick={() => addVariant('*')}>
+        <TextControlButton
+          title="Highlight"
+          onClick={() => addVariant('*')}
+        >
           <HighlightTextIcon />
         </TextControlButton>
 
-        <TextControlButton onClick={() => addVariant('_')}>
+        <TextControlButton
+          title="Italic"
+          onClick={() => addVariant('_')}
+        >
           <ItalicTextIcon />
         </TextControlButton>
-        <TextControlButton onClick={() => addVariant('$')}>
+        <TextControlButton
+          title="Bold"
+          onClick={() => addVariant('$')}
+        >
           <BoldTextIcon />
         </TextControlButton>
 
@@ -239,6 +248,7 @@ const TextControl = ({
               readjustSize={5}
               onClick={(e) => toggleShadow(false)}
               shadow={shadow}
+              title="Remove Shadow"
             >
               <TextShadow />
             </TextControlButton>
@@ -246,6 +256,7 @@ const TextControl = ({
             <TextControlButton
               readjustSize={5}
               shadow={shadow}
+              title="Add Shadow"
               onClick={(e) => toggleShadow(true)}
             >
               <TextShadow />
@@ -260,6 +271,7 @@ const TextControl = ({
               readjustSize={5}
               onClick={(e) => toggleUppercase(false)}
               uppercase={uppercase}
+              title="Lowercase"
             >
               <LowercaseTextIcon />
             </TextControlButton>
@@ -268,6 +280,7 @@ const TextControl = ({
               readjustSize={5}
               onClick={(e) => toggleUppercase(true)}
               uppercase={uppercase}
+              title="Uppercase"
             >
               <UppercaseTextIcon />
             </TextControlButton>
@@ -281,6 +294,7 @@ const TextControl = ({
           onClick={(e) => alignText('left')}
           textAlignment={textAlignment}
           value="left"
+          title="Text Left"
         >
           <LeftTextIcon />
         </TextControlButton>
@@ -288,6 +302,7 @@ const TextControl = ({
           onClick={(e) => alignText('right')}
           textAlignment={textAlignment}
           value="right"
+          title="Text Right"
         >
           <RightTextIcon />
         </TextControlButton>
@@ -295,6 +310,7 @@ const TextControl = ({
           onClick={(e) => alignText('center')}
           textAlignment={textAlignment}
           value="center"
+          title="Text Center"
         >
           <CenterTextIcon />
         </TextControlButton>
@@ -302,6 +318,7 @@ const TextControl = ({
           onClick={(e) => alignText('justify')}
           textAlignment={textAlignment}
           value="justify"
+          title="Text Justify"
         >
           <JustifyTextIcon />
         </TextControlButton>
@@ -311,16 +328,19 @@ const TextControl = ({
       <div className="flex justify-center mb-1 w-full">
         <TextControlButton
           onClick={centerX}
+          title="Align Horizontal"
         >
           <HorizontaLayerIcon />
         </TextControlButton>
         <TextControlButton
           onClick={centerY}
+          title="Align Vertical"
         >
           <VerticalLayerIcon />
         </TextControlButton>
         <TextControlButton
           onClick={centerXY}
+          title="Center"
         >
           <CenterLayerIcon />
         </TextControlButton>
