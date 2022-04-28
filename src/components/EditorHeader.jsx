@@ -1,12 +1,14 @@
 import { useSelector } from 'react-redux';
 import DomToImage from '@yzfe/dom-to-image';
-import React from 'react';
+import React, { useState } from 'react';
 
 const EditorHeader = () => {
   const { canvas, layer } = useSelector((state) => state);
   const { author, quote } = layer;
+  const [loading, setLoading] = useState();
 
   const toImage = async () => {
+    setLoading(true);
     const node = document.getElementById('canvas');
 
     // Get target size
@@ -30,13 +32,19 @@ const EditorHeader = () => {
       fontFamily: [author.fontFamily, quote.fontFamily],
     };
 
-    await DomToImage.toPng(node, config).then((dataUrl) => {
-      const link = document.createElement('a');
-      link.download = 'my-beautiful-quote.png';
-      link.href = dataUrl;
-      link.click();
-      link.remove();
-    });
+    try {
+      await DomToImage.toPng(node, config).then((dataUrl) => {
+        const link = document.createElement('a');
+        link.download = 'my-beautiful-quote.png';
+        link.href = dataUrl;
+        link.click();
+        link.remove();
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -44,9 +52,11 @@ const EditorHeader = () => {
       <h1 className="text-xl text-white font-black">Quotin</h1>
       <div className="flex">
         <button
+          disabled={loading}
           onClick={toImage}
-          className="bg-gray font-semibold p-2 rounded-lg bg-white ml-2"
-        >Download
+          className={`${loading && 'cursor-not-allowed'} w-24 bg-gray font-semibold p-2 rounded-lg bg-white hover:bg-[#0E1318] hover:text-white ml-2`}
+        >
+          {loading ? 'Loading...' : 'Download'}
         </button>
       </div>
     </nav>
