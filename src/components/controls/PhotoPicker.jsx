@@ -3,6 +3,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { useDispatch } from 'react-redux';
 import { createClient } from 'pexels';
+import short from 'short-uuid';
 import { updateBackground } from '../../redux/layer/layerActions';
 
 const apiKey = import.meta.env.VITE_APP_PEXELS_API;
@@ -166,7 +167,7 @@ const PhotoPicker = ({ closeBrowser }) => {
 
       <div
         ref={imagesRef}
-        className="custom-scrollbar overflow-y-auto w-full px-5"
+        className="custom-scrollbar overflow-y-auto w-full px-5 overflow-x-hidden"
       >
         {
           photos && photos.map((item) => {

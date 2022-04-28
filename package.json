@@ -24,6 +24,7 @@
     "react-select-search": "^3.0.9",
     "redux": "^4.2.0",
     "redux-logger": "^3.0.6",
+    "short-uuid": "^4.2.0",
     "vite-plugin-svgr": "^1.1.0"
   },
   "devDependencies": {
