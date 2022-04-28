@@ -26,6 +26,7 @@ const PhotoLayer = ({ item, canvasSize }) => {
   const [imageRatio, setImageRatio] = useState();
   const [x, setX] = useState(imageX);
   const [y, setY] = useState(imageY);
+  const [countRender, setCountRender] = useState(0);
 
   const zIndex = useLayerOrder(name);
 
@@ -52,8 +53,11 @@ const PhotoLayer = ({ item, canvasSize }) => {
     }
 
     // Reset position to 0,0
-    setX(0);
-    setY(0);
+    setCountRender(1);
+    if(countRender > 0) {
+      setX(0);
+      setY(0);
+    }
     dispatch(updateLayerLayout('photo', 'imageX', 0));
     dispatch(updateLayerLayout('photo', 'imageY', 0));
   };

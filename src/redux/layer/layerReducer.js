@@ -17,8 +17,8 @@ class TextLayer {
     this.height = options.height || 200;
     this.type = 'text';
     this.name = options.name; // must have name
-    this.text = options.text || '- Cak Lontong';
-    this.content = options.content || '- Cak Lontong';
+    this.text = options.text || '- Seneca';
+    this.content = options.content || '- Seneca';
     this.uppercase = options.uppercase || false;
     this.shadow = options.shadow || false;
     this.textAlignment = options.textAlignment || 'center';
@@ -26,11 +26,11 @@ class TextLayer {
     this.bold = options.bold || false;
     this.alignment = options.alignment || 'horizontal';
     this.textColor = options.textColor || '#FFFFFF';
-    this.highlightColor = options.highlightColor || '#e5ac00';
+    this.highlightColor = options.highlightColor || '#FF005C';
     this.fontFamily = options.fontFamily || 'Open Sans';
     this.fontSize = options.fontSize || 20;
     this.lineHeight = options.lineHeight || 1.2;
-    this.letterSpacing = options.lineHeight || 0;
+    this.letterSpacing = options.letterSpacing || 0;
     this.display = options.display;
     this.opacity = options.opacity || 1;
     this.zIndex = options.zIndex || 200;
@@ -58,7 +58,7 @@ class BackgroundLayer {
 class Photo {
   constructor(options = {}) {
     this.id = 'photo';
-    this.imageID = options.imageID || '3779822'; // pexels api
+    this.imageID = options.imageID || '333850'; // pexels api
     this.name = 'photo';
     this.type = 'photo';
     this.display = options.display;
@@ -91,7 +91,7 @@ class Brand {
     this.type = 'brand';
     this.opacity = options.opacity || 1;
     this.display = options.display;
-    this.text = options.text || 'minggo1999';
+    this.text = options.text || 'username';
     this.icon = options.icon || 'pinterest';
     this.position = options.position || 'center-end';
     this.color = options.color || '#FFFFFF';
@@ -103,17 +103,18 @@ class Brand {
 // Instantiate quote
 const quote = new TextLayer({
   name: 'quote',
-  text: 'The quick brown fox jumps over the lazy dog',
-  content: '<span>The quick brown fox jumps over the lazy dog</span>',
+  text: 'We are often more *frightened* than *hurt*, and we suffer more from *imagination* than from *reality*',
+  content: '"We are often more <span style="color:#FF005C;" class="highlight">frightened</span> than <span style="color:#FF005C;" class="highlight">hurt</span>, and we suffer more from <span style="color:#FF005C;" class="highlight">imagination</span> than from <span style="color:#FF005C;" class="highlight">reality</span>"',
   id: 'quote',
   x: 52.833,
   y: 43,
   height: 'auto',
   textColor: '#FFFFFF',
-  fontFamily: 'Architects Daughter',
-  fontSize: 55,
+  fontFamily: 'Bebas Neue',
+  fontSize: 41,
   display: true,
   width: 343,
+  lineHeight: 1.3,
 });
 
 // Instantiate author
@@ -123,12 +124,13 @@ const author = new TextLayer({
   x: 240,
   y: 400,
   width: 150,
-  fontSize: 18,
+  fontSize: 22,
   textAlignment: 'right',
   height: 'auto',
-  fontFamily: 'Amatic SC',
+  fontFamily: 'Bebas Neue',
   display: true,
   zIndex: 210,
+  textColor: '#FF005C',
 });
 
 // Instantiate base background
@@ -147,15 +149,15 @@ const overlayColor = new BackgroundLayer({
   gradientRotation: '0',
   display: true,
   zIndex: 80,
-  opacityColor1: 1,
-  opacityColor2: 0.01,
+  opacityColor1: 0.51,
+  opacityColor2: 0.1,
   color1: '#000000',
-  color2: '#ffffff',
+  color2: '#000000',
 });
 
 const photo = new Photo({
   display: true,
-  imageX: 0,
+  imageX: -173,
   imageY: 0,
 });
 const frame = new Frame({
