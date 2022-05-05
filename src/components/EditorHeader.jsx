@@ -8,6 +8,7 @@ const EditorHeader = () => {
   const [loading, setLoading] = useState();
 
   const toImage = async () => {
+    console.log("TEst");
     setLoading(true);
     const node = document.getElementById('canvas');
 
@@ -53,7 +54,7 @@ const EditorHeader = () => {
       <div className="flex">
         <button
           disabled={loading}
-          onClick={toImage}
+          onClick={!loading ? toImage : ()=>{}}
           className={`${loading && 'cursor-not-allowed'} w-24 bg-gray font-semibold p-2 rounded-lg bg-white hover:bg-[#0E1318] hover:text-white ml-2`}
         >
           {loading ? 'Loading...' : 'Download'}
