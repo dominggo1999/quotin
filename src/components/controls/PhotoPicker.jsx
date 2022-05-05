@@ -41,14 +41,19 @@ const PhotoPicker = ({ closeBrowser }) => {
   const extractId = (url) => {
     // Check if url is pexels url
     // eslint-disable-next-line prefer-regex-literals
-    const check = new RegExp('https://www.pexels.com/photo', 'g');
-    const count = url.match(check);
+    const pexelsUrlCheck = /^https:\/\/images\.pexels\.com\/photos\/\d+/g;
+    const count = url.match(pexelsUrlCheck);
 
-    // If only url occured once
-    if(count && count.length === 1) {
-      const cutPrefix = url.replace(check, '').replace(/[\/|\\]/g, '').split('-');
-      return cutPrefix[cutPrefix.length - 1];
-    }
+    if(count?.length !==1) return false;
+
+    // Check if pexels url is image url
+    const imageUrlCheck = /(http(s?):)([\/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png)/g;
+    if (!imageUrlCheck.test(url)) return false;
+
+    // Remove prefix
+    const id = count[0].split("https://images.pexels.com/photos/")[1];
+    if(id) return id;
+
 
     // Invalid url
     return false;
@@ -93,7 +98,7 @@ const PhotoPicker = ({ closeBrowser }) => {
       setPage(page + 1);
       setError(null);
     } catch (error) {
-      console.error(error);
+      setError("Error when retrieving images")
     }
   };
 
@@ -110,12 +115,6 @@ const PhotoPicker = ({ closeBrowser }) => {
       setCategory(query);
     }else{
       setCategory('');
-    }
-  };
-
-  const loadMore = (e) => {
-    if(page >= 1) {
-      getImage(query, page);
     }
   };
 
@@ -160,7 +159,7 @@ const PhotoPicker = ({ closeBrowser }) => {
             type="text"
             onChange={handleChange}
             value={query}
-            placeholder={mode === 'categories' ? 'ex: nature' : 'paste photo url from pexels.com'}
+            placeholder={mode === 'categories' ? 'ex: nature' : 'Paste image url from pexels.com'}
           />
         </form>
       </div>
@@ -196,12 +195,17 @@ const PhotoPicker = ({ closeBrowser }) => {
 
         {
           photos.length > 0 && photos.length < totalResults && (
-          <div className="flex w-full justify-center mt-5">
-            <button
-              onClick={loadMore}
-              className="bg-purple-600 px-2 py-1 text-white rounded-lg mb-5"
-            >Load more
-            </button>
+          <div className="flex flex-col w-full justify-center my-5">
+            <a 
+              target="_blank"
+              rel="noreferer noopener"
+              href={`https://www.pexels.com/search/${category}/`}
+              role="link"
+              className="self-center bg-purple-600 px-3 py-2 text-white rounded-lg"
+            >
+              Find More on Pexels
+            </a>
+            <p className="text-center text-white mt-1">You can paste Pexels url on url tab</p>
           </div>
           )
         }
