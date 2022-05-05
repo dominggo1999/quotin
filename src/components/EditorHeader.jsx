@@ -8,7 +8,6 @@ const EditorHeader = () => {
   const [loading, setLoading] = useState();
 
   const toImage = async () => {
-    console.log("TEst");
     setLoading(true);
     const node = document.getElementById('canvas');
 
