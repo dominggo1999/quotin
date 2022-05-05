@@ -19,6 +19,7 @@ const PhotoPicker = ({ closeBrowser }) => {
   const [totalResults, setTotalResults] = useState(0);
   const [mode, setMode] = useState('categories');
   const [error, setError] = useState(null);
+  const isSubscribed = useRef(true);
 
   const imagesRef = useRef(null);
   const inputRef = useRef(null);
@@ -36,6 +37,7 @@ const PhotoPicker = ({ closeBrowser }) => {
 
   useEffect(() => {
     inputRef.current.focus();
+    return () => isSubscribed.current = false;
   }, []);
 
   const extractId = (url) => {
@@ -83,22 +85,29 @@ const PhotoPicker = ({ closeBrowser }) => {
           break;
       }
 
-      if(page === 1) {
-        if(mode !== 'url') {
-          setPhotos(response.photos);
+      // Prevent setting state when component already unmounted
+      if(isSubscribed){
+        if(page === 1) {
+          if(mode !== 'url') {
+            setPhotos(response.photos);
+          }else{
+            setPhotos([response]);
+          }
         }else{
-          setPhotos([response]);
+          const previousPhotos = photos;
+          const newPhotos = previousPhotos.concat(response.photos);
+          setPhotos(newPhotos);
         }
-      }else{
-        const previousPhotos = photos;
-        const newPhotos = previousPhotos.concat(response.photos);
-        setPhotos(newPhotos);
+        setTotalResults(response.total_results);
+        setPage(page + 1);
+        setError(null);
       }
-      setTotalResults(response.total_results);
-      setPage(page + 1);
-      setError(null);
+
     } catch (error) {
-      setError("Error when retrieving images")
+      if(isSubscribed){
+        setError("Error when retrieving images")
+      }
+
     }
   };
 

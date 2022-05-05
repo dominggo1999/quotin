@@ -65,22 +65,30 @@ const PhotoLayer = ({ item, canvasSize }) => {
   useEffect(() => {
     const getImage = async () => {
       setLoading(true);
-      const response = await client.photos.show({ id: imageID });
-      setImageURL(response.src.large2x);
-      setLoading(false);
 
-      const { height, width } = response;
+      try {
+        const response = await client.photos.show({ id: imageID });
+        if(response?.src?.large2x){
+          setImageURL(response.src.large2x);
 
-      const imageAspectRatio = width / height;
-      const canvasAspectRatio = canvasSize.width / canvasSize.height;
+          const { height, width } = response;
 
-      // Remember imageaspectratio
-      dispatch(setImageAspectRatio(imageAspectRatio));
+          const imageAspectRatio = width / height;
+          const canvasAspectRatio = canvasSize.width / canvasSize.height;
 
-      // Image aspect ratio will always be the same if canvas size is changed
-      setImageRatio(imageAspectRatio);
+          // Remember imageaspectratio
+          dispatch(setImageAspectRatio(imageAspectRatio));
 
-      adjustDimension(imageAspectRatio, canvasAspectRatio);
+          // Image aspect ratio will always be the same if canvas size is changed
+          setImageRatio(imageAspectRatio);
+
+          adjustDimension(imageAspectRatio, canvasAspectRatio);
+        }
+      } catch(err) {
+        console.log(err);
+      } finally{
+        setLoading(false);
+      }
     };
 
     getImage();
